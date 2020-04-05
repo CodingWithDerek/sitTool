@@ -1,0 +1,16 @@
+<!--pages/sponsor/sponsor.wxml-->
+<view class="all">
+  <block wx:for="{{sponsors}}">
+    <view class="container">
+      <view class="container-left">
+        <image src="{{item.image}}"></image>
+      </view>
+      <view class="container-right">
+        <view class="container-right-up">{{item.company}}</view>
+        <view class="container-right-down">
+          <view>{{item.type}}</view>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

@@ -1,0 +1,50 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/index/job",
+    "pages/index/team",
+    "pages/index/show",
+    "pages/index/know",
+    "pages/index/service",
+    "pages/index/advertisement",
+    "pages/sponsor/sponsor",
+    "pages/person/person",
+    "pages/person/myInterview",
+    "pages/person/myTeam",
+    "pages/person/myShow",
+    "pages/person/myStar",
+    "pages/person/recommend",
+    "pages/person/sentJob",
+    "pages/person/beSponsor",
+    "pages/person/feedback"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#000000",
+    "selectedColor": "#33b5e5",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "首页",
+      "iconPath": "pages/res/noTouchIndex.png",
+      "selectedIconPath": "pages/res/touchIndex.png"
+    },
+    {
+      "pagePath": "pages/sponsor/sponsor",
+      "text": "赞助商",
+      "iconPath": "pages/res/noTouchSponsor.png",
+      "selectedIconPath": "pages/res/touchSponsor.png"
+    },
+    {
+      "pagePath": "pages/person/person",
+      "text": "个人中心",
+      "iconPath": "pages/res/noTouchPerson.png",
+      "selectedIconPath": "pages/res/touchPerson.png"
+    }]
+  },
+  "sitemapLocation": "sitemap.json"
+}

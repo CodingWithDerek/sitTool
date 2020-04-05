@@ -1,0 +1,73 @@
+/* pages/person/person.wxss */
+.top{
+  height: 200rpx;
+  background-color: #f2f2f2;
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+}
+.top-left{
+  width: 120rpx;
+  height: 120rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 20rpx;
+  border-radius: 50%;
+  border: 1px solid white;
+}
+.top-right{
+  height: 120rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around
+}
+.top-right-up{
+  font-size: 40rpx
+}
+.top-right-down{
+  font-size: 20rpx;
+}
+.top-right-down text{
+  font-size: 25rpx;
+  color: #ff1d11;
+  border: 1px solid #ff1d11;
+  padding: 5rpx 10rpx;
+  border-radius: 10rpx;
+}
+.medium{
+  height: 120rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.medium-son{
+  height: 100rpx;
+  width: 100rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.medium-son image{
+  height: 80rpx;
+  width: 80rpx;
+}
+.medium-son view{
+  font-size: 15rpx;
+}
+.gapLine{
+  height: 1px;
+  background-color: #b5b4b1;
+}
+.buttom{
+  height: 95rpx;
+  font-size: 35rpx;
+  display: flex;
+  align-items: center;
+}
+.buttom-left{
+  margin: 0 20rpx;
+  font-size: 50rpx
+}

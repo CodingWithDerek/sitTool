@@ -1,0 +1,6 @@
+/**app.wxss**/
+.all{
+  margin: 0;
+  padding: 0;
+  border: 1rpx solid white;
+}

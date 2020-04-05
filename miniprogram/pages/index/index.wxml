@@ -1,0 +1,51 @@
+<view class="all">
+  <view class="banner">
+    <view class="banner-up"></view>
+    <view class="banner-down"></view>
+  </view>
+  <!--index.wxml-->
+  <!-- <view class="swiFather">
+  <swiper wx:for="{{tupian}}" indicator-dots="true" duration="500" interval="7000" autoplay="true" class="swiFather-swiper">
+    <swiper-item>
+      <image src="{{item}}" class="swiFather-swiper-image"></image>
+    </swiper-item>
+  </swiper> -->
+  <!-- </view> -->
+  <view class="father">
+    <navigator wx:for="{{logo}}" url="{{item.url}}">
+      <view class="son">
+        <image src="{{item.way}}" class="son-image"></image>
+        <text class="son-text">{{item.text}}</text>
+      </view>
+    </navigator>
+  </view>
+  <view class="gap"></view>
+  <view class="school-title">Welcome to SIT</view>
+  <view class="banner">
+    <image src="cloud://sittool-sccwy.7369-sittool-sccwy-1301779720/schoolImage/school4.jpg"></image>
+  </view>
+  <view class="gap"></view>
+  <view class="goodman">精选达人
+    <text>TOP</text>
+    <van-icon name="arrow-down" class="icon1"/>
+  </view>
+  <view class="careful">
+    <block wx:for="{{pseudoData}}">
+      <view class="careful-container">
+        <view class="careful-container-up">
+          <image src="{{item.image}}"></image>
+        </view>
+        <view class="careful-container-down">
+          <view class="careful-container-down-row1">{{item.summary}}</view>
+          <view class="careful-container-down-row2">
+            <view class="careful-container-down-row2-left">{{item.label[0]}}</view>
+            <view class="careful-container-down-row2-right">
+              <text>{{item.people}}</text>
+              <van-icon name="like" color="#ff1d11" class="icon2"/>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

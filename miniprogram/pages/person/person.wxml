@@ -1,0 +1,48 @@
+<!--pages/person/person.wxml-->
+<view class="all">
+  <view class="top">
+    <view class="top-left">
+      <open-data type="userAvatarUrl"></open-data>
+    </view>
+    <view class="top-right">
+      <open-data type="userNickName" class="top-right-up"></open-data>
+      <view class="top-right-down">ID:45678tyugdsbddbsn
+        <text>复制</text>
+      </view>
+    </view>
+  </view>
+  <view class="medium">
+    <navigator wx:for="{{list}}" url="{{item.url}}">
+      <view class="medium-son">
+        <image src="{{item.picture}}"></image>
+        <view>{{item.title}}</view>
+      </view>
+    </navigator>
+  </view>
+  <view class="gapLine"></view>
+  <view class="buttom" bindtap="toMyStar">
+    <van-icon name="star-o" class="buttom-left"/>
+    <view class="buttom-right">我的收藏</view>
+  </view>
+  <view class="gapLine"></view>
+  <view class="buttom" bindtap="toRecommend">
+    <van-icon name="user-o" class="buttom-left"/>
+    <view class="buttom-right">推荐给好友</view>
+  </view>
+  <view class="gapLine"></view>
+  <view class="buttom" bindtap="toSentJob">
+    <van-icon name="fire-o" class="buttom-left"/>
+    <view class="buttom-right">发布兼职</view>
+  </view>
+  <view class="gapLine"></view>
+  <view class="buttom" bindtap="toBeSponsor">
+    <van-icon name="gold-coin-o" class="buttom-left"/>
+    <view class="buttom-right">我要赞助</view>
+  </view>
+  <view class="gapLine"></view>
+  <view class="buttom" bindtap="toFeedback">
+    <van-icon name="description" class="buttom-left"/>
+    <view class="buttom-right">意见反馈</view>
+  </view>
+  <view class="gapLine"></view>
+</view>
