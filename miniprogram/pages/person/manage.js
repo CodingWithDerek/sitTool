@@ -1,4 +1,4 @@
-// pages/person/sentJob.js
+// pages/person/manage.js
 Page({
 
   /**
@@ -62,5 +62,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
+  }
 })

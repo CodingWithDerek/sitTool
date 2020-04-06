@@ -16,12 +16,15 @@
     "pages/person/recommend",
     "pages/person/sentJob",
     "pages/person/beSponsor",
-    "pages/person/feedback"
+    "pages/person/feedback",
+    "pages/person/beManager",
+    "pages/person/superManage",
+    "pages/person/manage"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "sitTool",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {

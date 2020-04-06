@@ -6,8 +6,8 @@
     </view>
     <view class="top-right">
       <open-data type="userNickName" class="top-right-up"></open-data>
-      <view class="top-right-down">ID:45678tyugdsbddbsn
-        <text>复制</text>
+      <view class="top-right-down">ID:{{openid}}
+        <text bindtap="copy">复制</text>
       </view>
     </view>
   </view>
@@ -45,4 +45,17 @@
     <view class="buttom-right">意见反馈</view>
   </view>
   <view class="gapLine"></view>
+  <view class="buttom" bindtap="toBeManager">
+    <van-icon name="eye-o" class="buttom-left"/>
+    <view class="buttom-right">成为管理员</view>
+  </view>
+  <view class="gapLine" wx:if="{{openid==superId}}"></view>
+  <view class="buttom" bindtap="toSuperManage" wx:if="{{openid==superId}}">
+    <van-icon name="diamond-o" class="buttom-left"/>
+    <view class="buttom-right">超级管理</view>
+  </view>
+  <view class="gapLine"></view>
+  <view class="manage">
+    <view class="manage-son" bindtap="goManage">内部管理</view>
+  </view>
 </view>
