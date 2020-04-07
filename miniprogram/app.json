@@ -11,6 +11,7 @@
     "pages/person/person",
     "pages/person/myInterview",
     "pages/person/myTeam",
+    "pages/person/myTeam/createTeam",
     "pages/person/myShow",
     "pages/person/myStar",
     "pages/person/recommend",

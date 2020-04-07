@@ -58,6 +58,13 @@
 					"id": -1,
 					"name": "个人中心",
 					"pathName": "pages/person/person",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的组队",
+					"pathName": "pages/person/myTeam",
 					"scene": null
 				}
 			]

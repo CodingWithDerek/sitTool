@@ -56,6 +56,6 @@
   </view>
   <view class="gapLine"></view>
   <view class="manage">
-    <view class="manage-son" bindtap="goManage">内部管理</view>
+    <view class="manage-son" bindtap="goManage">后台管理</view>
   </view>
 </view>

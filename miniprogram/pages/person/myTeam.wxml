@@ -1,2 +1,53 @@
 <!--pages/person/myTeam.wxml-->
-<text>pages/person/myTeam.wxml</text>
+<view class="all">
+  <view class="upBar">
+    <view class="{{bindNum==1?'upBar-light':'upBar-dark'}}" bindtap="num1">已发起</view>
+    <view class="{{bindNum==2?'upBar-light':'upBar-dark'}}" bindtap="num2">已加入</view>
+    <view class="{{bindNum==3?'upBar-light':'upBar-dark'}}" bindtap="num3">等待审核</view>
+  </view>
+  <view class="body1" wx:if="{{bindNum==1}}">
+    <block wx:for="{{team}}">
+      <view class="body1-container">
+        <view class="body1-container-left">
+          <view class="body1-container-left-row1">
+            <van-icon name="flag-o" />
+            <text>队伍名称：{{item.name}}</text>
+          </view>
+          <view class="body1-container-left-row2">
+            <van-icon name="orders-o" />
+            <text>项目类别：{{item.type}}</text>
+          </view>
+          <view class="body1-container-left-row3">
+            <view class="body1-container-left-row3-left">
+              <van-icon name="friends-o" />
+              <text>项目人员：</text>
+            </view>
+            <view class="body1-container-left-row3-right">
+              <block wx:for="{{item.people}}">
+                <view class="body1-container-left-row3-right-eachRow">
+                  <view class="c1">{{item.character}}</view>
+                  <view class="c2">所需<text>{{item.all}}</text></view>
+                  <view class="c3">还差<text>{{item.joined}}</text></view>
+                </view>
+              </block>
+            </view>
+          </view>
+        </view>
+        <view class="body1-container-right">
+          <view bindtap="goCreateTeam">
+            <van-icon name="edit" class="faqi-rightIcon"/>
+            <view class="faqi-rightWord">编辑</view>
+          </view>
+          <view class="body1-container-right-open" wx:if="{{item.close}}" bindtap="openDetail" data-item="{{item}}">
+            <van-icon name="arrow-down" class="faqi-rightIcon"/>
+            <view class="faqi-rightWord">展开</view>
+          </view>
+          <view class="body1-container-right-close" wx:else bindtap="closeDetail" data-item="{{item}}">
+            <van-icon name="arrow-up" class="faqi-rightIcon"/>
+            <view class="faqi-rightWord">收起</view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

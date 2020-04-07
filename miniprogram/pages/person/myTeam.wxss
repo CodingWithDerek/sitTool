@@ -1,1 +1,84 @@
 /* pages/person/myTeam.wxss */
+.all{
+  font-size: 30rpx;
+}
+.upBar{
+  background-color: #f2f2f2;
+  padding: 20rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.upBar-light{
+  color: white;
+  background-color: #33b5e5;
+  padding: 10rpx 20rpx;
+  border-radius: 10rpx;
+}
+.upBar-dark{
+  color: black;
+  background-color: white;
+  padding: 10rpx 20rpx;
+  border-radius: 10rpx;
+}
+.body1{
+  background-color: #f2f2f2;
+  border: 1px solid #f2f2f2;
+}
+.body1-container{
+  background-color: white;
+  border-radius: 20rpx;
+  padding: 20rpx;
+  margin: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.body1 :first-child{
+  margin-top: 0;
+}
+.body1-container-left-row1,.body1-container-left-row2,.body1-container-left-row3{
+  display: flex;
+  align-items: center;
+}
+.body1-container-left-row3-right{
+  border-radius: 10rpx;
+  background-color: #f6f6f6;
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.body1-container-left-row3-right-eachRow{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70rpx;
+}
+.c1{
+  margin-right: 20rpx;
+}
+.c2{
+  margin-right: 20rpx;
+}
+.c2 text,.c3 text{
+  border: 1px solid #33b5e5;
+  padding: 0rpx 15rpx;
+  color: #ff1d11;
+  border-radius: 10rpx;
+  background-color: white;
+}
+.faqi-rightIcon{
+  font-size: 50rpx;
+}
+.body1-container-right view{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.body1-container-right-open,.body1-container-right-close{
+  margin-top: 30rpx;
+}
+.faqi-rightWord{
+  font-size: 20rpx;
+}
