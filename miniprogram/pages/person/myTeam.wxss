@@ -82,3 +82,59 @@
 .faqi-rightWord{
   font-size: 20rpx;
 }
+.body1-container-detail{
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20rpx;
+  margin: 20rpx;
+  border-radius: 20rpx;
+}
+.body1-container-detail-title{
+  font-size: 40rpx;
+  font-weight: bold;
+}
+.body1-container-detail-joinPeople{
+  border: 1px solid #33b5e5;
+  display: flex;
+  padding: 20rpx;
+  border-radius: 10rpx;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+.body1-container-detail-joinPeople-left-row{
+  display: felx;
+  height: 60rpx;
+  align-items: center;
+}
+.body1-container-detail-joinPeople-left-row text{
+  border: 1px solid #ff1d11;
+  border-radius: 10rpx;
+  padding: 5rpx 10rpx;
+  margin-left: 20rpx;
+  color: #ff1d11;
+}
+.body1-container-detail-joinPeople-right-agree{
+  background-color: #3bac6a;
+  color: white;
+  padding: 10rpx 20rpx;
+  border-radius: 20rpx;
+  margin-bottom: 30rpx;
+}
+.body1-container-detail-joinPeople-right-deny{
+  background-color: #ff1d11;
+  color: white;
+  padding: 10rpx 20rpx;
+  border-radius: 20rpx;
+}
+.body1-buttom-area{
+  background-color: white;
+  height: 100rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 20rpx;
+  border-radius: 20rpx;
+}

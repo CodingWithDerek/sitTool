@@ -1,2 +1,40 @@
 <!--pages/person/myTeam/createTeam.wxml-->
-<text>pages/person/myTeam/createTeam.wxml</text>
+<view class="all">
+  <view class="up">
+    <van-icon name="info-o" class="up-icon" />
+    <view>在该页面中你可以创建和修改自己项目组队信息，队员的角色可以动态添加和删除，向左滑动队员所在的那一行即可显示删除按钮</view>
+  </view>
+  <form>
+    <view class="form-row">
+      <view class="form-row-left">队伍名称</view>
+      <view class="form-row-right">
+        <input></input>
+      </view>
+    </view>
+    <view class="form-row">
+      <view class="form-row-left">项目类别</view>
+      <view class="form-row-right">
+        <picker range="{{projectType}}" bindchange="changeValue" value="{{index}}">{{projectType[index]}}</picker>
+      </view>
+    </view>
+    <view class="form-character">
+      <view class="form-character-up">
+        <view>队员角色</view>
+        <view>需要人数</view>
+      </view>
+      <view class="form-swipeCell-area">
+        <block wx:for="{{swipeCellNum}}">
+          <van-swipe-cell right-width="{{ 65 }}">
+            <view>
+              <input placeholder="输入角色名称"></input>
+            </view>
+            <view slot="right">删除</view>
+          </van-swipe-cell>
+        </block>
+      </view>
+      <view class="form-addButton">
+        <view>增加角色</view>
+      </view>
+    </view>
+  </form>
+</view>

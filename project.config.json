@@ -65,6 +65,13 @@
 					"id": -1,
 					"name": "我的组队",
 					"pathName": "pages/person/myTeam",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "组队编辑页面",
+					"pathName": "pages/person/myTeam/createTeam",
 					"scene": null
 				}
 			]

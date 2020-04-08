@@ -29,9 +29,21 @@ Page({
             joined: "1"
           }
         ],
-        joinID:[
-          "123",
-          "dcsfscf"
+        joinPeople:[
+          {
+            openid:"2ewqfd",
+            character:"UI设计",
+            name:"何志龙",
+            phone:"18800359311",
+            wechat:"dsfbdhsf24e34b3"
+          },
+          {
+            openid: "2ewqfd",
+            character: "UI设计",
+            name: "何志龙",
+            phone: "18800359311",
+            wechat: "dsfbdhsf24e34b3"
+          }
         ],
         close:true,
         detail:"我们需要你肯吃苦",
@@ -53,9 +65,21 @@ Page({
             joined: "1"
           }
         ],
-        joinID: [
-          "123",
-          "dcsfscf"
+        joinPeople: [
+          {
+            openid: "2ewqfd",
+            character: "UI设计",
+            name: "何志龙",
+            phone: "18800359311",
+            wechat: "dsfbdhsf24e34b3"
+          },
+          {
+            openid: "2ewqfd",
+            character: "UI设计",
+            name: "何志龙",
+            phone: "18800359311",
+            wechat: "dsfbdhsf24e34b3"
+          }
         ],
         close:true,
         detail:"dsfbdnf 悲剧的开始分别的时刻",

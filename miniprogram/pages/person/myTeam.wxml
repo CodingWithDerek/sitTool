@@ -48,6 +48,28 @@
           </view>
         </view>
       </view>
+      <view class="body1-container-detail" wx:if="{{!item.close}}">
+        <view class="body1-container-detail-title">项目介绍以及入伍要求：</view>
+        <view>{{item.detail}}</view>
+        <block wx:for="{{item.joinPeople}}">
+          <view class="body1-container-detail-joinPeople">
+            <view class="body1-container-detail-joinPeople-left">
+              <view class="body1-container-detail-joinPeople-left-row">申请人：{{item.name}}</view>
+              <view class="body1-container-detail-joinPeople-left-row">手机号：{{item.phone}}<text>拨打</text></view>
+              <view class="body1-container-detail-joinPeople-left-row">微信号：{{item.wechat}}<text>复制</text></view>
+              <view class="body1-container-detail-joinPeople-left-row">角色：{{item.character}}</view>
+            </view>
+            <view class="body1-container-detail-joinPeople-right">
+              <view class="body1-container-detail-joinPeople-right-agree">同意</view>
+              <view class="body1-container-detail-joinPeople-right-deny">拒绝</view>
+            </view>
+          </view>
+        </block>
+      </view>
     </block>
+    <view class="body1-buttom-area">
+      <view class="body1-buttom-area-button">发起组队</view>
+      <van-icon name="arrow" />
+    </view>
   </view>
 </view>

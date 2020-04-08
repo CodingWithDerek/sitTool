@@ -5,7 +5,30 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    projectType:[
+      "手机App开发",
+      "微信小程序开发",
+      "微信小游戏开发",
+      "网站开发",
+      "机器人开发",
+      "社会实践",
+      "其他"
+    ],
+    index:0,
+    swipeCellNum:[
+      {
+        character:"机器人开发",
+        num:1
+      },
+      {
+        character:"UI设计",
+        num:2
+      },
+      {
+        character:"编写程序",
+        num:4
+      }
+    ]
   },
 
   /**
@@ -62,5 +85,11 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  changeValue:function(e){
+    console.log(e)
+    this.setData({
+      index:e.detail.value
+    })
   }
 })
