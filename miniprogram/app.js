@@ -17,5 +17,31 @@ App({
         openid: ""
       }
     }
+  },
+  addData:function(collectionName,shuju){
+    const db = wx.cloud.database()
+    db.collection(collectionName).add({
+      // data 字段表示需新增的 JSON 数据
+      data: shuju,
+      success: function (res) {
+        wx.showToast({
+          title: '上传成功',
+          duration:2000
+        })
+        setTimeout(function(){
+          wx.hideToast()
+        },500)
+        wx.navigateBack({
+        })
+      },
+      fail:function(){
+        wx.showLoading({
+          title: '上传失败',
+        })
+        setTimeout(function(){
+          wx.hideLoading()
+        },500)
+      }
+    })
   }
 })

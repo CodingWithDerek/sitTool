@@ -2,13 +2,13 @@
 <view class="all">
   <view class="up">
     <van-icon name="info-o" class="up-icon" />
-    <view>在该页面中你可以创建和修改自己项目组队信息，队员的角色可以动态添加和删除，向左滑动队员所在的那一行即可显示删除按钮</view>
+    <view>在该页面中你可以创建和修改自己项目组队信息，队员的角色可以动态添加和删除，赶快去发起你的项目组队吧</view>
   </view>
-  <form>
+  <form bindsubmit="submit">
     <view class="form-row">
       <view class="form-row-left">队伍名称</view>
       <view class="form-row-right">
-        <input></input>
+        <input name="teamName"></input>
       </view>
     </view>
     <view class="form-row">
@@ -21,20 +21,32 @@
       <view class="form-character-up">
         <view>队员角色</view>
         <view>需要人数</view>
+        <view>删除</view>
       </view>
       <view class="form-swipeCell-area">
-        <block wx:for="{{swipeCellNum}}">
-          <van-swipe-cell right-width="{{ 65 }}">
-            <view>
-              <input placeholder="输入角色名称"></input>
-            </view>
-            <view slot="right">删除</view>
-          </van-swipe-cell>
+        <block wx:for="{{characterArr}}" wx:key="{{index}}">
+          <view class="form-swipeCell-area-eachRow">
+            <input placeholder="请输入角色名称" class="form-swipeCell-area-eachRow-left" value="{{item.character}}" bindblur="renameCharacter" data-id="{{index}}"></input>
+            <van-stepper value="{{item.num}}" integer bind:change="updateNum" data-id="{{index}}" />
+            <van-icon name="close" class="form-swipeCell-area-eachRow-icon" bindtap="deleteItem" data-id="{{index}}" />
+          </view>
         </block>
       </view>
-      <view class="form-addButton">
-        <view>增加角色</view>
+      <view class="form-addButton-area">
+        <view class="form-addButton" bindtap="addCharacter">
+          <van-icon name="plus" />
+          <view>增加角色</view>
+        </view>
       </view>
+    </view>
+    <view class="form-detailTitle">
+      <view>请输入项目介绍以及入伍要求</view>
+    </view>
+    <view class="form-detailContent">
+      <textarea name="detail" maxlength="-1"></textarea>
+    </view>
+    <view class="submit-area">
+      <button form-type="submit" type="primary" class="submit-area-button">提交</button>
     </view>
   </form>
 </view>

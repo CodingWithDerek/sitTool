@@ -1,5 +1,5 @@
 /* pages/person/myTeam/createTeam.wxss */
-.all{
+.all{ 
   background-color: #f2f2f2;
   font-size: 30rpx;
 }
@@ -18,7 +18,7 @@
   color: #3bac6a;
   margin-right: 20rpx;
 }
-.form-row{
+.form-row,.form-swipeCell-area-eachRow,.form-detailTitle{
   height: 80rpx;
   background-color: white;
   margin: 1px 0;
@@ -40,6 +40,58 @@
   justify-content: space-between;
   padding: 20rpx;
 }
-.form-swipeCell-area{
-  background-color: #fff;
+.form-swipeCell-area-eachRow{
+  justify-content: space-between;
+}
+.form-swipeCell-area-eachRow-left{
+  height: 50rpx;
+  width: 200rpx;
+  padding: 10rpx;
+  border-radius: 10rpx;
+  border: 1px solid #f2f2f2;
+}
+.form-swipeCell-area-eachRow-icon{
+  font-size: 50rpx;
+}
+.form-addButton-area{
+  height: 80rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20rpx;
+}
+.form-addButton{
+  padding: 10rpx;
+  border:1px solid #33b5e5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+.form-detailTitle{
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.form-detailContent{
+  height: 400rpx;
+  margin: 20rpx;
+  border: 1px solid #f2f2f2;
+  border-radius: 20rpx;
+  padding: 20rpx;
+  background-color: white;
+}
+.form-detailContent textarea{
+  width:auto;
+  height: 400rpx;
+}
+.submit-area{
+  height: 200rpx;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.submit-area-button{
+  padding: 5rpx 40rpx;
+  font-size: 30rpx;
 }

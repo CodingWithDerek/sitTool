@@ -51,6 +51,7 @@
       <view class="body1-container-detail" wx:if="{{!item.close}}">
         <view class="body1-container-detail-title">项目介绍以及入伍要求：</view>
         <view>{{item.detail}}</view>
+        <view class="body1-container-detail-check">入伍审批:</view>
         <block wx:for="{{item.joinPeople}}">
           <view class="body1-container-detail-joinPeople">
             <view class="body1-container-detail-joinPeople-left">
@@ -67,7 +68,7 @@
         </block>
       </view>
     </block>
-    <view class="body1-buttom-area">
+    <view class="body1-buttom-area" bindtap="goCreateTeam">
       <view class="body1-buttom-area-button">发起组队</view>
       <van-icon name="arrow" />
     </view>

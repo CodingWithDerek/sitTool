@@ -91,8 +91,8 @@
   margin: 20rpx;
   border-radius: 20rpx;
 }
-.body1-container-detail-title{
-  font-size: 40rpx;
+.body1-container-detail-title,.body1-container-detail-check{
+  font-size: 35rpx;
   font-weight: bold;
 }
 .body1-container-detail-joinPeople{
