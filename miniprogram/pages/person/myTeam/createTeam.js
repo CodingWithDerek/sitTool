@@ -143,6 +143,8 @@ Page({
     var type = this.data.type
     var characterArr = this.data.characterArr
     var count=0
+    var time = app.createTime()
+    console.log(time)
     for(var i=0;i<characterArr.length;i++){
       if(characterArr[i].character=="")
         count++;
@@ -156,11 +158,15 @@ Page({
       }, 500)
     }
     else{
+      for(var j=0;j<characterArr.length;j++){
+        characterArr[j].addedNum=0
+      }
       var shuju={
         teamName,
         type,
         characterArr,
-        detail
+        detail,
+        time
       }
       app.addData('team',shuju)
     }

@@ -72,6 +72,13 @@
 					"id": -1,
 					"name": "组队编辑页面",
 					"pathName": "pages/person/myTeam/createTeam",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "首页组队页",
+					"pathName": "pages/index/team",
 					"scene": null
 				}
 			]

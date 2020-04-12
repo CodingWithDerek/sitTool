@@ -19,7 +19,7 @@ App({
     }
   },
   addData:function(collectionName,shuju){
-    const db = wx.cloud.database()
+    var db = wx.cloud.database()
     db.collection(collectionName).add({
       // data 字段表示需新增的 JSON 数据
       data: shuju,
@@ -43,5 +43,31 @@ App({
         },500)
       }
     })
+  },
+  createTime:function(){
+    var date = new Date()
+    var year = date.getFullYear()
+    var month = date.getMonth()
+    month = month+1
+    var day = date.getDate()
+    var h = date.getHours()
+    var m = date.getMinutes()
+    var s = date.getSeconds()
+    var ms = date.getMilliseconds()
+    if(month<10) month = "0" + month
+    if(h<10) h = "0" + h
+    if(m<10) m = "0" + m
+    if(s<10) s = "0" + s
+    var time = year + "-" + month + "-" + day + " " + h + ":" +
+    m + ":" + s + ":" + ms
+    return time
+  },
+  getData:function(collectionName,skipNum,callRight,callFail){
+    var db = wx.cloud.database()
+    db.collection(collectionName).orderBy("time","desc")
+    .skip(skipNum)
+    .get()
+    .then(callRight)
+    .catch(callFail)
   }
 })
