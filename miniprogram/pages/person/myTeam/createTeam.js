@@ -160,6 +160,7 @@ Page({
     else{
       for(var j=0;j<characterArr.length;j++){
         characterArr[j].addedNum=0
+        characterArr[j].needNum=characterArr[j].num
       }
       var shuju={
         teamName,

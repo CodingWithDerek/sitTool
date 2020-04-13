@@ -30,7 +30,7 @@ App({
         })
         setTimeout(function(){
           wx.hideToast()
-        },500)
+        },2000)
         wx.navigateBack({
         })
       },
@@ -64,9 +64,27 @@ App({
   },
   getData:function(collectionName,skipNum,callRight,callFail){
     var db = wx.cloud.database()
-    db.collection(collectionName).orderBy("time","desc")
+    var _ = db.command
+    db.collection(collectionName).where({
+      characterArr: _.elemMatch({
+        needNum: _.gt(0)
+      })
+    })
+    .orderBy("time","desc")
     .skip(skipNum)
     .get()
+    .then(callRight)
+    .catch(callFail)
+  },
+  getAll:function(collectionName,callRight,callFail){
+    var db = wx.cloud.database()
+    var _ = db.command
+    db.collection(collectionName).where({
+      characterArr:_.elemMatch({
+        needNum: _.gt(0)
+      })
+    })
+    .count()
     .then(callRight)
     .catch(callFail)
   }
