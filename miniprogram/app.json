@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/index/job",
     "pages/index/team",
+    "pages/index/team/teamDetail",
     "pages/index/show",
     "pages/index/know",
     "pages/index/service",

@@ -37,18 +37,32 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-    wx.cloud.callFunction({
-        // 云函数名称
-        name: 'getOpenid'
-      })
-      .then(res => {
-        var that = this
+    var that = this
+    wx.getStorage({
+      key: 'openid',
+      success(res) {
+        console.log(res.data)
         that.setData({
-          openid: res.result.openid
+          openid:res.data
         })
-        app.globalData.openid = res.result.openid
-      })
-      .catch(console.error)
+      },
+      fail(err){
+        wx.cloud.callFunction({
+          // 云函数名称
+          name: 'getOpenid'
+        })
+          .then(res => {
+            that.setData({
+              openid: res.result.openid
+            })
+            wx.setStorage({
+              key: "openid",
+              data: res.result.openid
+            })
+          })
+          .catch(console.error)
+      }
+    })
   },
 
   /**

@@ -14,7 +14,7 @@
   </scroll-view>
   <view class="body">
     <block wx:for="{{team}}" wx:key="{{item._id}}">
-      <view class="body-container" wx:if="{{item.type==selectedType}}">
+      <view class="body-container" wx:if="{{item.type==selectedType}}" bindtap="goTeamDetail" data-item="{{item}}">
         <view class="body-container-row">
           <van-icon name="flag-o" />
           <text>队伍名称：{{item.teamName}}</text>

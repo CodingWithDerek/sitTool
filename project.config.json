@@ -79,6 +79,13 @@
 					"id": -1,
 					"name": "首页组队页",
 					"pathName": "pages/index/team",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "组队详情页面",
+					"pathName": "pages/index/team/teamDetail",
 					"scene": null
 				}
 			]

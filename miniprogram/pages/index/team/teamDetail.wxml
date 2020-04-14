@@ -1,0 +1,48 @@
+<!--pages/index/team/teamDetail.wxml-->
+<view class="all">
+  <view class="body-container">
+    <view class="body-container-row">
+      <van-icon name="flag-o" />
+      <text>队伍名称：{{currentItem.teamName}}</text>
+    </view>
+    <view class="body-container-row">
+      <van-icon name="orders-o" />
+      <text>项目类别：{{currentItem.type}}</text>
+    </view>
+    <view class="body-container-people">
+      <view class="body-container-people-left">
+        <van-icon name="friends-o" />
+        <text>项目人员</text>
+      </view>
+      <view class="body-container-people-right">
+        <block wx:for="{{currentItem.characterArr}}">
+          <view class="body-container-people-right-content">
+            <view>{{item.character}}</view>
+            <view class="body-container-people-right-content-c2">所需
+              <text>{{item.num}}</text>
+            </view>
+            <view class="body-container-people-right-content-c3">还差
+              <text>{{item.num-item.addedNum}}</text>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+    <view class="body-container-row">
+      <van-icon name="underway-o" />
+      <text>发布时间：{{currentItem.time}}</text>
+    </view>
+  </view>
+  <view class="detail">
+    <view class="detail-title"><text>项目介绍以及入伍要求</text></view>
+    <view class="detail-content">{{currentItem.detail}}</view>
+  </view>
+  <view class="gap"></view>
+</view>
+<van-goods-action>
+  <van-goods-action-icon icon="star-o" text="收藏" bind:click="star" wx:if="{{canStar}}"/>
+  <van-goods-action-icon icon="star" text="已收藏" bind:click="unstar" icon-class="unstar" wx:else/>
+  <van-goods-action-button color="#a7e4fa" text="分享给好友" type="warning" open-type="share"/>
+  <van-goods-action-button color="#33b5e5" text="申请加入" bind:click="join" wx:if="{{canJoin}}"/>
+  <van-goods-action-button color="#33b5e5" text="您已加入" bind:click="showToast" wx:else/>
+</van-goods-action>

@@ -145,6 +145,7 @@ Page({
     var count=0
     var time = app.createTime()
     console.log(time)
+    var starArr=[]
     for(var i=0;i<characterArr.length;i++){
       if(characterArr[i].character=="")
         count++;
@@ -167,7 +168,8 @@ Page({
         type,
         characterArr,
         detail,
-        time
+        time,
+        starArr
       }
       app.addData('team',shuju)
     }

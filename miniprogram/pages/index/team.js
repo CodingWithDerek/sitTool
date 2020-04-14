@@ -180,5 +180,10 @@ Page({
       selectedType: newType[index].name,
       noDataFlag: _noDataFlag
     })
+  },
+  goTeamDetail:function(e){
+    wx.navigateTo({
+      url: './team/teamDetail?item=' + JSON.stringify(e.currentTarget.dataset.item)
+    })
   }
 })
