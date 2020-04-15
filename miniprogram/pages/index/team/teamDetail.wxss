@@ -66,3 +66,39 @@
 .unstar{
   color: #ff1d11
 }
+.application{
+  height: 600rpx;
+}
+.form{
+  border: 1p solid white;
+  font-size: 30rpx
+}
+.application-row{
+  display: flex;
+  height: 60rpx;
+  align-items: center;
+  padding: 20rpx;
+}
+.application-row-left{
+  margin-right: 20rpx;
+}
+.application-row-right{
+  background-color: #f2f2f2;
+  width: 70%;
+}
+.gap2{
+  height:90rpx;
+}
+.application-area{
+  height: 200rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.application-area-button{
+  padding: 10rpx 50rpx;
+  border-radius: 20rpx;
+  background-color: #33b5e5;
+  font-size: 30rpx;
+  color: white;
+}

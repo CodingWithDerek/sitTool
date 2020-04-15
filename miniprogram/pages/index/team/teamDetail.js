@@ -9,7 +9,8 @@ Page({
     currentItem: null,
     canStar: true,
     canJoin: true,
-    openid: ""
+    openid: "",
+    show:false
   },
 
   /**
@@ -28,6 +29,7 @@ Page({
   onReady: function() {
     var that = this
     var item_starArr = that.data.currentItem.starArr
+    var item_applyArr = that.data.currentItem.applyArr
     wx.getStorage({
       key: 'openid',
       success(res) {
@@ -39,6 +41,14 @@ Page({
           if(res.data==item_starArr[i]){
             that.setData({
               canStar:false
+            })
+            break
+          }
+        }
+        for(var j=0;j<item_applyArr.length;j++){
+          if(res.data==item_applyArr[j].openid){
+            that.setData({
+              canJoin: false
             })
             break
           }
@@ -56,6 +66,14 @@ Page({
               if (res.data == item_starArr[i]) {
                 that.setData({
                   canStar: false
+                })
+                break
+              }
+            }
+            for (var j = 0; j < item_applyArr.length; j++) {
+              if (res.data == item_applyArr[j].openid) {
+                that.setData({
+                  canJoin: false
                 })
                 break
               }
@@ -113,16 +131,15 @@ Page({
   },
   star: function() {
     var _id = this.data.currentItem._id
-    var starArr = this.data.currentItem.starArr
-    starArr.push(this.data.openid)
-    if(_id!=""){
+    var openid = this.data.openid
+    if(openid!=""){
       wx.cloud.callFunction({
-        // 云函数名称
         name: 'updateItem',
         data: {
           _id,
           collectionName: "team",
-          starArr
+          openid,
+          attributeName:"starArr"
         }
       })
         .then(res => {
@@ -157,20 +174,13 @@ Page({
   unstar:function(){
     var _id = this.data.currentItem._id
     var openid = this.data.openid
-    var starArr = this.data.currentItem.starArr
-    for(var i=0;i<starArr.length;i++){
-      if(openid==starArr[i]){
-        starArr.splice(i,1)
-        break
-      }
-    }
     wx.cloud.callFunction({
       // 云函数名称
-      name: 'updateItem',
+      name: 'unstar',
       data: {
         _id,
         collectionName: "team",
-        starArr
+        openid
       }
     })
       .then(res => {
@@ -193,5 +203,88 @@ Page({
           wx.hideToast()
         }, 500)
       })
+  },
+  join:function(){
+    this.setData({
+      show:true
+    })
+  },
+  closeDialog:function(){
+    this.setData({
+      show:false
+    })
+  },
+  submitApplication:function(e){
+    console.log(e)
+    var name = e.detail.value.name
+    var mobbilePhone = e.detail.value.mobbilePhone
+    var wechatId = e.detail.value.wechatId
+    var _id = this.data.currentItem._id
+    var openid = this.data.openid
+    var applyEach = {
+      openid,
+      name,
+      mobbilePhone,
+      wechatId
+    }
+    if(name&&mobbilePhone.length==11&&wechatId){
+      if(openid!=""){
+        wx.cloud.callFunction({
+          // 云函数名称
+          name: 'updateItem',
+          data: {
+            _id,
+            collectionName: "team",
+            applyEach,
+            attributeName: "applyArr"
+          }
+        })
+          .then(res => {
+            this.setData({
+              canJoin: false,
+              show:false
+            })
+            wx.showToast({
+              title: '申请已提交'
+            })
+            setTimeout(function () {
+              wx.hideToast()
+            }, 500)
+          })
+          .catch(err => {
+            wx.showToast({
+              title: '请重试',
+              icon: 'loading'
+            })
+            setTimeout(function () {
+              wx.hideToast()
+            }, 500)
+          })
+      }
+      else{
+        wx.showLoading({
+          title: '请稍后再试',
+        })
+        setTimeout(function(){
+          wx.hideLoading()
+        },500)
+      }
+    }
+    else{
+      wx.showLoading({
+        title: '请填写完整信息',
+      })
+      setTimeout(function () {
+        wx.hideLoading()
+      }, 500)
+    }
+  },
+  showAdded:function(){
+    wx.showLoading({
+      title: '您已经申请过了',
+    })
+    setTimeout(function(){
+      wx.hideLoading()
+    },500)
   }
 })

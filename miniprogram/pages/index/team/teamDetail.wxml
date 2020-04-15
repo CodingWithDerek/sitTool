@@ -44,5 +44,31 @@
   <van-goods-action-icon icon="star" text="已收藏" bind:click="unstar" icon-class="unstar" wx:else/>
   <van-goods-action-button color="#a7e4fa" text="分享给好友" type="warning" open-type="share"/>
   <van-goods-action-button color="#33b5e5" text="申请加入" bind:click="join" wx:if="{{canJoin}}"/>
-  <van-goods-action-button color="#33b5e5" text="您已加入" bind:click="showToast" wx:else/>
+  <van-goods-action-button color="#33b5e5" text="您已申请" bind:click="showAdded" wx:else/>
 </van-goods-action>
+<van-popup show="{{ show }}" 
+  closeable
+  close-icon="close"
+  position="bottom"
+  custom-style="application"
+  bind:close="closeDialog"
+  round>
+  <form class="form" bindsubmit="submitApplication">
+    <view class="gap2"></view>
+    <view class="application-row">
+      <view class="application-row-left">姓名</view>
+      <input class="application-row-right" name="name"></input>
+    </view>
+    <view class="application-row">
+      <view class="application-row-left">手机号</view>
+      <input class="application-row-right" name="mobbilePhone" type="number"></input>
+    </view>
+    <view class="application-row">
+      <view class="application-row-left">微信号</view>
+      <input class="application-row-right" name="wechatId"></input>
+    </view>
+    <view class="application-area">
+      <button form-type="submit" class="application-area-button">确认提交</button>
+    </view>
+  </form>
+</van-popup>
