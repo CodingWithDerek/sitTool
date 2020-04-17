@@ -1,4 +1,6 @@
 // pages/person/myTeam.js
+const db = wx.cloud.database()
+const _ = db.command
 Page({
 
   /**
@@ -6,86 +8,9 @@ Page({
    */
   data: {
     bindNum:1,
-    openid:"oBitP5SmaDl4ptj4_KI6Tojx9D0M",
-    team:[
-      {
-        ownerID:"oBitP5SmaDl4ptj4_KI6Tojx9D0M",
-        name:"志星",
-        type:"微信小程序",
-        people:[
-          {
-            character:"UI设计",
-            all:"4",
-            joined:"2"
-          },
-          {
-            character: "软件开发",
-            all: "5",
-            joined: "2"
-          },
-          {
-            character: "单元测试",
-            all: "4",
-            joined: "1"
-          }
-        ],
-        joinPeople:[
-          {
-            openid:"2ewqfd",
-            character:"UI设计",
-            name:"何志龙",
-            phone:"18800359311",
-            wechat:"dsfbdhsf24e34b3"
-          },
-          {
-            openid: "2ewqfd",
-            character: "UI设计",
-            name: "何志龙",
-            phone: "18800359311",
-            wechat: "dsfbdhsf24e34b3"
-          }
-        ],
-        close:true,
-        detail:"我们需要你肯吃苦",
-        randomNum:1
-      },
-      {
-        ownerID: "",
-        name: "志星",
-        type: "微信小程序",
-        people: [
-          {
-            character: "UI设计",
-            all: "4",
-            joined: "2"
-          },
-          {
-            character: "单元测试",
-            all: "4",
-            joined: "1"
-          }
-        ],
-        joinPeople: [
-          {
-            openid: "2ewqfd",
-            character: "UI设计",
-            name: "何志龙",
-            phone: "18800359311",
-            wechat: "dsfbdhsf24e34b3"
-          },
-          {
-            openid: "2ewqfd",
-            character: "UI设计",
-            name: "何志龙",
-            phone: "18800359311",
-            wechat: "dsfbdhsf24e34b3"
-          }
-        ],
-        close:true,
-        detail:"dsfbdnf 悲剧的开始分别的时刻",
-        randomNum:4
-      }
-    ]
+    openid:"",
+    team:[],
+    applyCollection:[]
   },
 
   /**
@@ -106,7 +31,70 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this
+    wx.getStorage({
+      key: 'openid',
+      success: function(res) {
+        that.setData({
+          openid:res.data
+        })
+        db.collection("team").where({
+          _openid: res.data
+        }).get().then(res2 => {
+          var teamArr = res2.data
+          for(var i=0;i<teamArr.length;i++){
+            teamArr[i].close=true
+          }
+          that.setData({
+            team:teamArr
+          })
+        })
+        db.collection("team").where({
+          applyArr: _.elemMatch({
+            openid: _.eq(res.data)
+          })
+        }).get().then(res3 => {
+          that.setData({
+            applyCollection: res3.data
+          })
+        })
+      },
+      fail:function(err){
+        wx.cloud.callFunction({
+          name: 'getOpenid'
+        })
+          .then(res => {
+            that.setData({
+              openid: res.result.openid
+            })
+            wx.setStorage({
+              key: "openid",
+              data: res.result.openid
+            })
+            db.collection("team").where({
+              _openid: res.data
+            }).get().then(res2 => {
+              var teamArr = res2.data
+              for (var i = 0; i < teamArr.length; i++) {
+                teamArr[i].close = false
+              }
+              that.setData({
+                team: teamArr
+              })
+            })
+            db.collection("team").where({
+              applyArr: _.elemMatch({
+                openid: _.eq(res.data)
+              })
+            }).get().then(res3 => {
+              that.setData({
+                applyCollection: res3.data
+              })
+            })
+          })
+          .catch(console.err)
+      }
+    })
   },
 
   /**
@@ -158,9 +146,9 @@ Page({
       bindNum: 3
     })
   },
-  goCreateTeam:function(){
+  goCreateTeam:function(e){
     wx.navigateTo({
-      url: './myTeam/createTeam',
+      url: './myTeam/createTeam?item=' + JSON.stringify(e.currentTarget.dataset.item),
     })
   },
   openDetail:function(e){
@@ -168,7 +156,7 @@ Page({
     var team = this.data.team
     var current = e.currentTarget.dataset.item
     for(var i=0;i<team.length;i++){
-      if(team[i].randomNum==current.randomNum){
+      if(team[i]._id==current._id){
         team[i].close=false;
         this.setData({
           team:team
@@ -182,7 +170,7 @@ Page({
     var team = this.data.team
     var current = e.currentTarget.dataset.item
     for (var i = 0; i < team.length; i++) {
-      if (team[i].randomNum == current.randomNum) {
+      if (team[i]._id == current._id) {
         team[i].close = true;
         this.setData({
           team: team
@@ -190,5 +178,21 @@ Page({
         break
       }
     }
+  },
+  callPeople:function(e){
+    var phone = e.currentTarget.dataset.phone
+    wx.makePhoneCall({
+      phoneNumber: phone,
+    })
+  },
+  copyWechatId:function(e){
+    var wechat = e.currentTarget.dataset.wechat
+    wx.setClipboardData({
+      data: wechat,
+      success(res) {
+        wx.getClipboardData({
+        })
+      }
+    })
   }
 })

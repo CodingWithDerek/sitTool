@@ -10,7 +10,8 @@ Page({
     canStar: true,
     canJoin: true,
     openid: "",
-    show:false
+    show:false,
+    index:0
   },
 
   /**
@@ -214,20 +215,30 @@ Page({
       show:false
     })
   },
+  changeValue:function(e){
+    console.log(e)
+    this.setData({
+      index:e.detail.value
+    })
+  },
   submitApplication:function(e){
     console.log(e)
     var name = e.detail.value.name
     var mobbilePhone = e.detail.value.mobbilePhone
     var wechatId = e.detail.value.wechatId
+    var character = this.data.currentItem.characterArr[this.data.index].character
     var _id = this.data.currentItem._id
     var openid = this.data.openid
     var applyEach = {
       openid,
       name,
       mobbilePhone,
-      wechatId
+      wechatId,
+      character,
+      argue:1,
+      added:false
     }
-    if(name&&mobbilePhone.length==11&&wechatId){
+    if(name&&mobbilePhone.length==11&&wechatId&&character){
       if(openid!=""){
         wx.cloud.callFunction({
           // 云函数名称

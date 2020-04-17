@@ -22,14 +22,30 @@ Page({
         character:"",
         num:1
       }
-    ]
+    ],
+    currentItem:""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var item = JSON.parse(options.item)
+    var type = item.type
+    var projectType = this.data.projectType
+    var index
+    var characterArr = item.characterArr
+    for(var i=0;i<projectType.length;i++)
+      if(type==projectType[i]){
+        index = i
+        break
+      }
+    console.log(item)
+    this.setData({
+      currentItem: item,
+      index:index,
+      characterArr:characterArr
+    })
   },
 
   /**
@@ -160,20 +176,35 @@ Page({
       }, 500)
     }
     else{
-      for(var j=0;j<characterArr.length;j++){
-        characterArr[j].addedNum=0
-        characterArr[j].needNum=characterArr[j].num
+      var repeat = false
+      for(var i=0;i<characterArr.length-1;i++)
+        for(var j=i+1;j<characterArr.length;j++)
+          if(characterArr[i].character==characterArr[j].character){
+            repeat = true
+            break
+          }
+      if(repeat){
+        wx.showModal({
+          showCancel:false,
+          content: '请不要设置相同的队员角色',
+        })
       }
-      var shuju={
-        teamName,
-        type,
-        characterArr,
-        detail,
-        time,
-        starArr,
-        applyArr
+      else{
+        for (var i = 0; i < characterArr.length; i++) {
+          characterArr[i].addedNum = 0
+          characterArr[i].needNum = characterArr[i].num
+        }
+        var shuju = {
+          teamName,
+          type,
+          characterArr,
+          detail,
+          time,
+          starArr,
+          applyArr
+        }
+        app.addData('team', shuju)
       }
-      app.addData('team',shuju)
     }
   }
 })

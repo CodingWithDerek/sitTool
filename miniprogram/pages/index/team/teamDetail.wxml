@@ -67,6 +67,10 @@
       <view class="application-row-left">微信号</view>
       <input class="application-row-right" name="wechatId"></input>
     </view>
+    <view class="application-row">
+      <view class="application-row-left">申请角色</view>
+      <picker class="application-row-right4" range="{{currentItem.characterArr}}" range-key="character" bindchange="changeValue">{{currentItem.characterArr[index].character}}</picker>
+    </view>
     <view class="application-area">
       <button form-type="submit" class="application-area-button">确认提交</button>
     </view>

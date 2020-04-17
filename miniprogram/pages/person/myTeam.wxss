@@ -25,14 +25,18 @@
   background-color: #f2f2f2;
   border: 1px solid #f2f2f2;
 }
+.body1-all{
+  background-color: white;
+  margin: 20rpx;
+  border-radius: 20rpx;
+}
 .body1-container{
   background-color: white;
-  border-radius: 20rpx;
   padding: 20rpx;
-  margin: 20rpx;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-radius: 20rpx;
 }
 .body1 :first-child{
   margin-top: 0;
@@ -42,8 +46,8 @@
   align-items: center;
 }
 .body1-container-left-row3-right{
-  border-radius: 10rpx;
-  background-color: #f6f6f6;
+  border-radius: 20rpx;
+  border: 1px solid #33b5e5;
   padding: 20rpx;
   display: flex;
   flex-direction: column;
@@ -62,11 +66,13 @@
   margin-right: 20rpx;
 }
 .c2 text,.c3 text{
-  border: 1px solid #33b5e5;
-  padding: 0rpx 15rpx;
+  padding: 10rpx 20rpx;
   color: #ff1d11;
   border-radius: 10rpx;
-  background-color: white;
+  background-color: #f2f2f2;
+}
+.c3 text{
+  color: #33b5e5
 }
 .faqi-rightIcon{
   font-size: 50rpx;
@@ -79,6 +85,9 @@
 .body1-container-right-open,.body1-container-right-close{
   margin-top: 30rpx;
 }
+.body1-container-right-first{
+  margin-bottom: 30rpx;
+}
 .faqi-rightWord{
   font-size: 20rpx;
 }
@@ -88,12 +97,17 @@
   flex-direction: column;
   justify-content: center;
   padding: 20rpx;
-  margin: 20rpx;
   border-radius: 20rpx;
 }
 .body1-container-detail-title,.body1-container-detail-check{
   font-size: 35rpx;
   font-weight: bold;
+}
+.body1-container-detail-noData{
+  padding: 20rpx;
+  border-radius: 20rpx;
+  background-color: #f2f2f2;
+  text-align: center;
 }
 .body1-container-detail-joinPeople{
   border: 1px solid #33b5e5;
@@ -123,7 +137,9 @@
   border-radius: 20rpx;
   margin-bottom: 30rpx;
 }
-.body1-container-detail-joinPeople-right-deny{
+.body1-container-detail-joinPeople-right-deny,
+.body1-container-detail-joinPeople-right-delete
+{
   background-color: #ff1d11;
   color: white;
   padding: 10rpx 20rpx;

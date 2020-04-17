@@ -6,66 +6,84 @@
     <view class="{{bindNum==3?'upBar-light':'upBar-dark'}}" bindtap="num3">等待审核</view>
   </view>
   <view class="body1" wx:if="{{bindNum==1}}">
-    <block wx:for="{{team}}">
-      <view class="body1-container">
-        <view class="body1-container-left">
-          <view class="body1-container-left-row1">
-            <van-icon name="flag-o" />
-            <text>队伍名称：{{item.name}}</text>
-          </view>
-          <view class="body1-container-left-row2">
-            <van-icon name="orders-o" />
-            <text>项目类别：{{item.type}}</text>
-          </view>
-          <view class="body1-container-left-row3">
-            <view class="body1-container-left-row3-left">
-              <van-icon name="friends-o" />
-              <text>项目人员：</text>
+    <block wx:for="{{team}}" wx:key="{{item._id}}">
+      <view class="body1-all">
+        <view class="body1-container">
+          <view class="body1-container-left">
+            <view class="body1-container-left-row1">
+              <van-icon name="flag-o" />
+              <text>队伍名称：{{item.teamName}}</text>
             </view>
-            <view class="body1-container-left-row3-right">
-              <block wx:for="{{item.people}}">
-                <view class="body1-container-left-row3-right-eachRow">
-                  <view class="c1">{{item.character}}</view>
-                  <view class="c2">所需<text>{{item.all}}</text></view>
-                  <view class="c3">还差<text>{{item.joined}}</text></view>
+            <view class="body1-container-left-row2">
+              <van-icon name="orders-o" />
+              <text>项目类别：{{item.type}}</text>
+            </view>
+            <view class="body1-container-left-row3">
+              <view class="body1-container-left-row3-left">
+                <van-icon name="friends-o" />
+                <text>项目人员：</text>
+              </view>
+              <view class="body1-container-left-row3-right">
+                <block wx:for="{{item.characterArr}}">
+                  <view class="body1-container-left-row3-right-eachRow">
+                    <view class="c1">{{item.character}}</view>
+                    <view class="c2">所需
+                      <text>{{item.num}}</text>
+                    </view>
+                    <view class="c3">还差
+                      <text>{{item.needNum}}</text>
+                    </view>
+                  </view>
+                </block>
+              </view>
+            </view>
+          </view>
+          <view class="body1-container-right">
+            <view class="body1-container-right-first" bindtap="breakItem">
+              <van-icon name="delete" class="faqi-rightIcon" />
+              <view class="faqi-rightWord">解散</view>
+            </view>
+            <view bindtap="goCreateTeam" data-item="{{item}}">
+              <van-icon name="edit" class="faqi-rightIcon" />
+              <view class="faqi-rightWord">编辑</view>
+            </view>
+            <view class="body1-container-right-open" wx:if="{{item.close}}" bindtap="openDetail" data-item="{{item}}">
+              <van-icon name="arrow-down" class="faqi-rightIcon" />
+              <view class="faqi-rightWord">展开</view>
+            </view>
+            <view class="body1-container-right-close" wx:else bindtap="closeDetail" data-item="{{item}}">
+              <van-icon name="arrow-up" class="faqi-rightIcon" />
+              <view class="faqi-rightWord">收起</view>
+            </view>
+          </view>
+        </view>
+        <view class="body1-container-detail" wx:if="{{!item.close}}">
+          <view class="body1-container-detail-title">项目介绍以及入伍要求：</view>
+          <view>{{item.detail}}</view>
+          <view class="body1-container-detail-check">人员管理:</view>
+          <view class="body1-container-detail-noData" wx:if="{{item.applyArr.length==0}}">还没有人员申请加入您的项目</view>
+          <block wx:for="{{item.applyArr}}">
+            <view class="body1-container-detail-joinPeople">
+              <view class="body1-container-detail-joinPeople-left">
+                <view class="body1-container-detail-joinPeople-left-row">申请人：{{item.name}}</view>
+                <view class="body1-container-detail-joinPeople-left-row">手机号：{{item.mobbilePhone}}
+                  <text data-phone="{{item.mobbilePhone}}" bindtap="callPeople">拨打</text>
                 </view>
-              </block>
+                <view class="body1-container-detail-joinPeople-left-row">微信号：{{item.wechatId}}
+                  <text data-wechat="{{item.wechatId}}" bindtap="copyWechatId">复制</text>
+                </view>
+                <view class="body1-container-detail-joinPeople-left-row">角色：{{item.character}}</view>
+              </view>
+              <view class="body1-container-detail-joinPeople-right">
+                <view class="body1-container-detail-joinPeople-right-agree" wx:if="{{item.argue==1}}">同意</view>
+                <view class="body1-container-detail-joinPeople-right-deny" wx:if="{{item.argue==1}}">拒绝</view>
+                <view class="body1-container-detail-joinPeople-right-agree" wx:if="{{item.argue==2}}">已同意</view>
+                <view class="body1-container-detail-joinPeople-right-deny" wx:if="{{item.argue==3}}">已拒绝</view>
+                <view class="body1-container-detail-joinPeople-right-delete" wx:if="{{item.argue==2}}">删除</view>
+              </view>
             </view>
-          </view>
+          </block>
         </view>
-        <view class="body1-container-right">
-          <view bindtap="goCreateTeam">
-            <van-icon name="edit" class="faqi-rightIcon"/>
-            <view class="faqi-rightWord">编辑</view>
-          </view>
-          <view class="body1-container-right-open" wx:if="{{item.close}}" bindtap="openDetail" data-item="{{item}}">
-            <van-icon name="arrow-down" class="faqi-rightIcon"/>
-            <view class="faqi-rightWord">展开</view>
-          </view>
-          <view class="body1-container-right-close" wx:else bindtap="closeDetail" data-item="{{item}}">
-            <van-icon name="arrow-up" class="faqi-rightIcon"/>
-            <view class="faqi-rightWord">收起</view>
-          </view>
-        </view>
-      </view>
-      <view class="body1-container-detail" wx:if="{{!item.close}}">
-        <view class="body1-container-detail-title">项目介绍以及入伍要求：</view>
-        <view>{{item.detail}}</view>
-        <view class="body1-container-detail-check">入伍审批:</view>
-        <block wx:for="{{item.joinPeople}}">
-          <view class="body1-container-detail-joinPeople">
-            <view class="body1-container-detail-joinPeople-left">
-              <view class="body1-container-detail-joinPeople-left-row">申请人：{{item.name}}</view>
-              <view class="body1-container-detail-joinPeople-left-row">手机号：{{item.phone}}<text>拨打</text></view>
-              <view class="body1-container-detail-joinPeople-left-row">微信号：{{item.wechat}}<text>复制</text></view>
-              <view class="body1-container-detail-joinPeople-left-row">角色：{{item.character}}</view>
-            </view>
-            <view class="body1-container-detail-joinPeople-right">
-              <view class="body1-container-detail-joinPeople-right-agree">同意</view>
-              <view class="body1-container-detail-joinPeople-right-deny">拒绝</view>
-            </view>
-          </view>
-        </block>
       </view>
     </block>
     <view class="body1-buttom-area" bindtap="goCreateTeam">

@@ -8,7 +8,7 @@
     <view class="form-row">
       <view class="form-row-left">队伍名称</view>
       <view class="form-row-right">
-        <input name="teamName"></input>
+        <input name="teamName" value="{{currentItem.teamName}}"></input>
       </view>
     </view>
     <view class="form-row">
@@ -43,7 +43,7 @@
       <view>请输入项目介绍以及入伍要求</view>
     </view>
     <view class="form-detailContent">
-      <textarea name="detail" maxlength="-1"></textarea>
+      <textarea name="detail" maxlength="-1" value="{{currentItem.detail}}"></textarea>
     </view>
     <view class="submit-area">
       <button form-type="submit" type="primary" class="submit-area-button">提交</button>

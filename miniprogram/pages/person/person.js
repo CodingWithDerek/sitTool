@@ -60,7 +60,7 @@ Page({
               data: res.result.openid
             })
           })
-          .catch(console.error)
+          .catch(console.err)
       }
     })
   },
