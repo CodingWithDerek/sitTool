@@ -4,6 +4,7 @@
     <view class="{{bindNum==1?'upBar-light':'upBar-dark'}}" bindtap="num1">已发起</view>
     <view class="{{bindNum==2?'upBar-light':'upBar-dark'}}" bindtap="num2">已加入</view>
     <view class="{{bindNum==3?'upBar-light':'upBar-dark'}}" bindtap="num3">等待审核</view>
+    <view class="{{bindNum==4?'upBar-light':'upBar-dark'}}" bindtap="num4">已被拒绝</view>
   </view>
   <view class="body1" wx:if="{{bindNum==1}}">
     <block wx:for="{{team}}" wx:key="{{item._id}}">
@@ -39,7 +40,7 @@
             </view>
           </view>
           <view class="body1-container-right">
-            <view class="body1-container-right-first" bindtap="breakItem">
+            <view class="body1-container-right-first" bindtap="breakItem" data-id="{{item._id}}">
               <van-icon name="delete" class="faqi-rightIcon" />
               <view class="faqi-rightWord">解散</view>
             </view>
@@ -75,11 +76,11 @@
                 <view class="body1-container-detail-joinPeople-left-row">角色：{{item.character}}</view>
               </view>
               <view class="body1-container-detail-joinPeople-right">
-                <view class="body1-container-detail-joinPeople-right-agree" wx:if="{{item.argue==1}}">同意</view>
-                <view class="body1-container-detail-joinPeople-right-deny" wx:if="{{item.argue==1}}">拒绝</view>
+                <view class="body1-container-detail-joinPeople-right-agree" wx:if="{{item.argue==1}}" bindtap="agreeJoin" data-item="{{item}}">同意</view>
+                <view class="body1-container-detail-joinPeople-right-deny" wx:if="{{item.argue==1}}" bindtap="rejectJoin" data-item="{{item}}">拒绝</view>
                 <view class="body1-container-detail-joinPeople-right-agree" wx:if="{{item.argue==2}}">已同意</view>
                 <view class="body1-container-detail-joinPeople-right-deny" wx:if="{{item.argue==3}}">已拒绝</view>
-                <view class="body1-container-detail-joinPeople-right-delete" wx:if="{{item.argue==2}}">删除</view>
+                <view class="body1-container-detail-joinPeople-right-delete" wx:if="{{item.argue==2}}" bindtap="deleteJoined" data-item="{{item}}">删除</view>
               </view>
             </view>
           </block>

@@ -131,6 +131,9 @@ Page({
 
   },
   star: function() {
+    wx.showLoading({
+      title: '刷新中',
+    })
     var _id = this.data.currentItem._id
     var openid = this.data.openid
     if(openid!=""){
@@ -147,6 +150,7 @@ Page({
           this.setData({
             canStar: false
           })
+          wx.hideLoading()
           wx.showToast({
             title: '收藏成功'
           })
@@ -173,6 +177,9 @@ Page({
     }
   },
   unstar:function(){
+    wx.showLoading({
+      title: '刷新中',
+    })
     var _id = this.data.currentItem._id
     var openid = this.data.openid
     wx.cloud.callFunction({
@@ -188,6 +195,7 @@ Page({
         this.setData({
           canStar: true
         })
+        wx.hideLoading()
         wx.showToast({
           title: '已取消收藏'
         })
@@ -222,6 +230,9 @@ Page({
     })
   },
   submitApplication:function(e){
+    wx.showLoading({
+      title: '正在提交',
+    })
     console.log(e)
     var name = e.detail.value.name
     var mobbilePhone = e.detail.value.mobbilePhone
@@ -236,7 +247,9 @@ Page({
       wechatId,
       character,
       argue:1,
-      added:false
+      added:false,
+      rejected:false,
+      _id
     }
     if(name&&mobbilePhone.length==11&&wechatId&&character){
       if(openid!=""){
@@ -251,6 +264,7 @@ Page({
           }
         })
           .then(res => {
+            wx.hideLoading()
             this.setData({
               canJoin: false,
               show:false

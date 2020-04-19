@@ -1,4 +1,5 @@
 // pages/person/myTeam/createTeam.js
+const db = wx.cloud.database()
 const app = getApp()
 Page({
 
@@ -30,31 +31,38 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var item = JSON.parse(options.item)
-    var type = item.type
-    var projectType = this.data.projectType
-    var index
-    var characterArr = item.characterArr
-    for(var i=0;i<projectType.length;i++)
-      if(type==projectType[i]){
-        index = i
-        break
-      }
-    console.log(item)
-    this.setData({
-      currentItem: item,
-      index:index,
-      characterArr:characterArr
-    })
+    console.log(options)
+    if(options.item!="undefined"){
+      var item = JSON.parse(options.item)
+      var type = item.type
+      var projectType = this.data.projectType
+      var index
+      var characterArr = item.characterArr
+      for (var i = 0; i < projectType.length; i++)
+        if (type == projectType[i]) {
+          index = i
+          break
+        }
+      console.log(item)
+      this.setData({
+        currentItem: item,
+        index: index,
+        characterArr: characterArr,
+        type:type
+      })
+    }
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.setData({
-      type:this.data.projectType[0]
-    })
+    var current = this.data.currentItem
+    if(current==""){
+      this.setData({
+        type: this.data.projectType[0]
+      })
+    }
   },
 
   /**
@@ -190,20 +198,65 @@ Page({
         })
       }
       else{
+        var flag=false
         for (var i = 0; i < characterArr.length; i++) {
-          characterArr[i].addedNum = 0
-          characterArr[i].needNum = characterArr[i].num
+          if(!characterArr[i].addedNum){
+            characterArr[i].addedNum = 0
+            characterArr[i].needNum = characterArr[i].num
+          }
+          if(characterArr[i].addedNum>characterArr[i].num){
+            flag=true
+            break
+          }
         }
-        var shuju = {
-          teamName,
-          type,
-          characterArr,
-          detail,
-          time,
-          starArr,
-          applyArr
+        if(this.data.currentItem!=""){
+          if(flag==true){
+            wx.showModal({
+              showCancel: false,
+              content: '您设置的所需人数小于已加入您队伍的人数，请重新设置',
+            })
+          }
+          else{
+            var _id = this.data.currentItem._id
+            db.collection("team").doc(_id).update({
+              data:{
+                teamName:teamName,
+                type:type,
+                characterArr:characterArr,
+                detail:detail
+              }
+            }).then(res=>{
+              wx.showToast({
+                title: '数据更新成功',
+              })
+              setTimeout(function(){
+                wx.hideToast()
+              },500)
+              wx.navigateBack({
+              })
+            }).catch(err=>{
+              console.log(err)
+              wx.showLoading({
+                title: '请稍后再试',
+              })
+              setTimeout(function(){
+                wx.hideLoading()
+              },500)
+            })
+          }
         }
-        app.addData('team', shuju)
+        else{
+          var shuju = {
+            teamName,
+            type,
+            characterArr,
+            detail,
+            time,
+            starArr,
+            applyArr
+          }
+          app.addData('team', shuju)
+        }
       }
     }
   }
