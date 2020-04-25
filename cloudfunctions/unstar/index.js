@@ -6,7 +6,7 @@ const db = cloud.database()
 const _ = db.command
 // 云函数入口函数
 exports.main = async (event, context) => {
-  await db.collection(event.collectionName).doc(event._id).update({
+  return await db.collection(event.collectionName).doc(event._id).update({
     data: {
       starArr: _.pull(event.openid)
     }

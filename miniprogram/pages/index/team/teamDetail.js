@@ -147,6 +147,7 @@ Page({
         }
       })
         .then(res => {
+          console.log("updateItem",res)
           this.setData({
             canStar: false
           })
@@ -159,6 +160,7 @@ Page({
           }, 500)
         })
         .catch(err => {
+          console.log("updateItem",err)
           wx.showToast({
             title: '请重试',
             icon: 'loading'
@@ -192,6 +194,7 @@ Page({
       }
     })
       .then(res => {
+        console.log("unstar",res)
         this.setData({
           canStar: true
         })
@@ -204,6 +207,7 @@ Page({
         }, 500)
       })
       .catch(err => {
+        console.log("unstar",err)
         wx.showToast({
           title: '请重试',
           icon: 'loading'

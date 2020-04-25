@@ -213,39 +213,89 @@ Page({
           if(flag==true){
             wx.showModal({
               showCancel: false,
-              content: '您设置的所需人数小于已加入您队伍的人数，请重新设置',
+              content: '您设置角色的所需人数小于已加入您队伍的人数，请重新设置',
             })
           }
           else{
+            wx.showLoading({
+              title: '上传中',
+            })
+            var content = teamName + type + JSON.stringify(characterArr)+detail
             var _id = this.data.currentItem._id
-            db.collection("team").doc(_id).update({
+            wx.cloud.callFunction({
+              name:"checkContent",
               data:{
-                teamName:teamName,
-                type:type,
-                characterArr:characterArr,
-                detail:detail
+                content:content
               }
             }).then(res=>{
-              wx.showToast({
-                title: '数据更新成功',
-              })
-              setTimeout(function(){
-                wx.hideToast()
-              },500)
-              wx.navigateBack({
+              wx.hideLoading()
+              console.log("安全接口调用成功返回的内容",res)
+              db.collection("team").doc(_id).update({
+                data: {
+                  teamName: teamName,
+                  type: type,
+                  characterArr: characterArr,
+                  detail: detail
+                }
+              }).then(res => {
+                console.log("数据更新成功的res", res)
+                wx.showToast({
+                  title: '数据更新成功',
+                })
+                setTimeout(function () {
+                  wx.hideToast()
+                }, 500)
+                wx.navigateBack({
+                })
+              }).catch(err => {
+                console.log(err)
+                wx.showLoading({
+                  title: '请稍后再试',
+                })
+                setTimeout(function () {
+                  wx.hideLoading()
+                }, 500)
               })
             }).catch(err=>{
-              console.log(err)
-              wx.showLoading({
-                title: '请稍后再试',
+              wx.hideLoading()
+              console.log("安全接口调用失败的内容",err)
+              wx.showModal({
+                showCancel:false,
+                content: '您上传的内容涉嫌违法违规，请重新编辑后上传',
               })
-              setTimeout(function(){
-                wx.hideLoading()
-              },500)
             })
+            // db.collection("team").doc(_id).update({
+            //   data:{
+            //     teamName:teamName,
+            //     type:type,
+            //     characterArr:characterArr,
+            //     detail:detail
+            //   }
+            // }).then(res=>{
+            //   console.log("数据更新成功的res",res)
+            //   wx.showToast({
+            //     title: '数据更新成功',
+            //   })
+            //   setTimeout(function(){
+            //     wx.hideToast()
+            //   },500)
+            //   wx.navigateBack({
+            //   })
+            // }).catch(err=>{
+            //   console.log(err)
+            //   wx.showLoading({
+            //     title: '请稍后再试',
+            //   })
+            //   setTimeout(function(){
+            //     wx.hideLoading()
+            //   },500)
+            // })
           }
         }
         else{
+          wx.showLoading({
+            title: '上传中',
+          })
           var shuju = {
             teamName,
             type,
@@ -255,7 +305,24 @@ Page({
             starArr,
             applyArr
           }
-          app.addData('team', shuju)
+          var firstContent = JSON.stringify(shuju)
+          wx.cloud.callFunction({
+            name: "checkContent",
+            data: {
+              content: firstContent
+            }
+          }).then(res => {
+            console.log("安全接口调用成功返回的内容", res)
+            wx.hideLoading()
+            app.addData('team', shuju)
+          }).catch(err => {
+            console.log("安全接口调用失败的内容", err)
+            wx.hideLoading()
+            wx.showModal({
+              showCancel: false,
+              content: '您上传的内容涉嫌违法违规，请重新编辑后上传',
+            })
+          })
         }
       }
     }

@@ -21,7 +21,7 @@
   padding: 10rpx 20rpx;
   border-radius: 10rpx;
 }
-.body1{
+.body1,.body2{
   background-color: #f2f2f2;
   border: 1px solid #f2f2f2;
 }
@@ -153,4 +153,15 @@
   align-items: center;
   margin: 20rpx;
   border-radius: 20rpx;
+}
+.body2-container{
+  margin: 20rpx;
+  padding: 20rpx;
+  border-radius: 20rpx;
+  background-color: white;
+}
+.body2-container-row{
+  display: flex;
+  height: 90rpx;
+  align-items: center;
 }

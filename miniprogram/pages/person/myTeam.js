@@ -55,8 +55,16 @@ Page({
             openid: _.eq(res.data)
           })
         }).get().then(res3 => {
+          var outData = res3.data
+          for(var i=0;i<outData.length;i++)
+            for(var j=0;j<outData[i].applyArr.length;j++)
+              if (outData[i].applyArr[j].openid==that.data.openid){
+                outData[i].added = outData[i].applyArr[j].added
+                outData[i].rejected = outData[i].applyArr[j].rejected
+                break
+              }
           that.setData({
-            applyCollection: res3.data
+            applyCollection: outData
           })
         })
       },
@@ -312,7 +320,7 @@ Page({
     })
     var item = e.currentTarget.dataset.item
     var team = this.data.team
-    item.reject = true
+    item.rejected = true
     item.argue = 3
     for (var k = 0; k < team.length; k++) {
       if (team[k]._id == item._id) {
@@ -396,6 +404,11 @@ Page({
     })
     .catch(err=>{
       console.log(err)
+    })
+  },
+  goDetail:function(e){
+    wx.navigateTo({
+      url: '../index/team/teamDetail?item=' + JSON.stringify(e.currentTarget.dataset.item),
     })
   }
 })
