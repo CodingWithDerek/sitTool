@@ -1,1 +1,83 @@
 /* pages/person/myShow.wxss */
+.all{
+  font-size: 30rpx;
+  background-color: #f2f2f2;
+}
+.up{
+  padding: 20rpx;
+  display: flex;
+  justify-content:  space-around;
+  align-items: center;
+  background-color: #f2f2f2;
+}
+.up-upload-light{
+  padding: 10rpx 20rpx;
+  border-radius: 10rpx;
+  background-color: #33b5e5;
+  color: white;
+}
+.up-upload-dark{
+  padding: 10rpx 20rpx;
+  border-radius: 10rpx;
+  background-color: white;
+  color: black;
+}
+.body1{
+  margin: 20rpx;
+  margin-top: 0;
+  padding: 20rpx;
+  background-color: white;
+  border-radius: 20rpx;
+}
+.body1-firstRow{
+  color: grey;
+  margin-bottom: 20rpx;
+}
+.body1-picker{
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+.body1-picker-right{
+  margin-left: 20rpx;
+  padding: 20rpx;
+  background-color: #f2f2f2;
+  width: 70%;
+  text-align: center;
+}
+.body1-contact{
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+.body1-contact-right{
+  padding: 20rpx;
+  margin-left: 20rpx;
+  width: 70%;
+  background-color: #f2f2f2;
+}
+.body1-detail{
+  border: 1px solid #33b5e5;
+  border-radius: 10rpx;
+  padding: 20rpx;
+}
+.body1-detail-title{
+  color: grey;
+  margin-bottom: 20rpx;
+}
+.body1-detail-body{
+  height: 300rpx;
+  background-color: #f2f2f2;
+  width: auto;
+  padding: 20rpx;
+}
+.body1-buttonArea{
+  height: 200rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.body1-buttonArea-button{
+  padding: 5rpx 50rpx;
+  font-size: 30rpx;
+}

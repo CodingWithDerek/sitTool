@@ -5,7 +5,15 @@ Page({
    * 页面的初始数据
    */
   data: {
+    selectedNum:1,
+    tempArr:[],
+    pickerIndex:0,
+    typeArr:[
+      "摄影","网页开发","手机软件开发","硬件设计","微信小程序开发","微信小游戏开发","微信公众号开发","视频剪辑","CAD作图","其他"
+    ],
+    labelArr:[
 
+    ]
   },
 
   /**
@@ -62,5 +70,40 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  num1:function(){
+    this.setData({
+      selectedNum:1
+    })
+  },
+  num2:function(){
+    this.setData({
+      selectedNum:2
+    })
+  },
+  afterRead:function(e){
+    console.log(e)
+    this.setData({
+      tempArr:e.detail.file
+    })
+  },
+  deleteImg:function(e){
+    console.log(e)
+    var newTempArr = this.data.tempArr
+    var index = e.detail.index
+    newTempArr.splice(index,1)
+    this.setData({
+      tempArr:newTempArr
+    })
+  },
+  bindPickerChange:function(e){
+    this.setData({
+      pickerIndex:e.detail.value
+    })
+  },
+  submit:function(e){
+    var contact = e.detail.value.contact
+    var detail = e.detail.value.detail
+    
   }
 })

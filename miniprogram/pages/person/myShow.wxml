@@ -1,2 +1,28 @@
 <!--pages/person/myShow.wxml-->
-<text>pages/person/myShow.wxml</text>
+<view class="all">
+  <view class="up">
+    <view class="{{selectedNum==1?'up-upload-light':'up-upload-dark'}}" bindtap="num1">上传</view>
+    <view class="{{selectedNum==2?'up-upload-light':'up-upload-dark'}}" bindtap="num2">已上传</view>
+  </view>
+  <view wx:if="{{selectedNum==1}}" class="body1">
+    <view class="body1-firstRow">展示图片</view>
+    <van-uploader file-list="{{tempArr}}" bind:after-read="afterRead" bind:delete="deleteImg" multiple />
+    <view class="body1-picker">
+      <view class="body1-picker-left">类型</view>
+      <picker class="body1-picker-right" bindchange="bindPickerChange" value="{{pickerIndex}}" range="{{typeArr}}">{{typeArr[pickerIndex]}}</picker>
+    </view>
+    <form bindsubmit="submit">
+      <view class="body1-contact">
+        <view>商务联系</view>
+        <input class="body1-contact-right" placeholder="请输入您的邮箱号码" name="contact"></input>
+      </view>
+      <view class="body1-detail">
+        <view class="body1-detail-title">详情介绍</view>
+        <textarea class="body1-detail-body" name="detail"></textarea>
+      </view>
+      <view class="body1-buttonArea">
+        <button class="body1-buttonArea-button" form-type="submit" type="primary">提交</button>
+      </view>
+    </form>
+  </view>
+</view>
