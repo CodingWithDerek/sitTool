@@ -6,7 +6,7 @@
   </view>
   <view wx:if="{{selectedNum==1}}" class="body1">
     <view class="body1-firstRow">展示图片</view>
-    <van-uploader file-list="{{tempArr}}" bind:after-read="afterRead" bind:delete="deleteImg" multiple />
+    <van-uploader file-list="{{tempArr}}" bind:after-read="afterRead" bind:delete="deleteImg" multiple accept="image"/>
     <view class="body1-picker">
       <view class="body1-picker-left">类型</view>
       <picker class="body1-picker-right" bindchange="bindPickerChange" value="{{pickerIndex}}" range="{{typeArr}}">{{typeArr[pickerIndex]}}</picker>
@@ -18,7 +18,7 @@
       </view>
       <view class="body1-detail">
         <view class="body1-detail-title">详情介绍</view>
-        <textarea class="body1-detail-body" name="detail"></textarea>
+        <textarea class="body1-detail-body" name="detail" maxlength="-1"></textarea>
       </view>
       <view class="body1-buttonArea">
         <button class="body1-buttonArea-button" form-type="submit" type="primary">提交</button>

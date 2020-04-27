@@ -93,6 +93,13 @@
 					"id": -1,
 					"name": "我的show",
 					"pathName": "pages/person/myShow",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "首页个人show",
+					"pathName": "pages/index/show",
 					"scene": null
 				}
 			]

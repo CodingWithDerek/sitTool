@@ -1,2 +1,34 @@
 <!--pages/index/show.wxml-->
-<text>pages/index/show.wxml</text>
+<view class="all">
+  <scroll-view class="up" scroll-x="true" enable-flex="true">
+    <block wx:for="{{typeArr}}">
+      <view class="up-each" wx:if="{{item.flag==1}}" data-id="{{index}}" bindtap="changeType">
+        <view class="up-each-name">{{item.name}}</view>
+        <view class="up-each-line"></view>
+      </view>
+      <view class="up-each-noClick" wx:else data-id="{{index}}" bindtap="changeType">
+        <view class="up-each-noClick-name">{{item.name}}</view>
+        <view class="up-each-noClick-line"></view>
+      </view>
+    </block>
+  </scroll-view>
+  <view class="careful">
+    <block wx:for="{{showArr}}">
+      <view class="careful-container" wx:if="{{item.type==selectType}}">
+        <view class="careful-container-up">
+          <image src="{{item.imgArr[0]}}" mode="aspectFill"></image>
+        </view>
+        <view class="careful-container-down">
+          <view class="careful-container-down-row1">{{item.detail}}</view>
+          <view class="careful-container-down-row2">
+            <van-icon name="ellipsis" class="icon2"/>
+            <view class="careful-container-down-row2-right">
+              <text>{{item.starArr.length}}</text>
+              <van-icon name="like" color="#ff1d11" class="icon2"/>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

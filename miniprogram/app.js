@@ -105,5 +105,21 @@ App({
     .count()
     .then(callRight)
     .catch(callFail)
+  },
+  getRandom:function(){
+    var date = new Date()
+    var year = date.getFullYear()
+    var month = date.getMonth()
+    month = month + 1
+    var day = date.getDate()
+    var h = date.getHours()
+    var m = date.getMinutes()
+    var s = date.getSeconds()
+    if (month < 10) month = "0" + month
+    if (h < 10) h = "0" + h
+    if (m < 10) m = "0" + m
+    if (s < 10) s = "0" + s
+    var math = (Math.random()*1000000).toFixed(0)
+    return year+month+day+h+m+s+math
   }
 })

@@ -1,4 +1,5 @@
 // pages/person/myShow.js
+const app = getApp()
 Page({
 
   /**
@@ -83,8 +84,10 @@ Page({
   },
   afterRead:function(e){
     console.log(e)
+    var tempArr = this.data.tempArr
+    var newTempArr = tempArr.concat(e.detail.file)
     this.setData({
-      tempArr:e.detail.file
+      tempArr:newTempArr
     })
   },
   deleteImg:function(e){
@@ -104,6 +107,66 @@ Page({
   submit:function(e){
     var contact = e.detail.value.contact
     var detail = e.detail.value.detail
+    var tempArr = this.data.tempArr
+    var pickerIndex = this.data.pickerIndex
+    var pickerType = this.data.typeArr
+    var type = pickerType[pickerIndex]
+    var time = app.createTime()
+    var starArr=[]
+    var promiseArr = []
+    if(contact==""||detail==""||tempArr.length<=0){
+      wx.showLoading({
+        title: '请输入完整信息',
+      })
+      setTimeout(function(){
+        wx.hideLoading()
+      },500)
+    }
+    else{
+      wx.showLoading({
+        title: '上传中',
+      })
+      var checkContent = type + contact + detail
+      wx.cloud.callFunction({
+        name:"checkContent",
+        data:{
+          content:checkContent
+        }
+      }).then(res=>{
+        for (var i = 0; i < tempArr.length; i++) {
+          var name = app.getRandom()
+          var suf = /\.[^\.]+$/.exec(tempArr[i].path)
+          promiseArr.push(
+            wx.cloud.uploadFile({
+              cloudPath: name + suf,
+              filePath: tempArr[i].path
+            })
+          )
+        }
+        return Promise.all(promiseArr)
+      }).then(res=>{
+        wx.hideLoading()
+        console.log(res)
+        var imgArr = []
+        for (var i = 0; i < res.length; i++)
+          imgArr.push(res[i].fileID)
+        var shuju = {
+          type,
+          contact,
+          imgArr,
+          detail,
+          time,
+          starArr
+        }
+        app.addData("personShow", shuju)
+      }).catch(err => {
+        wx.hideLoading()
+        wx.showModal({
+          showCancel:true,
+          content: '请检查您的当前网络是否可用或者检查您的文本是否包含敏感信息',
+        })
+      })
+    }
+    }
     
-  }
 })
