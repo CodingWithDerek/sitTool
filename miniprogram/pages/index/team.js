@@ -1,4 +1,6 @@
 // pages/index/team.js
+const db = wx.cloud.database()
+var _ = _ = db.command
 const app = getApp()
 Page({
 
@@ -6,10 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    allDataNum: null,
-    team: [],
-    noData: [],
-    noDataFlag: "",
+    currentIndex:0,
     type: [{
         name: "手机App开发",
         flag: 1
@@ -39,9 +38,72 @@ Page({
         flag: 0
       }
     ],
-    selectedType: "手机App开发"
+    teamData:[
+      {
+        total:null,
+        data:[]
+      },
+      {
+        total: null,
+        data: []
+      },
+      {
+        total: null,
+        data: []
+      },
+      {
+        total: null,
+        data: []
+      },
+      {
+        total: null,
+        data: []
+      },
+      {
+        total: null,
+        data: []
+      },
+      {
+        total: null,
+        data: []
+      }
+    ]
   },
-
+  getAllNum:function(teamType,proper){
+    var that = this
+    db.collection("team").where({
+      type:teamType,
+      characterArr: _.elemMatch({
+        needNum: _.gt(0)
+      })
+    }).count()
+    .then(res=>{
+      //console.log(res)
+      that.setData({
+        [proper]:res.total
+      })
+    })
+  },
+  getData:function(teamType,skipNum,proper){
+    var that = this
+    db.collection("team").where({
+      type: teamType,
+      characterArr: _.elemMatch({
+        needNum: _.gt(0)
+      })
+    }).orderBy("time","desc")
+      .skip(skipNum)
+      .get()
+      .then(res=>{
+       // console.log(res)
+        that.setData({
+          [proper]:res.data
+        })
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -60,45 +122,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    app.getAll("team", res => {
-      this.setData({
-        allDataNum: res.total
-      })
-    }, err => {
-      console.log("调用getAll产生的错误",err)
-    })
-    app.getData("team", 0, res => {
-        var resData = res.data
-        var arr = []
-        arr.push(resData[0].type)
-        for (var i = 1; i < resData.length; i++) {
-          var flag = 0
-          for (var j = 0; j < arr.length; j++) {
-            if (arr[j] == resData[i].type) {
-              flag = 1
-              break
-            }
-          }
-          if (flag == 0) arr.push(resData[i].type)
-        }
-        var type = JSON.parse(JSON.stringify(this.data.type))
-        for (var k = 0; k < arr.length; k++)
-          for (var t = 0; t < type.length; t++) {
-            if (arr[k] == type[t].name) {
-              type.splice(t, 1)
-              break
-            }
-          }
-        console.log("筛选后的type", type)
-        this.setData({
-          team: resData,
-          noData: type,
-          noDataFlag:type[0].name
-        })
-      },
-      err => {
-        console.log(err)
-      })
+    var type = this.data.type
+    for(var i=0;i<type.length;i++){
+      this.getAllNum(type[i].name,"teamData["+i+"].total")
+      this.getData(type[i].name,0,"teamData["+i+"].data")
+    }
   },
 
   /**
@@ -126,22 +154,34 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-    var team = this.data.team
-    var all = this.data.allDataNum
-    var skipNum = this.data.team.length
-    if (skipNum < all) {
+    var currentIndex = this.data.currentIndex
+    var team = this.data.teamData[currentIndex].data
+    var allNUm = this.data.teamData[currentIndex].total
+    var skipNum = team.length
+    var arg = "teamData["+currentIndex+"].data"
+    if (skipNum < allNUm) {
       wx.showLoading({
         title: '数据加载中',
       })
-      app.getData("team",skipNum,res=>{
-        wx.hideLoading()
-        team.push(res.data)
-        this.setData({
-          team:team
+      db.collection("team").where({
+        type: team[0].type,
+        characterArr: _.elemMatch({
+          needNum: _.gt(0)
         })
-      },err=>{
-        console.log(err)
-      })
+      }).orderBy("time", "desc")
+        .skip(skipNum)
+        .get()
+        .then(res => {
+          wx.hideLoading()
+          var newTeam = team.concat(res.data)
+          this.setData({
+            [arg]: newTeam
+          })
+        })
+        .catch(err => {
+          wx.hideLoading()
+          console.log(err)
+        })
     }
     else{
       wx.showToast({
@@ -163,22 +203,14 @@ Page({
   changeType: function(e) {
     var index = e.currentTarget.dataset.id
     var newType = this.data.type
-    var noData = this.data.noData
-    var _noDataFlag
-    for (var j = 0; j < noData.length; j++) {
-      if (noData[j].name == newType[index].name) {
-        _noDataFlag = noData[j].name
-        break
-      }
-    }
+    console.log(index)
     for (var i = 0; i < newType.length; i++) {
       newType[i].flag = 0
     }
     newType[index].flag = 1
     this.setData({
-      type: newType,
-      selectedType: newType[index].name,
-      noDataFlag: _noDataFlag
+      type:newType,
+      currentIndex:index
     })
   },
   goTeamDetail:function(e){

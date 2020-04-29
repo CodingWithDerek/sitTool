@@ -5,6 +5,7 @@
     "pages/index/team",
     "pages/index/team/teamDetail",
     "pages/index/show",
+    "pages/index/show/showDetail",
     "pages/index/know",
     "pages/index/service",
     "pages/index/advertisement",

@@ -13,8 +13,8 @@
     </block>
   </scroll-view>
   <view class="careful">
-    <block wx:for="{{showArr}}">
-      <view class="careful-container" wx:if="{{item.type==selectType}}">
+    <block wx:for="{{personShowData[currentIndex].data}}" wx:key="{{item._id}}">
+      <view class="careful-container" bindtap="goShowDetail" data-item="{{item}}">
         <view class="careful-container-up">
           <image src="{{item.imgArr[0]}}" mode="aspectFill"></image>
         </view>
@@ -30,5 +30,8 @@
         </view>
       </view>
     </block>
+  </view>
+  <view class="noData" wx:if="{{personShowData[currentIndex].data.length==0}}">
+    <view>该类别暂时没有内容</view>
   </view>
 </view>

@@ -13,8 +13,8 @@
     </block>
   </scroll-view>
   <view class="body">
-    <block wx:for="{{team}}" wx:key="{{item._id}}">
-      <view class="body-container" wx:if="{{item.type==selectedType}}" bindtap="goTeamDetail" data-item="{{item}}">
+    <block wx:for="{{teamData[currentIndex].data}}" wx:key="{{item._id}}">
+      <view class="body-container" bindtap="goTeamDetail" data-item="{{item}}">
         <view class="body-container-row">
           <van-icon name="flag-o" />
           <text>队伍名称：{{item.teamName}}</text>
@@ -33,7 +33,7 @@
               <view class="body-container-people-right-content">
                 <view>{{item.character}}</view>
                 <view class="body-container-people-right-content-c2">所需<text>{{item.num}}</text></view>
-                <view class="body-container-people-right-content-c3">还差<text>{{item.num-item.addedNum}}</text></view>
+                <view class="body-container-people-right-content-c3">还差<text>{{item.needNum}}</text></view>
               </view>
             </block>
           </view>
@@ -44,7 +44,7 @@
         </view>
       </view>
     </block>
-    <view class="body-noData" wx:if="{{noDataFlag==selectedType}}">
+    <view class="body-noData" wx:if="{{teamData[currentIndex].data.length==0}}">
       <view>该类别暂时没有项目组队</view>
     </view>
   </view>

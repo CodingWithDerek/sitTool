@@ -80,32 +80,6 @@ App({
     m + ":" + s + ":" + ms
     return time
   },
-  getData:function(collectionName,skipNum,callRight,callFail){
-    var db = wx.cloud.database()
-    var _ = db.command
-    db.collection(collectionName).where({
-      characterArr: _.elemMatch({
-        needNum: _.gt(0)
-      })
-    })
-    .orderBy("time","desc")
-    .skip(skipNum)
-    .get()
-    .then(callRight)
-    .catch(callFail)
-  },
-  getAll:function(collectionName,callRight,callFail){
-    var db = wx.cloud.database()
-    var _ = db.command
-    db.collection(collectionName).where({
-      characterArr:_.elemMatch({
-        needNum: _.gt(0)
-      })
-    })
-    .count()
-    .then(callRight)
-    .catch(callFail)
-  },
   getRandom:function(){
     var date = new Date()
     var year = date.getFullYear()
