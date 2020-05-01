@@ -64,7 +64,7 @@ Page({
               openid: res.result.openid
             })
             for (var i = 0; i < item_starArr.length; i++) {
-              if (res.data == item_starArr[i]) {
+              if (res.result.openid == item_starArr[i]) {
                 that.setData({
                   canStar: false
                 })
@@ -72,7 +72,7 @@ Page({
               }
             }
             for (var j = 0; j < item_applyArr.length; j++) {
-              if (res.data == item_applyArr[j].openid) {
+              if (res.result.openid == item_applyArr[j].openid) {
                 that.setData({
                   canJoin: false
                 })

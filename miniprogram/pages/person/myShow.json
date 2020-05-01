@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "van-uploader": "../../miniprogram_npm/@vant/weapp/uploader/index"
+    "van-uploader": "../../miniprogram_npm/@vant/weapp/uploader/index",
+    "van-icon": "../../miniprogram_npm/@vant/weapp/icon/index"
   }
 }

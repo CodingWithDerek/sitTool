@@ -1,5 +1,6 @@
 //index.js
-//获取应用实例
+const db = wx.cloud.database()
+const $ = db.command.aggregate
 const app = getApp()
 
 Page({
@@ -67,6 +68,40 @@ Page({
         label: ["摄影", "生活", "美丽"],
         people: "20"
       }
-    ]
+    ],
+    goodMenArr:[]
+  },
+  onShow:function(){
+    var that = this
+    db.collection('personShow').aggregate()
+      .project({
+        totalLikeNum: $.size('$likeArr'),
+        _openid:1,
+        contact:1,
+        detail:1,
+        imgArr:1,
+        likeArr:1,
+        starArr:1,
+        type:1
+      })
+      .sort({
+        totalLikeNum:-1
+      })
+      .limit(6)
+      .end()
+      .then(res => {
+        console.log("聚合操作", res)
+        that.setData({
+          goodMenArr:res.list
+        })
+      })
+      .catch(err=>{
+        console.log("聚合失败",err)
+      })
+  },
+  goShowDetail:function(e){
+    wx.navigateTo({
+      url: './show/showDetail?item=' + JSON.stringify(e.currentTarget.dataset.item),
+    })
   }
 })

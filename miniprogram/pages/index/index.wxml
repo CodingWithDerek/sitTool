@@ -30,17 +30,17 @@
     <van-icon name="arrow-down" class="icon1"/>
   </view>
   <view class="careful">
-    <block wx:for="{{pseudoData}}">
-      <view class="careful-container">
+    <block wx:for="{{goodMenArr}}" wx:key="{{item._id}}">
+      <view class="careful-container" bindtap="goShowDetail" data-item="{{item}}">
         <view class="careful-container-up">
-          <image src="{{item.image}}"></image>
+          <image src="{{item.imgArr[0]}}" mode="aspectFill"></image>
         </view>
         <view class="careful-container-down">
-          <view class="careful-container-down-row1">{{item.summary}}</view>
+          <view class="careful-container-down-row1">{{item.detail}}</view>
           <view class="careful-container-down-row2">
-            <view class="careful-container-down-row2-left">{{item.label[0]}}</view>
+            <view class="careful-container-down-row2-left">{{item.type}}</view>
             <view class="careful-container-down-row2-right">
-              <text>{{item.people}}</text>
+              <text>{{item.likeArr.length}}</text>
               <van-icon name="like" color="#ff1d11" class="icon2"/>
             </view>
           </view>

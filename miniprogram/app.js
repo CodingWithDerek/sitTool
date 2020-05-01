@@ -13,74 +13,91 @@ App({
         env: 'sittool-sccwy',
         traceUser: true,
       })
-      this.globalData = {
-        openid: ""
-      }
+      this.globalData = {}
       // this.showDialog()
+      wx.getStorage({
+        key: 'openid',
+        success(res) {
+          console.log(res.data)
+        },
+        fail(err) {
+          wx.cloud.callFunction({
+            name: 'getOpenid'
+          }).then(res => {
+            wx.setStorage({
+              key: "openid",
+              data: res.result.openid
+            })
+          }).catch(console.err)
+        }
+      })
     }
   },
-  showDialog:function(){
+  showDialog: function() {
     wx.showModal({
       content: '请点击确定按钮当您被提及的时候给您发送通知消息',
-      showCancel:false,
+      showCancel: false,
       success(res) {
         if (res.confirm) {
           wx.requestSubscribeMessage({
             tmplIds: ['-W2Q06WDJyuYjFjN4zaVGkvigMkVGwASbh9JttbMA-M',
               'NqBtoPiR4u1v0pcuW_7Ygtb0O5o9VJN6JnsJHMgwX6g'
             ],
-            success(res) { console.log(res) },
-            fail(err) { console.log(err) }
+            success(res) {
+              console.log(res)
+            },
+            fail(err) {
+              console.log(err)
+            }
           })
         }
       }
     })
   },
-  addData:function(collectionName,shuju){
+  addData: function(collectionName, shuju) {
     var db = wx.cloud.database()
     db.collection(collectionName).add({
       // data 字段表示需新增的 JSON 数据
       data: shuju,
-      success: function (res) {
+      success: function(res) {
         wx.showToast({
           title: '上传成功',
-          duration:2000
+          duration: 2000
         })
-        setTimeout(function(){
+        setTimeout(function() {
           wx.hideToast()
-        },2000)
-        wx.navigateBack({
-        })
+        }, 2000)
+        wx.navigateBack({})
       },
-      fail:function(){
+      fail: function() {
         wx.showLoading({
           title: '上传失败',
         })
-        setTimeout(function(){
+        setTimeout(function() {
           wx.hideLoading()
-        },500)
+        }, 500)
       }
     })
   },
-  createTime:function(){
+  createTime: function() {
     var date = new Date()
     var year = date.getFullYear()
     var month = date.getMonth()
-    month = month+1
+    month = month + 1
     var day = date.getDate()
     var h = date.getHours()
     var m = date.getMinutes()
     var s = date.getSeconds()
     var ms = date.getMilliseconds()
-    if(month<10) month = "0" + month
-    if(h<10) h = "0" + h
-    if(m<10) m = "0" + m
-    if(s<10) s = "0" + s
+    if (month < 10) month = "0" + month
+    if (h < 10) h = "0" + h
+    if (m < 10) m = "0" + m
+    if (s < 10) s = "0" + s
     var time = year + "-" + month + "-" + day + " " + h + ":" +
-    m + ":" + s + ":" + ms
+      m + ":" + s + ":" + ms
     return time
   },
-  getRandom:function(){
+  getRandom: function() {
     var date = new Date()
     var year = date.getFullYear()
     var month = date.getMonth()
@@ -93,7 +110,7 @@ App({
     if (h < 10) h = "0" + h
     if (m < 10) m = "0" + m
     if (s < 10) s = "0" + s
-    var math = (Math.random()*1000000).toFixed(0)
-    return year+month+day+h+m+s+math
+    var math = (Math.random() * 1000000).toFixed(0)
+    return year + month + day + h + m + s + math
   }
 })

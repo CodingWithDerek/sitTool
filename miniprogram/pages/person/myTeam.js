@@ -69,39 +69,7 @@ Page({
         })
       },
       fail:function(err){
-        wx.cloud.callFunction({
-          name: 'getOpenid'
-        })
-          .then(res => {
-            that.setData({
-              openid: res.result.openid
-            })
-            wx.setStorage({
-              key: "openid",
-              data: res.result.openid
-            })
-            db.collection("team").where({
-              _openid: res.data
-            }).get().then(res2 => {
-              var teamArr = res2.data
-              for (var i = 0; i < teamArr.length; i++) {
-                teamArr[i].close = false
-              }
-              that.setData({
-                team: teamArr
-              })
-            })
-            db.collection("team").where({
-              applyArr: _.elemMatch({
-                openid: _.eq(res.data)
-              })
-            }).get().then(res3 => {
-              that.setData({
-                applyCollection: res3.data
-              })
-            })
-          })
-          .catch(console.err)
+        console.log(err)
       }
     })
   },

@@ -23,4 +23,12 @@ exports.main = async (event, context) => {
         }
       })
   }
+  if(attributeName=="likeArr"){
+    return await db.collection(event.collectionName).doc(event._id)
+      .update({
+        data: {
+          likeArr: _.push(event.openid)
+        }
+      })
+  }
 }

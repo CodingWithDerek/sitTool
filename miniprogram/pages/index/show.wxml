@@ -23,7 +23,7 @@
           <view class="careful-container-down-row2">
             <van-icon name="ellipsis" class="icon2"/>
             <view class="careful-container-down-row2-right">
-              <text>{{item.starArr.length}}</text>
+              <text>{{item.likeArr.length}}</text>
               <van-icon name="like" color="#ff1d11" class="icon2"/>
             </view>
           </view>

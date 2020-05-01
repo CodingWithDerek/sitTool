@@ -25,4 +25,29 @@
       </view>
     </form>
   </view>
+  <view wx:if="{{selectedNum==2}}">
+    <view class="body2-tip">
+      <van-icon name="info-o" class="body2-tip-icon"/>
+      <view>如果您想删除您的项目的话，您可以长按相关项目进行删除</view>
+    </view>
+    <view class="careful">
+    <block wx:for="{{myShowArr}}" wx:key="{{item._id}}">
+      <view class="careful-container" bindtap="goShowDetail" data-item="{{item}}" bindlongpress="deleteItem">
+        <view class="careful-container-up">
+          <image src="{{item.imgArr[0]}}" mode="aspectFill"></image>
+        </view>
+        <view class="careful-container-down">
+          <view class="careful-container-down-row1">{{item.detail}}</view>
+          <view class="careful-container-down-row2">
+            <view class="careful-container-down-row2-left">{{item.type}}</view>
+            <view class="careful-container-down-row2-right">
+              <text>{{item.likeArr.length}}</text>
+              <van-icon name="like" color="#ff1d11" class="icon2"/>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+  </view>
 </view>

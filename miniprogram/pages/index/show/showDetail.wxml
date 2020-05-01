@@ -1,2 +1,52 @@
 <!--pages/index/show/showDetail.wxml-->
-
+<view class="all">
+  <swiper class="swiperContainer" indicator-dots="{{indicator_dots}}" autoplay="{{autoplay}}" circular="{{circular}}" interval="{{interval}}">
+    <block wx:for="{{currentItem.imgArr}}">
+      <swiper-item>
+        <image class="swiperContainer-img" src="{{item}}" mode="aspectFill" bindtap="previewImg" data-item="{{item}}"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class="firstRow">
+    <view class="firstRow-each">
+      <van-icon name="location-o" class="icon" />
+      <text>SIT</text>
+    </view>
+    <view class="firstRow-each">
+      <van-icon name="orders-o" class="icon" />
+      <text>{{currentItem.type}}</text>
+    </view>
+    <view wx:if="{{canStar}}" class="firstRow-each">
+      <van-icon name="star-o" class="icon" bindtap="star"/>
+      <text>收藏</text>
+    </view>
+    <view wx:else class="firstRow-each">
+      <van-icon name="star" class="icon clickedIcon" bindtap="cancelStar"/>
+      <text>已收藏</text>
+    </view>
+    <view wx:if="{{canLike}}" class="firstRow-each">
+      <van-icon name="like-o" class="icon" bindtap="like"/>
+      <text>点赞</text>
+    </view>
+    <view wx:else class="firstRow-each">
+      <van-icon name="like" class="icon clickedIcon" bindtap="cancelLike"/>
+      <text>已点赞</text>
+    </view>
+  </view>
+  <view class="gap"></view>
+  <van-notice-bar left-icon="volume-o" text="如果你喜欢我的作品的话可以在上面为我点赞哦！" />
+  <view class="gap"></view>
+  <view class="secondRow">
+    <view>商务联系：{{currentItem.contact}}</view>
+    <view class="secondRow-right" bindtap="copyContact" data-contact="{{currentItem.contact}}">复制</view>
+  </view>
+  <view class="detailArea">
+    <view class="detailArea-container">
+      <view class="detailArea-container-up">
+        <van-icon name="info-o" class="detailIcon" />
+        <text>详细介绍</text>
+      </view>
+      <view>{{currentItem.detail}}</view>
+    </view>
+  </view>
+</view>
