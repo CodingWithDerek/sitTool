@@ -11,7 +11,8 @@ Page({
     canJoin: true,
     openid: "",
     show:false,
-    index:0
+    index:0,
+    disabledCondition:false
   },
 
   /**
@@ -131,12 +132,12 @@ Page({
 
   },
   star: function() {
-    wx.showLoading({
-      title: '刷新中',
-    })
     var _id = this.data.currentItem._id
     var openid = this.data.openid
     if(openid!=""){
+      wx.showLoading({
+        title: '刷新中',
+      })
       wx.cloud.callFunction({
         name: 'updateItem',
         data: {
@@ -160,6 +161,7 @@ Page({
           }, 500)
         })
         .catch(err => {
+          wx.hideLoading()
           console.log("updateItem",err)
           wx.showToast({
             title: '请重试',
@@ -207,6 +209,7 @@ Page({
         }, 500)
       })
       .catch(err => {
+        wx.hideLoading()
         console.log("unstar",err)
         wx.showToast({
           title: '请重试',
@@ -234,8 +237,8 @@ Page({
     })
   },
   submitApplication:function(e){
-    wx.showLoading({
-      title: '正在提交',
+    this.setData({
+      disabledCondition: true
     })
     console.log(e)
     var name = e.detail.value.name
@@ -257,6 +260,9 @@ Page({
     }
     if(name&&mobbilePhone.length==11&&wechatId&&character){
       if(openid!=""){
+        wx.showLoading({
+          title: '正在提交',
+        })
         wx.cloud.callFunction({
           // 云函数名称
           name: 'updateItem',
@@ -281,9 +287,13 @@ Page({
             }, 500)
           })
           .catch(err => {
+            wx.hideLoading()
             wx.showToast({
               title: '请重试',
               icon: 'loading'
+            })
+            this.setData({
+              disabledCondition:false
             })
             setTimeout(function () {
               wx.hideToast()
@@ -291,6 +301,9 @@ Page({
           })
       }
       else{
+        this.setData({
+          disabledCondition: false
+        })
         wx.showLoading({
           title: '请稍后再试',
         })
@@ -300,6 +313,9 @@ Page({
       }
     }
     else{
+      this.setData({
+        disabledCondition: false
+      })
       wx.showLoading({
         title: '请填写完整信息',
       })

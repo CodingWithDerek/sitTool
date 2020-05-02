@@ -1,6 +1,6 @@
 <!--pages/person/myShow.wxml-->
 <view class="all">
-  <view class="up">
+  <view class="all-up">
     <view class="{{selectedNum==1?'up-upload-light':'up-upload-dark'}}" bindtap="num1">上传</view>
     <view class="{{selectedNum==2?'up-upload-light':'up-upload-dark'}}" bindtap="num2">已上传</view>
   </view>
@@ -21,7 +21,7 @@
         <textarea class="body1-detail-body" name="detail" maxlength="-1"></textarea>
       </view>
       <view class="body1-buttonArea">
-        <button class="body1-buttonArea-button" form-type="submit" type="primary">提交</button>
+        <button class="body1-buttonArea-button" form-type="submit" type="primary" disabled="{{disabledCondition}}">提交</button>
       </view>
     </form>
   </view>

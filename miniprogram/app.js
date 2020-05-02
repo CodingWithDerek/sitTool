@@ -54,31 +54,6 @@ App({
       }
     })
   },
-  addData: function(collectionName, shuju) {
-    var db = wx.cloud.database()
-    db.collection(collectionName).add({
-      // data 字段表示需新增的 JSON 数据
-      data: shuju,
-      success: function(res) {
-        wx.showToast({
-          title: '上传成功',
-          duration: 2000
-        })
-        setTimeout(function() {
-          wx.hideToast()
-        }, 2000)
-        wx.navigateBack({})
-      },
-      fail: function() {
-        wx.showLoading({
-          title: '上传失败',
-        })
-        setTimeout(function() {
-          wx.hideLoading()
-        }, 500)
-      }
-    })
-  },
   createTime: function() {
     var date = new Date()
     var year = date.getFullYear()

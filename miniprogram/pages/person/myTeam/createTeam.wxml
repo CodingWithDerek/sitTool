@@ -1,6 +1,6 @@
 <!--pages/person/myTeam/createTeam.wxml-->
 <view class="all">
-  <view class="up">
+  <view class="all-up">
     <van-icon name="info-o" class="up-icon" />
     <view>在该页面中你可以创建和修改自己项目组队信息，队员的角色可以动态添加和删除，赶快去发起你的项目组队吧</view>
   </view>
@@ -46,7 +46,7 @@
       <textarea name="detail" maxlength="-1" value="{{currentItem.detail}}"></textarea>
     </view>
     <view class="submit-area">
-      <button form-type="submit" type="primary" class="submit-area-button">提交</button>
+      <button form-type="submit" type="primary" class="submit-area-button" disabled="{{disabledCondition}}">提交</button>
     </view>
   </form>
 </view>

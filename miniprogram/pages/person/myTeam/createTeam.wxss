@@ -3,7 +3,7 @@
   background-color: #f2f2f2;
   font-size: 30rpx;
 }
-.up{
+.all-up{
   height: 200rpx;
   background-color: white;
   margin: 20rpx;

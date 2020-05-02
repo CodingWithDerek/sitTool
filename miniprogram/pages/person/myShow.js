@@ -14,7 +14,8 @@ Page({
       "摄影", "网页开发", "手机软件开发", "硬件设计", "微信小程序开发", "微信小游戏开发", "微信公众号开发", "视频剪辑", "CAD作图", "其他"
     ],
     totalNum: null,
-    myShowArr: []
+    myShowArr: [],
+    disabledCondition:false
   },
   getAllNum: function(openid) {
     var that = this
@@ -179,6 +180,10 @@ Page({
     })
   },
   submit: function(e) {
+    var that = this
+    this.setData({
+      disabledCondition:true
+    })
     var contact = e.detail.value.contact
     var detail = e.detail.value.detail
     var tempArr = this.data.tempArr
@@ -190,6 +195,9 @@ Page({
     var likeArr = []
     var promiseArr = []
     if (contact == "" || detail == "" || tempArr.length <= 0) {
+      this.setData({
+        disabledCondition:false
+      })
       wx.showLoading({
         title: '请输入完整信息',
       })
@@ -219,7 +227,6 @@ Page({
         }
         return Promise.all(promiseArr)
       }).then(res => {
-        wx.hideLoading()
         console.log(res)
         var imgArr = []
         for (var i = 0; i < res.length; i++)
@@ -233,8 +240,25 @@ Page({
           starArr,
           likeArr
         }
-        app.addData("personShow", shuju)
-      }).catch(err => {
+        return db.collection("personShow").add({
+          data:shuju
+        })
+      }).then(res=>{
+        wx.hideLoading()
+        setTimeout(function(){
+          wx.showToast({
+            title: '上传成功',
+          })
+        },200)
+        setTimeout(function () {
+          wx.hideToast()
+        }, 1000)
+        wx.navigateBack()
+      })
+      .catch(err => {
+        that.setData({
+          disabledCondition:false
+        })
         wx.hideLoading()
         wx.showModal({
           showCancel: true,

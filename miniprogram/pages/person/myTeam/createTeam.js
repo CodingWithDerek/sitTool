@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    projectType:[
+    projectType: [
       "手机App开发",
       "微信小程序开发",
       "微信小游戏开发",
@@ -16,23 +16,22 @@ Page({
       "社会实践",
       "其他"
     ],
-    index:0,
-    type:"",
-    characterArr:[
-      {
-        character:"",
-        num:1
-      }
-    ],
-    currentItem:""
+    index: 0,
+    type: "",
+    characterArr: [{
+      character: "",
+      num: 1
+    }],
+    currentItem: "",
+    disabledCondition: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     console.log(options)
-    if(options.item!="undefined"){
+    if (options.item != "undefined") {
       var item = JSON.parse(options.item)
       var type = item.type
       var projectType = this.data.projectType
@@ -48,7 +47,7 @@ Page({
         currentItem: item,
         index: index,
         characterArr: characterArr,
-        type:type
+        type: type
       })
     }
   },
@@ -56,9 +55,9 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
     var current = this.data.currentItem
-    if(current==""){
+    if (current == "") {
       this.setData({
         type: this.data.projectType[0]
       })
@@ -68,231 +67,211 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
-  changeValue:function(e){
+  changeValue: function(e) {
     var xiaBiao = e.detail.value
     var projectType = this.data.projectType
     this.setData({
-      index:xiaBiao,
-      type:projectType[xiaBiao]
+      index: xiaBiao,
+      type: projectType[xiaBiao]
     })
   },
-  renameCharacter:function(e){
+  renameCharacter: function(e) {
     var newCharacterArr = this.data.characterArr
     var index = e.currentTarget.dataset.id
     newCharacterArr[index].character = e.detail.value
     this.setData({
-      characterArr:newCharacterArr
+      characterArr: newCharacterArr
     })
   },
-  addCharacter:function(){
+  addCharacter: function() {
     var obj = {
-      character:"",
-      num:"1"
+      character: "",
+      num: "1"
     }
     var newCharacterArr = this.data.characterArr
     newCharacterArr.push(obj)
     this.setData({
-      characterArr:newCharacterArr
+      characterArr: newCharacterArr
     })
   },
-  deleteItem:function(e){
-    var index=e.currentTarget.dataset.id
+  deleteItem: function(e) {
+    var index = e.currentTarget.dataset.id
     var newCharacterArr = this.data.characterArr
-    if(newCharacterArr.length==1){
+    if (newCharacterArr.length == 1) {
       wx.showLoading({
         title: '请至少输入一个',
       })
-      setTimeout(function () {
+      setTimeout(function() {
         wx.hideLoading()
       }, 500)
-    }
-    else{
+    } else {
       newCharacterArr.splice(index, 1)
       this.setData({
         characterArr: newCharacterArr
       })
     }
   },
-  updateNum:function(e){
+  updateNum: function(e) {
     var index = e.currentTarget.dataset.id
     var newCharacterArr = this.data.characterArr
     newCharacterArr[index].num = e.detail
     this.setData({
-      characterArr:newCharacterArr
+      characterArr: newCharacterArr
     })
     //console.log(this.data.characterArr)
   },
-  submit:function(e){
+  submit: function(e) {
+    var that = this
+    this.setData({
+      disabledCondition: true
+    })
     console.log(e)
     var teamName = e.detail.value.teamName
     var detail = e.detail.value.detail
     var type = this.data.type
     var characterArr = this.data.characterArr
-    var count=0
+    var count = 0
     var time = app.createTime()
     console.log(time)
-    var starArr=[]
-    var applyArr=[]
-    for(var i=0;i<characterArr.length;i++){
-      if(characterArr[i].character=="")
+    var starArr = []
+    var applyArr = []
+    for (var i = 0; i < characterArr.length; i++) {
+      if (characterArr[i].character == "")
         count++;
     }
-    if(teamName==""||count>0||detail==""){
+    if (teamName == "" || count > 0 || detail == "") {
+      this.setData({
+        disabledCondition: false
+      })
       wx.showLoading({
         title: '请补充完整信息',
       })
-      setTimeout(function () {
+      setTimeout(function() {
         wx.hideLoading()
       }, 500)
-    }
-    else{
+    } else {
       var repeat = false
-      for(var i=0;i<characterArr.length-1;i++)
-        for(var j=i+1;j<characterArr.length;j++)
-          if(characterArr[i].character==characterArr[j].character){
+      for (var i = 0; i < characterArr.length - 1; i++)
+        for (var j = i + 1; j < characterArr.length; j++)
+          if (characterArr[i].character == characterArr[j].character) {
             repeat = true
             break
           }
-      if(repeat){
+      if (repeat) {
+        this.setData({
+          disabledCondition: false
+        })
         wx.showModal({
-          showCancel:false,
+          showCancel: false,
           content: '请不要设置相同的队员角色',
         })
-      }
-      else{
-        var flag=false
+      } else {
+        var flag = false
         for (var i = 0; i < characterArr.length; i++) {
-          if(!characterArr[i].addedNum){
+          if (!characterArr[i].addedNum) {
             characterArr[i].addedNum = 0
             characterArr[i].needNum = characterArr[i].num
           }
-          if(characterArr[i].addedNum>characterArr[i].num){
-            flag=true
+          if (characterArr[i].addedNum > characterArr[i].num) {
+            flag = true
             break
           }
         }
-        if(this.data.currentItem!=""){
-          if(flag==true){
+        if (this.data.currentItem != "") {
+          if (flag == true) {
+            that.setData({
+              disabledCondition: false
+            })
             wx.showModal({
               showCancel: false,
               content: '您设置角色的所需人数小于已加入您队伍的人数，请重新设置',
             })
-          }
-          else{
+          } else {
             wx.showLoading({
               title: '上传中',
             })
-            var content = teamName + type + JSON.stringify(characterArr)+detail
+            var content = teamName + type + JSON.stringify(characterArr) + detail
             var _id = this.data.currentItem._id
             wx.cloud.callFunction({
-              name:"checkContent",
-              data:{
-                content:content
-              }
-            }).then(res=>{
-              wx.hideLoading()
-              console.log("安全接口调用成功返回的内容",res)
-              db.collection("team").doc(_id).update({
+                name: "checkContent",
                 data: {
-                  teamName: teamName,
-                  type: type,
-                  characterArr: characterArr,
-                  detail: detail
+                  content
                 }
-              }).then(res => {
-                console.log("数据更新成功的res", res)
-                wx.showToast({
-                  title: '数据更新成功',
+              })
+              .then(res => {
+                return db.collection("team").doc(_id).update({
+                  data: {
+                    teamName,
+                    type,
+                    characterArr,
+                    detail
+                  }
                 })
+              })
+              .then(res => {
+               // console.log("数据更新第二个res", res)
+                wx.hideLoading()
+                setTimeout(function(){
+                  wx.showToast({
+                    title: '数据更新成功',
+                  })
+                },200)
                 setTimeout(function () {
                   wx.hideToast()
-                }, 500)
-                wx.navigateBack({
-                })
-              }).catch(err => {
-                console.log(err)
-                wx.showLoading({
-                  title: '请稍后再试',
-                })
-                setTimeout(function () {
-                  wx.hideLoading()
-                }, 500)
+                }, 1000)
+                wx.navigateBack()
               })
-            }).catch(err=>{
-              wx.hideLoading()
-              console.log("安全接口调用失败的内容",err)
-              wx.showModal({
-                showCancel:false,
-                content: '您上传的内容涉嫌违法违规，请重新编辑后上传',
+              .catch(err => {
+                that.setData({
+                  disabledCondition: false
+                })
+                wx.hideLoading()
+                console.log("数据更新调用失败的内容", err)
+                wx.showModal({
+                  showCancel: false,
+                  content: '请检查您的当前网络是否可用或者检查您的文本是否包含敏感信息',
+                })
               })
-            })
-            // db.collection("team").doc(_id).update({
-            //   data:{
-            //     teamName:teamName,
-            //     type:type,
-            //     characterArr:characterArr,
-            //     detail:detail
-            //   }
-            // }).then(res=>{
-            //   console.log("数据更新成功的res",res)
-            //   wx.showToast({
-            //     title: '数据更新成功',
-            //   })
-            //   setTimeout(function(){
-            //     wx.hideToast()
-            //   },500)
-            //   wx.navigateBack({
-            //   })
-            // }).catch(err=>{
-            //   console.log(err)
-            //   wx.showLoading({
-            //     title: '请稍后再试',
-            //   })
-            //   setTimeout(function(){
-            //     wx.hideLoading()
-            //   },500)
-            // })
           }
-        }
-        else{
+        } else {
           wx.showLoading({
             title: '上传中',
           })
@@ -311,16 +290,33 @@ Page({
             data: {
               content: firstContent
             }
-          }).then(res => {
-            console.log("安全接口调用成功返回的内容", res)
+          })
+          .then(res => {
+            return db.collection("team").add({
+              data:shuju
+            })
+          })
+          .then(res=>{
             wx.hideLoading()
-            app.addData('team', shuju)
-          }).catch(err => {
-            console.log("安全接口调用失败的内容", err)
+            setTimeout(function(){
+              wx.showToast({
+                title: '上传成功',
+              })
+            },200)
+            setTimeout(function () {
+              wx.hideToast()
+            }, 1000)
+            wx.navigateBack()
+          })
+          .catch(err => {
+            that.setData({
+              disabledCondition: false
+            })
+            console.log("调用失败的内容", err)
             wx.hideLoading()
             wx.showModal({
               showCancel: false,
-              content: '您上传的内容涉嫌违法违规，请重新编辑后上传',
+              content: '请检查您的当前网络是否可用或者检查您的文本是否包含敏感信息',
             })
           })
         }
