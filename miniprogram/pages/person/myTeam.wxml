@@ -7,6 +7,10 @@
     <view class="{{bindNum==4?'upBar-light':'upBar-dark'}}" bindtap="num4">已被拒绝</view>
   </view>
   <view class="body1" wx:if="{{bindNum==1}}">
+    <view class="body1-buttom-area" bindtap="goCreateTeam">
+      <view class="body1-buttom-area-button">发起组队</view>
+      <van-icon name="arrow" />
+    </view>
     <block wx:for="{{team}}" wx:key="{{item._id}}">
       <view class="body1-all">
         <view class="body1-container">
@@ -63,7 +67,7 @@
           <view>{{item.detail}}</view>
           <view class="body1-container-detail-check">人员管理:</view>
           <view class="body1-container-detail-noData" wx:if="{{item.applyArr.length==0}}">还没有人员申请加入您的项目</view>
-          <block wx:for="{{item.applyArr}}">
+          <block wx:for="{{item.applyArr}}" wx:key="{{item.openid}}">
             <view class="body1-container-detail-joinPeople">
               <view class="body1-container-detail-joinPeople-left">
                 <view class="body1-container-detail-joinPeople-left-row">申请人：{{item.name}}</view>
@@ -87,69 +91,28 @@
         </view>
       </view>
     </block>
-    <view class="body1-buttom-area" bindtap="goCreateTeam">
-      <view class="body1-buttom-area-button">发起组队</view>
-      <van-icon name="arrow" />
+  </view>
+  <view class="body2" wx:if="{{bindNum!=1}}">
+    <block wx:for="{{applyCollection[applyIndex].data}}" wx:key="{{item._id}}">
+      <view class="body2-container" bindtap="goDetail" data-item="{{item}}">
+        <view class="body2-container-row">
+          <van-icon name="flag-o" />
+          <view>队伍名称：{{item.teamName}}</view>
+        </view>
+        <view class="body2-container-row">
+          <van-icon name="orders-o" />
+          <view>项目类别：{{item.type}}</view>
+        </view>
+        <block wx:for="{{item.applyArr}}" wx:key="{{item.openid}}">
+          <view wx:if="{{item.openid==openid}}" class="body2-container-row">
+            <van-icon name="friends-o" />
+            <view>申请角色：{{item.character}}</view>
+          </view>
+        </block>
+      </view>
+    </block>
+    <view class="noDataArea" wx:if="{{applyCollection[applyIndex].data.length==0}}">
+      <view>该状态暂时没有数据</view>
     </view>
-  </view>
-  <view class="body2" wx:if="{{bindNum==2}}">
-    <block wx:for="{{applyCollection}}" wx:key="{{item._id}}">
-      <view class="body2-container" bindtap="goDetail" data-item="{{item}}" wx:if="{{item.added==false&&item.rejected==false}}">
-        <view class="body2-container-row">
-          <van-icon name="flag-o" />
-          <view>队伍名称：{{item.teamName}}</view>
-        </view>
-        <view class="body2-container-row">
-          <van-icon name="orders-o" />
-          <view>项目类别：{{item.type}}</view>
-        </view>
-        <block wx:for="{{item.applyArr}}">
-          <view wx:if="{{item.openid==openid}}" class="body2-container-row">
-            <van-icon name="friends-o" />
-            <view>申请角色：{{item.character}}</view>
-          </view>
-        </block>
-      </view>
-    </block>
-  </view>
-  <view class="body2" wx:if="{{bindNum==3}}">
-    <block wx:for="{{applyCollection}}" wx:key="{{item._id}}">
-      <view class="body2-container" bindtap="goDetail" data-item="{{item}}" wx:if="{{item.added}}">
-        <view class="body2-container-row">
-          <van-icon name="flag-o" />
-          <view>队伍名称：{{item.teamName}}</view>
-        </view>
-        <view class="body2-container-row">
-          <van-icon name="orders-o" />
-          <view>项目类别：{{item.type}}</view>
-        </view>
-        <block wx:for="{{item.applyArr}}">
-          <view wx:if="{{item.openid==openid}}" class="body2-container-row">
-            <van-icon name="friends-o" />
-            <view>申请角色：{{item.character}}</view>
-          </view>
-        </block>
-      </view>
-    </block>
-  </view>
-  <view class="body2" wx:if="{{bindNum==4}}">
-    <block wx:for="{{applyCollection}}" wx:key="{{item._id}}">
-      <view class="body2-container" bindtap="goDetail" data-item="{{item}}" wx:if="{{item.rejected}}">
-        <view class="body2-container-row">
-          <van-icon name="flag-o" />
-          <view>队伍名称：{{item.teamName}}</view>
-        </view>
-        <view class="body2-container-row">
-          <van-icon name="orders-o" />
-          <view>项目类别：{{item.type}}</view>
-        </view>
-        <block wx:for="{{item.applyArr}}">
-          <view wx:if="{{item.openid==openid}}" class="body2-container-row">
-            <van-icon name="friends-o" />
-            <view>申请角色：{{item.character}}</view>
-          </view>
-        </block>
-      </view>
-    </block>
   </view>
 </view>

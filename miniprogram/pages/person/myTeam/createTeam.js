@@ -153,6 +153,7 @@ Page({
     var index = e.currentTarget.dataset.id
     var newCharacterArr = this.data.characterArr
     newCharacterArr[index].num = e.detail
+    newCharacterArr[index].needNum=e.detail-newCharacterArr[index].addedNum
     this.setData({
       characterArr: newCharacterArr
     })

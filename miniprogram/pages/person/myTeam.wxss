@@ -8,6 +8,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  padding-bottom: 0;
 }
 .upBar-light{
   color: white;
@@ -37,9 +38,6 @@
   justify-content: space-between;
   align-items: center;
   border-radius: 20rpx;
-}
-.body1 :first-child{
-  margin-top: 0;
 }
 .body1-container-left-row1,.body1-container-left-row2,.body1-container-left-row3{
   display: flex;
@@ -164,4 +162,13 @@
   display: flex;
   height: 90rpx;
   align-items: center;
+}
+.noDataArea{
+  height: 100rpx;
+  margin: 20rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 20rpx;
 }
