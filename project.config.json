@@ -100,6 +100,20 @@
 					"id": -1,
 					"name": "首页个人show",
 					"pathName": "pages/index/show",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "发布兼职",
+					"pathName": "pages/person/sentJob",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "兼职编辑页面",
+					"pathName": "pages/person/sentJob/editJob",
 					"scene": null
 				}
 			]

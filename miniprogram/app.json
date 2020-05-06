@@ -18,6 +18,7 @@
     "pages/person/myStar",
     "pages/person/recommend",
     "pages/person/sentJob",
+    "pages/person/sentJob/editJob",
     "pages/person/beSponsor",
     "pages/person/feedback",
     "pages/person/beManager",

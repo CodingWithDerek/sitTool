@@ -1,2 +1,76 @@
 <!--pages/person/sentJob.wxml-->
-
+<view class="all">
+  <view class="noSentTip" wx:if="{{sentJobArr.length==0}}">
+    <van-icon name="info-o" class="noSentTip-icon" />
+    <view>您还没有发布任何兼职，点击下方的发布兼职去发布兼职吧</view>
+  </view>
+  <view class="sentTip">
+    <van-icon name="info-o" class="noSentTip-icon" />
+    <view>您发布的兼职需要经过学校的审核，只有审核通过，您发布的兼职才会被发布</view>
+  </view>
+  <view class="sentJobArea" bindtap="goEditJob">
+    <view>发布兼职</view>
+    <van-icon name="arrow" />
+  </view>
+  <block wx:for="{{sentJobArr}}" wx:key="{{item._id}}">
+    <view class="jobContainer">
+      <view class="jobContainer-up">
+        <view class="jobContainer-up-left">
+          <view wx:if="{{item.agree==false&&item.reject==false}}">审核状态：
+            <text class="awaitJudge">等待审核</text>
+          </view>
+          <view wx:if="{{item.agree==true}}">审核状态：
+            <text class="passed">已通过</text>
+          </view>
+          <view wx:if="{{item.reject==true}}">审核状态：
+            <text class="rejected">已被拒绝</text>
+          </view>
+          <view>招聘单位：{{item.company}}</view>
+          <view>兼职类型：{{item.type}}</view>
+          <view>面试时间：{{item.interviewTime}}</view>
+          <view>面试地点：{{item.interviewPlace}}</view>
+          <view>已申请人数：{{item.applyArr.length}}</view>
+          <view>薪资：{{item.wage}}</view>
+        </view>
+        <view class="jobContainer-up-right">
+          <view class="jobContainer-up-right-delete">
+            <van-icon name="delete" class="right-icon" />
+            <view class="right-text">删除</view>
+          </view>
+          <view class="jobContainer-up-right-edit">
+            <van-icon name="edit" class="right-icon" />
+            <view class="right-text">编辑</view>
+          </view>
+          <view class="jobContainer-up-right-open" wx:if="{{item.close}}" data-index="{{index}}" bindtap="openDetail">
+            <van-icon name="arrow-down" class="right-icon" />
+            <view class="right-text">展开</view>
+          </view>
+          <view class="jobContainer-up-right-close" wx:else data-index="{{index}}" bindtap="closeDetail">
+            <van-icon name="arrow-up" class="right-icon" />
+            <view class="right-text">收起</view>
+          </view>
+        </view>
+      </view>
+      <view class="jobContainer-buttom" wx:if="{{!item.close}}">
+        <view>工作区域：{{item.workArea}}</view>
+        <view>联系电话：{{item.phone}}</view>
+        <view class="jobContainer-buttom-interviewPeople">
+          <view>面试者</view>
+          <view>
+            <block wx:for="{{item.applyArr}}" wx:key="{{item.openid}}">
+              <view class="jobContainer-buttom-interviewPeople-right-each">
+                <view>
+                  <view>{{item.name}}</view>
+                  <view>{{item.phone}}</view>
+                </view>
+                <view class="jobContainer-buttom-interviewPeople-right-each-right" data-phone="{{item.phone}}" bindtap="callSomebody">拨打</view>
+              </view>
+            </block>
+          </view>
+        </view>
+        <view class="detailTitle">详细介绍</view>
+        <view>{{item.detail}}</view>
+      </view>
+    </view>
+  </block>
+</view>

@@ -1,0 +1,76 @@
+<!--pages/person/sentJob/editJob.wxml-->
+<view class="all">
+  <view class="updateItemTip" wx:if="{{currentItem!=''}}">
+    <van-icon name="info-o" class="updateItemTip-icon" />
+    <view>为了更好的用户体验，建议如果您只是修改兼职的无关紧要信息（例如：错别字），请将"通知面试者"的状态设置为"否"；如果您修改了面试地点或者面试时间，请将"通知面试者"的状态设置为"是"</view>
+  </view>
+  <view class="updateItemTip" wx:if="{{currentItem!=''}}">
+    <van-icon name="info-o" class="updateItemTip-icon" />
+    <view>请注意，如果您拥有工商执照，上传后一经提交，是不允许再次修改的，为了使您能够通过学校的审核，请上传真实的工商执照</view>
+  </view>
+  <form bindsubmit="submit">
+    <view class="eachRow">
+      <view>招聘单位</view>
+      <view class="eachRow-right">
+        <input name="companyName"></input>
+      </view>
+    </view>
+    <view class="eachRow">
+      <view>类型</view>
+      <view class="eachRow-right">
+        <picker range="{{type}}" value="{{typeIndex}}" bindchange="changeTypeIndex">{{type[typeIndex]}}</picker>
+      </view>
+    </view>
+    <view class="eachRow">
+      <view>工作区域</view>
+      <view class="eachRow-right">
+        <picker range="{{workAreaArr}}" value="{{workAreaIndex}}" bindchange="changeAreaIndex">{{workAreaArr[workAreaIndex]}}</picker>
+      </view>
+    </view>
+    <view class="eachRow">
+      <view>联系电话</view>
+      <view class="eachRow-right">
+        <input name="phone" type="number"></input>
+      </view>
+    </view>
+    <view class="eachRow">
+      <view>面试地点</view>
+      <view class="eachRow-right">
+        <input name="interviewPlace"></input>
+      </view>
+    </view>
+    <view class="eachRow">
+      <view>面试时间</view>
+      <view class="eachRow-right">
+        <picker mode="multiSelector" bindchange="updateMutipleIndex" bindcolumnchange="updateColumnValue" value="{{mutiplePickerIndex}}" range="{{mutiplePickerArr}}">{{mutiplePickerArr[0][mutiplePickerIndex[0]]}}-{{mutiplePickerArr[1][mutiplePickerIndex[1]]}}-{{mutiplePickerArr[2][mutiplePickerIndex[2]]}} {{mutiplePickerArr[3][mutiplePickerIndex[3]]}}:{{mutiplePickerArr[4][mutiplePickerIndex[4]]}}</picker>
+      </view>
+    </view>
+    <view class="eachRow">
+      <view>薪资</view>
+      <view class="eachRow-right">
+        <input name="wage"></input>
+      </view>
+    </view>
+    <view class="eachRow" wx:if="{{currentItem!=''}}">
+      <view>是否通知面试者</view>
+      <view class="eachRow-right">
+        <picker range="{{tellIntervieweeArr}}" value="{{tellIntervieweeIndex}}" bindchange="changeInterviewIndex">{{tellIntervieweeArr[tellIntervieweeIndex]}}</picker>
+      </view>
+    </view>
+    <view class="eachRow">
+      <view>是否有工商执照</view>
+      <view class="eachRow-right">
+        <picker range="{{haveCertificateArr}}" value="{{haveCertificateIndex}}" bindchange="changeCertificateIndex">{{haveCertificateArr[haveCertificateIndex]}}</picker>
+      </view>
+    </view>
+    <view wx:if="{{haveCertificateIndex==0}}" class="uploaderContainer">
+      <view class="uploaderContainer-first">请上传您的工商执照</view>
+      <van-uploader file-list="{{tempAddress}}" bind:after-read="afterRead" bind:delete="deleteImg" />
+    </view>
+    <view class="detailTitle">详细介绍</view>
+    <textarea class="detailContent" maxlength="-1" name="detail"></textarea>
+    <view class="buttonArea">
+      <button class="submitButton" type="primary" form-type="submit">提交</button>
+    </view>
+  </form>
+</view>

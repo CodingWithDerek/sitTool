@@ -2,7 +2,7 @@
 <view class="all">
   <view class="all-up">
     <van-icon name="info-o" class="up-icon" />
-    <view>在该页面中你可以创建和修改自己项目组队信息，队员的角色可以动态添加和删除，赶快去发起你的项目组队吧</view>
+    <view>在该页面中你可以创建和修改自己项目组队信息，队员的角色可以动态添加和删除，赶快去发起你的项目组队吧，注意：请不要在项目发起后修改已上传的队员角色名称</view>
   </view>
   <form bindsubmit="submit">
     <view class="form-row">
