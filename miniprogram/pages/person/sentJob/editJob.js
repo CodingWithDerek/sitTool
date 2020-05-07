@@ -1,11 +1,13 @@
 // pages/person/sentJob/editJob.js
+const app = getApp()
+const db = wx.cloud.database()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    currentItem:"123",
+    currentItem:"",
     type:[
       "餐饮","家教","助教","传单","促销","校园代理","其他"
     ],
@@ -22,14 +24,42 @@ Page({
     tempAddress:[],
     mutiplePickerArr:[],
     mutiplePickerIndex:[0,0,2,3,4],
-    currentYear:"2019"
+    currentYear:"2019",
+    interviewTime:"2019-01-03 03:04"
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if(options.item!="undefined"){
+      var item = JSON.parse(options.item)
+      console.log(item)
+      this.setData({
+        currentItem:item,
+        mutiplePickerIndex:item.mutiplePickerIndex,
+        interviewTime:item.interviewTime
+      })
+      var type = this.data.type
+      var workAreaArr = this.data.workAreaArr
+      for(let i=0;i<type.length;i++){
+        if(type[i]==item.type){
+          this.setData({
+            typeIndex:i
+          })
+          break
+        }
+      }
+      for(let i=0;i<workAreaArr.length;i++){
+        if(item.workArea==workAreaArr[i]){
+          this.setData({
+            workAreaIndex:i
+          })
+          break
+        }
 
+      }
+    }
   },
 
   /**
@@ -112,8 +142,17 @@ Page({
   },
   updateMutipleIndex:function(e){
     //console.log("点击确定键",e)
+    var mutiplePickerArr = this.data.mutiplePickerArr
+    var indexArr = e.detail.value
+    var year = mutiplePickerArr[0][indexArr[0]]
+    var month = mutiplePickerArr[1][indexArr[1]]
+    var day = mutiplePickerArr[2][indexArr[2]]
+    var hour = mutiplePickerArr[3][indexArr[3]]
+    var minute = mutiplePickerArr[4][indexArr[4]]
+    var time = `${year}-${month}-${day} ${hour}:${minute}`
     this.setData({
-      mutiplePickerIndex:e.detail.value
+      interviewTime:time,
+      mutiplePickerIndex:indexArr
     })
   },
   updateColumnValue:function(e){
@@ -200,5 +239,108 @@ Page({
   },
   submit:function(e){
     console.log(e)
+    var companyName = e.detail.value.companyName
+    var phone = e.detail.value.phone
+    var interviewPlace = e.detail.value.interviewPlace
+    var wage = e.detail.value.wage
+    var detail = e.detail.value.detail
+    var interviewTime = this.data.interviewTime
+    var typeArr = this.data.type
+    var workAreaArr = this.data.workAreaArr
+    var haveCertificateArr = this.data.haveCertificateArr
+    var typeIndex = this.data.typeIndex
+    var workAreaIndex = this.data.workAreaIndex
+    var haveCertificateIndex = this.data.haveCertificateIndex
+    var type = typeArr[typeIndex]
+    var workArea = workAreaArr[workAreaIndex]
+    var haveCertificate = haveCertificateArr[haveCertificateIndex]
+    var sentTime = app.createTime()
+    var mutiplePickerIndex = this.data.mutiplePickerIndex
+    if(companyName==""||phone==""||interviewPlace==""||wage==""||detail==""){
+      wx.showLoading({
+        title: '请补充完整信息',
+      })
+      setTimeout(function(){
+        wx.hideLoading()
+      },500)
+    }
+    else{
+      if(haveCertificate=="是"){
+        let suf = /\.[^\.]+$/.exec(this.data.tempAddress[0].path)
+        wx.cloud.uploadFile({
+          cloudPath: app.getRandom() + suf,
+          filePath: this.data.tempAddress[0].path
+        }).then(res => {
+          return db.collection("jobArr").add({
+            data:{
+              companyName,
+              type,
+              workArea,
+              phone,
+              interviewPlace,
+              interviewTime,
+              wage,
+              haveCertificate,
+              fileID: res.fileID,
+              detail,
+              applyArr: [],
+              agree:false,
+              reject:false,
+              sentTime,
+              mutiplePickerIndex
+            }
+          })
+        }).then(res=>{
+          wx.showToast({
+            title: '上传成功',
+          })
+          setTimeout(function(){
+            wx.hideToast()
+          },500)
+          wx.navigateBack()
+        }).catch(err=>{
+          console.log(err)
+          wx.showModal({
+            showCancel:false,
+            content: '似乎出现了点问题，请稍后再试',
+          })
+        })
+      }
+      else{
+        db.collection("jobArr").add({
+          data:{
+            companyName,
+            type,
+            workArea,
+            phone,
+            interviewPlace,
+            interviewTime,
+            wage,
+            haveCertificate,
+            fileID: "",
+            detail,
+            applyArr: [],
+            agree: false,
+            reject: false,
+            sentTime,
+            mutiplePickerIndex
+          }
+        }).then(res=>{
+          wx.showToast({
+            title: '上传成功',
+          })
+          setTimeout(function () {
+            wx.hideToast()
+          }, 500)
+          wx.navigateBack()
+        }).catch(err=>{
+          console.log(err)
+          wx.showModal({
+            showCancel: false,
+            content: '似乎出现了点问题，请稍后再试',
+          })
+        })
+      }
+    }
   }
 })

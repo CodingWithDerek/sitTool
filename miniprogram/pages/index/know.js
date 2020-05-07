@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    activeNames:["1"]
   },
 
   /**
@@ -62,5 +62,11 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  onChange:function(e){
+    //console.log(e)
+    this.setData({
+      activeNames:e.detail
+    })
   }
 })

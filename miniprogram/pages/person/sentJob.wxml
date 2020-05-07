@@ -1,12 +1,8 @@
 <!--pages/person/sentJob.wxml-->
 <view class="all">
-  <view class="noSentTip" wx:if="{{sentJobArr.length==0}}">
-    <van-icon name="info-o" class="noSentTip-icon" />
-    <view>您还没有发布任何兼职，点击下方的发布兼职去发布兼职吧</view>
-  </view>
   <view class="sentTip">
-    <van-icon name="info-o" class="noSentTip-icon" />
-    <view>您发布的兼职需要经过学校的审核，只有审核通过，您发布的兼职才会被发布</view>
+    <van-icon name="info-o" class="sentTip-icon" />
+    <view>您发布的兼职需要经过学校的审核，只有审核通过，您发布的兼职才会被发布，若您上传的兼职被学校拒绝时只能重新发布，在原有兼职上修改是不会提交到学校审核部门的</view>
   </view>
   <view class="sentJobArea" bindtap="goEditJob">
     <view>发布兼职</view>
@@ -25,7 +21,7 @@
           <view wx:if="{{item.reject==true}}">审核状态：
             <text class="rejected">已被拒绝</text>
           </view>
-          <view>招聘单位：{{item.company}}</view>
+          <view>招聘单位：{{item.companyName}}</view>
           <view>兼职类型：{{item.type}}</view>
           <view>面试时间：{{item.interviewTime}}</view>
           <view>面试地点：{{item.interviewPlace}}</view>
@@ -37,7 +33,7 @@
             <van-icon name="delete" class="right-icon" />
             <view class="right-text">删除</view>
           </view>
-          <view class="jobContainer-up-right-edit">
+          <view class="jobContainer-up-right-edit" bindtap="goEditJob" data-item="{{item}}">
             <van-icon name="edit" class="right-icon" />
             <view class="right-text">编辑</view>
           </view>

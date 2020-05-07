@@ -1,2 +1,24 @@
 <!--pages/index/know.wxml-->
-<text>pages/index/know.wxml</text>
+<view class="all">
+  <view class="tipInfo">
+    <van-icon name="info-o" class="tipInfo-icon" />
+    <view>大家好，我是sitTool,我集成以下5个功能，在下面我将详细为您介绍</view>
+  </view>
+  <van-collapse value="{{ activeNames }}" bind:change="onChange">
+    <van-collapse-item title="兼职" name="1">
+      之前学校的兼职一直是通过QQ群或微信群发布的，信赖度不高(原因是任何人都可建群，任何人都可以发布兼职)，学生难以分辨兼职的真假性，在该小程序上所发布的兼职都是经过学校审核的，可信度高，可以较好地保证学生权益
+    </van-collapse-item>
+    <van-collapse-item title="项目组队" name="2">
+      这个功能是为了解决有些学生想做一个项目却因自己的圈子窄而找不到志同道合的人的问题，你可以发起自己的项目组队，当学校的学生看到你的项目后，认为你项目比较好的话他们会申请加入你的项目
+    </van-collapse-item>
+    <van-collapse-item title="个人show" name="3">
+      身为千里马的你拥有百般技能，却无地施展，你还在为这个问题而苦恼吗？快去上传你的个人show,让属于你的伯乐发现你这匹千里马
+    </van-collapse-item>
+    <van-collapse-item title="广告" name="4">
+      想增加自己的知名度，或者想为自己的产品做一个广告，学校人员众多，是一个宣传的好地方，例如学校周围的驾校，新开的餐饮店等都可以申请广告入驻，这部分所收取的费用将用于sitTool的运维
+    </van-collapse-item>
+    <van-collapse-item title="赞助" name="5">
+      如果您觉得这款小程序还不错的话，可以进行赞助，以便我们把更好的服务提供给您，当在小程序赞助的金额高于10元时，我们会在赞助商tabBar页面以赞助金额为依据从高到低展示赞助商
+    </van-collapse-item>
+  </van-collapse>
+</view>

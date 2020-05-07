@@ -65,6 +65,7 @@ App({
     var s = date.getSeconds()
     var ms = date.getMilliseconds()
     if (month < 10) month = "0" + month
+    if(day < 10) day = "0" + day
     if (h < 10) h = "0" + h
     if (m < 10) m = "0" + m
     if (s < 10) s = "0" + s

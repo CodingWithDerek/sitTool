@@ -114,6 +114,13 @@
 					"id": -1,
 					"name": "兼职编辑页面",
 					"pathName": "pages/person/sentJob/editJob",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "了解我",
+					"pathName": "pages/index/know",
 					"scene": null
 				}
 			]
