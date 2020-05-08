@@ -13,7 +13,7 @@
   align-items: center;
 }
 .updateItemTip2{
-  height: 250rpx;
+  height: 300rpx;
 }
 .updateItemTip-icon{
   font-size: 50rpx;

@@ -121,6 +121,13 @@
 					"id": -1,
 					"name": "了解我",
 					"pathName": "pages/index/know",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "消息通知",
+					"pathName": "pages/person/manageMessage",
 					"scene": null
 				}
 			]

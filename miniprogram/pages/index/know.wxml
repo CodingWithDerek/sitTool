@@ -2,7 +2,7 @@
 <view class="all">
   <view class="tipInfo">
     <van-icon name="info-o" class="tipInfo-icon" />
-    <view>大家好，我是sitTool,我集成以下5个功能，在下面我将详细为您介绍</view>
+    <view>大家好，我是sitTool,我集成以下5个功能，在下面我将详细为您介绍。我们建议您在使用sitTool之前，先在“个人中心-->消息管理”页面完成页面所述操作</view>
   </view>
   <van-collapse value="{{ activeNames }}" bind:change="onChange">
     <van-collapse-item title="兼职" name="1">

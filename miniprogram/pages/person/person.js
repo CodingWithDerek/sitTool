@@ -161,5 +161,10 @@ Page({
     wx.navigateTo({
       url: 'manage',
     })
+  },
+  toManageMessage:function(){
+    wx.navigateTo({
+      url: 'manageMessage',
+    })
   }
 })

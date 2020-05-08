@@ -20,6 +20,11 @@
     </navigator>
   </view>
   <view class="gapLine"></view>
+  <view class="buttom" bindtap="toManageMessage">
+    <van-icon name="chat-o" class="buttom-left"/>
+    <view class="buttom-right">消息管理</view>
+  </view>
+  <view class="gapLine"></view>
   <view class="buttom" bindtap="toMyStar">
     <van-icon name="star-o" class="buttom-left"/>
     <view class="buttom-right">我的收藏</view>

@@ -15,6 +15,7 @@
     "pages/person/myTeam",
     "pages/person/myTeam/createTeam",
     "pages/person/myShow",
+    "pages/person/manageMessage",
     "pages/person/myStar",
     "pages/person/recommend",
     "pages/person/sentJob",

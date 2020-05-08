@@ -125,5 +125,10 @@ Page({
     this.setData({
       sentJobArr: sentJobArr
     })
+  },
+  previewImage:function(e){
+    wx.previewImage({
+      urls: [e.currentTarget.dataset.fileid],
+    })
   }
 })
