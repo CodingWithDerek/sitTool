@@ -40,6 +40,7 @@ Page({
             _openid: res.data
           }).count()
           .then(res2 => {
+            console.log(res2)
             that.setData({
               totalNum: res2.total
             })
@@ -50,6 +51,7 @@ Page({
           _openid:res.data
         }).orderBy("sentTime","desc").get()
         .then(res3=>{
+          console.log("res3",res3)
           for(let i=0;i<res3.data.length;i++)
             res3.data[i].close=true
           that.setData({

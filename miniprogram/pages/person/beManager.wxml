@@ -1,2 +1,34 @@
 <!--pages/person/beManager.wxml-->
-<text>pages/person/beManager.wxml</text>
+<view class="all">
+  <view class="tipInfo">
+    <van-icon name="info-o" class="tipInfo-icon"/>
+    <view>这个页面是为学校管理人员而设立的，经过超级管理员的允许学校的学生可以申请成为管理员，没经过允许的学生提交申请，超级管理员是不受理的</view>
+  </view>
+  <view wx:if="{{currentIdentity==''}}">
+    <form bindsubmit="submitApplication">
+      <view class="eachRow">
+        <view>姓名</view>
+        <input class="eachRow-right" name="name"></input>
+      </view>
+      <view class="eachRow">
+        <view>学号</view>
+        <input class="eachRow-right" name="school_id"></input>
+      </view>
+      <view class="eachRow">
+        <view>管理类型</view>
+          <picker range="{{applyTypeArr}}" value="{{applyTypeIndex}}" class="eachRow-right" bindchange="changeIndex">{{applyTypeArr[applyTypeIndex]}}</picker>
+      </view>
+      <view class="gap"></view>
+      <view class="buttonArea">
+        <button form-type="submit" class="buttonArea-button" type="primary" disabled="{{disabledCondition}}">提交</button>
+      </view>
+    </form>
+  </view>
+  <view wx:if="{{currentIdentity!=''}}" class="appliedContainer">
+    <view class="appliedContainer-each" wx:if="{{currentIdentity.agree==false}}">审核状态：<text class="wait">等待审核</text></view>
+    <view class="appliedContainer-each" wx:else>审核状态：<text class="passed">已通过</text></view>
+    <view class="appliedContainer-each">姓名：{{currentIdentity.name}}</view>
+    <view class="appliedContainer-each">学号：{{currentIdentity.school_id}}</view>
+    <view class="appliedContainer-each">申请职位：{{currentIdentity.applyType}}</view>
+  </view>
+</view>

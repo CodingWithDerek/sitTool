@@ -1,5 +1,6 @@
 // pages/person/person.js
 const app = getApp()
+const db = wx.cloud.database()
 Page({
 
   /**
@@ -7,7 +8,7 @@ Page({
    */
   data: {
     openid: "",
-    superId:"oBitP5SmaDl4ptj4_KI6Tojx9D0M",
+    superId:"1",
     list: [{
         title: "我的面试",
         picture: "../res/myInterview.png",
@@ -38,6 +39,15 @@ Page({
    */
   onReady: function() {
     var that = this
+    db.collection("superManager").get()
+      .then(res => {
+        console.log("直接获取superManager",res)
+        that.setData({
+          superId:res.data[0].openid
+        })
+      }).catch(err => {
+        console.log(err)
+      })
     wx.getStorage({
       key: 'openid',
       success(res) {

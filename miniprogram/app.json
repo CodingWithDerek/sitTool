@@ -27,7 +27,6 @@
     "pages/person/manage"
   ],
   "window": {
-    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "sitTool",
     "navigationBarTextStyle": "black"

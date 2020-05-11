@@ -128,6 +128,20 @@
 					"id": -1,
 					"name": "消息通知",
 					"pathName": "pages/person/manageMessage",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "成为管理员",
+					"pathName": "pages/person/beManager",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "超级管理",
+					"pathName": "pages/person/superManage",
 					"scene": null
 				}
 			]

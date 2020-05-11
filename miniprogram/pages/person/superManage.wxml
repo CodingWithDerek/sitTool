@@ -1,2 +1,47 @@
 <!--pages/person/superManage.wxml-->
-<text>pages/person/superManage.wxml</text>
+<view class="all">
+  <view class="upBar">
+    <view class="{{bindNum==1?'upBar-each_light':'upBar-each_dark'}}" bindtap="num1">已加入</view>
+    <view class="{{bindNum==2?'upBar-each_light':'upBar-each_dark'}}" bindtap="num2">已申请</view>
+    <view class="{{bindNum==3?'upBar-each_light':'upBar-each_dark'}}" bindtap="num3">删除申请者</view>
+  </view>
+  <view wx:if="{{bindNum==1}}">
+    <block wx:for="{{agreedArr}}">
+      <view class="container">
+        <view class="container-left">
+          <view class="container-left-each">姓名：{{item.name}}</view>
+          <view class="container-left-each">学号：{{item.school_id}}</view>
+          <view class="container-left-each">职位：{{item.applyType}}</view>
+        </view>
+        <view class="container-right" data-id="{{item.school_id}}" bindtap="deleteAdded">删除</view>
+      </view>
+    </block>
+    <view class="noDataTip" wx:if="{{agreedArr==0}}">
+      <view>该类别暂时没有数据</view>
+    </view>
+  </view>
+  <view wx:if="{{bindNum==2}}">
+    <block wx:for="{{applyArr}}">
+      <view class="container">
+        <view class="container-left">
+          <view class="container-left-each">姓名：{{item.name}}</view>
+          <view class="container-left-each">学号：{{item.school_id}}</view>
+          <view class="container-left-each">职位：{{item.applyType}}</view>
+        </view>
+        <view class="container-right_agree" data-id="{{item._id}}" bindtap="agree">同意</view>
+      </view>
+    </block>
+    <view class="noDataTip" wx:if="{{applyArr.length==0}}">
+      <view>该类别暂时没有数据</view>
+    </view>
+  </view>
+  <view wx:if="{{bindNum==3}}">
+    <view class="deleteContainer">
+      <view>学号</view>
+      <input placeholder="请输入要删除的学号" bindblur="getNum" class="deleteContainer-right"></input>
+    </view>
+    <view class="buttonArea">
+      <button class="buttonArea-button" type="warn" bindtap="deleteApplyer">删除</button>
+    </view>
+  </view>
+</view>

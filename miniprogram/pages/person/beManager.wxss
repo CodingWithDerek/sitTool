@@ -1,1 +1,61 @@
 /* pages/person/beManager.wxss */
+.all{
+  background-color: #f2f2f2;
+  font-size: 30rpx;
+}
+.tipInfo{
+  height: 150rpx;
+  margin: 20rpx;
+  padding: 20rpx;
+  background-color: white;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+}
+.tipInfo-icon{
+  font-size: 50rpx;
+  color: #3bac6a;
+  margin-right: 20rpx;
+}
+.eachRow{
+  height: 80rpx;
+  background-color: white;
+  margin: 1px 0;
+  padding: 20rpx;
+  display: flex;
+  align-items: center;
+}
+.eachRow-right{
+  margin-left: 20rpx;
+  width: 75%;
+}
+.gap{
+  height: 20rpx;
+  background-color: #f2f2f2;
+}
+.buttonArea{
+  height: 200rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+.buttonArea-button{
+  padding: 5rpx 50rpx;
+  font-size: 30rpx;
+}
+.appliedContainer{
+  margin: 20rpx;
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 20rpx;
+}
+.appliedContainer-each{
+  margin: 20rpx;
+}
+.wait{
+  color: #33b5e5;
+}
+.passed{
+  color: #05c160;
+}
