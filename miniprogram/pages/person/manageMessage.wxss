@@ -3,38 +3,72 @@
   background-color: #f2f2f2;
   font-size: 30rpx;
 }
-.tipInfo{
+.sentJobContainer,
+.studentContainer,
+.openMainSwitch,
+.openMainSwitch_select{
   background-color: white;
   margin: 20rpx;
   padding: 20rpx;
   border-radius: 20rpx;
+}
+.sentJobContainer-up,.studentContainer-up{
   display: flex;
   align-items: center;
-  height: 400rpx;
+  height: 250rpx;
 }
-.finishedInfo{
-  height: 80rpx;
-  background-color: white;
-  margin: 20rpx;
-  padding: 20rpx;
-  border-radius: 20rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.tipInfo-icon,.finishedInfo-icon{
+.sentJobContainer-up-icon,
+.studentContainer-up-icon,
+.subscribedContainer-icon{
   font-size: 50rpx;
   color: #3bac6a;
   margin-right: 20rpx;
 }
-.buttonArea{
+.sentJobContainer-down,
+.studentContainer-down,
+.openMainSwitch-down,
+.openMainSwitch_select-down{
   height: 150rpx;
-  background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.buttonArea-button{
-  font-size: 30rpx;
+.sentJobContainer-down-button,
+.studentContainer-down-button,
+.openMainSwitch-down-button,
+.openMainSwitch_select-down-button{
   padding: 5rpx 50rpx;
+  font-size: 30rpx;
+}
+.subscribedContainer{
+  height: 100rpx;
+  background-color: white;
+  margin: 20rpx;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.openMainSwitch-up{
+  display: flex;
+  height: 150rpx;
+  align-items: center;
+}
+.openMainSwitch-up-icon,
+.openMainSwitch_select-up-icon{
+  font-size: 50rpx;
+  color: #ff1d11;
+  margin-right: 20rpx;
+}
+.image1{
+  height: 508rpx;
+  width: 400rpx;
+}
+.image2{
+  height: 512rpx;
+  width: 400rpx;
+}
+.openMainSwitch_select-up{
+  display: flex;
+  align-items: center;
 }

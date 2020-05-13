@@ -1,14 +1,64 @@
 <!--pages/person/manageMessage.wxml-->
 <view class="all">
-  <view class="tipInfo" wx:if="{{subscribeFlag==false}}">
-    <van-icon name="info-o" class="tipInfo-icon"/>
-    <view>我们建议您在使用sitTool之前，在该页面下完成以下操作：点击“订阅消息”按钮，在弹出框中先选中“总是保持以上选择，不再询问”，然后点击“确定”按钮（原因：涉及到信息变动时会给您发送变更消息通知，例如您申请了一个兼职，当兼职发布者更改了面试时间时会给您发送通知消息，以便您在正确的时间内参加面试），若您没有没有进行上述操作，无论何时都不会给您发送通知消息</view>
+  <view class="sentJobContainer" wx:if="{{flag1==true}}">
+    <view class="sentJobContainer-up">
+      <van-icon name="info-o" class="sentJobContainer-up-icon" />
+      <view>若您的身份为兼职发布者，请点击下方“订阅消息”按钮，在弹出框中先选中“总是保持以上选择，不再询问”，然后点击“允许”按钮,您申请发布的兼职经过学校审核后，学校会把审核结果通知给您（若不进行上述操作，不会给您发送通知消息）</view>
+    </view>
+    <view class="sentJobContainer-down">
+      <button class="sentJobContainer-down-button" type="primary" bindtap="subscribeInfo_sentJob">订阅消息</button>
+    </view>
   </view>
-  <view class="finishedInfo" wx:else>
-    <van-icon name="info-o" class="finishedInfo-icon"/>
-    <view>您已订阅消息，无需其他操作</view>
+  <view class="studentContainer" wx:if="{{flag2==true}}">
+    <view class="studentContainer-up">
+      <van-icon name="info-o" class="studentContainer-up-icon" />
+      <view>若您的身份为学生，请点击下方“订阅消息”按钮，在弹出框中先选中“总是保持以上选择，不再询问”，然后点击“允许”按钮,您申请的兼职若面试信息发生变更会通知给您（若不进行上述操作，不会给您发送通知消息）</view>
+    </view>
+    <view class="studentContainer-down">
+      <button class="studentContainer-down-button" type="primary" bindtap="subscribeInfo_student">订阅消息</button>
+    </view>
   </view>
-  <view class="buttonArea" wx:if="{{subscribeFlag==false}}">
-    <button class="buttonArea-button" type="primary" bindtap="subscribeInfo">订阅消息</button>
+  <view class="subscribedContainer" wx:if="{{flag3==true}}">
+    <van-icon name="info-o" class="subscribedContainer-icon" />
+    <view>您已订阅兼职发布者消息</view>
+  </view>
+  <view class="subscribedContainer" wx:if="{{flag4==true}}">
+    <van-icon name="info-o" class="subscribedContainer-icon" />
+    <view>您已订阅学生消息</view>
+  </view>
+  <view class="openMainSwitch" wx:if="{{flag7==true}}">
+    <view class="openMainSwitch-up">
+      <van-icon name="warning-o" class="openMainSwitch-up-icon" />
+      <view>系统监测到您关闭了“接受订阅消息”开关，如果您还想收到和您有关的通知消息，请点击下方按钮前往开启</view>
+    </view>
+    <view class="openMainSwitch-down">
+      <button class="openMainSwitch-down-button" type="primary" bindtap="goSetting">前往开启</button>
+    </view>
+  </view>
+  <view class="openMainSwitch_select" wx:if="{{flag5==true}}">
+    <view class="openMainSwitch_select-up">
+      <van-icon name="warning-o" class="openMainSwitch_select-up-icon" />
+      <view>系统监测到您没有勾选“业务审核结果通知”选项，如果您还想收到和您有关的通知消息（该消息只对兼职发布者有用），请点击下方按钮并且按照下图指定步骤操作
+        <view>
+          <image src="cloud://sittool-sccwy.7369-sittool-sccwy-1301779720/openMainSwitch_select-tipImage/selectResult.jpg" class="image1"></image>
+        </view>
+      </view>
+    </view>
+    <view class="openMainSwitch_select-down">
+      <button class="openMainSwitch_select-down-button" type="primary" bindtap="goSetting">前往设置</button>
+    </view>
+  </view>
+  <view class="openMainSwitch_select" wx:if="{{flag6==true}}">
+    <view class="openMainSwitch_select-up">
+      <van-icon name="warning-o" class="openMainSwitch_select-up-icon" />
+      <view>系统监测到您没有勾选“面试安排提醒”选项，如果您还想收到和您有关的通知消息（该消息只对普通学生有用），请点击下方按钮并且按照下图指定步骤操作
+        <view>
+          <image src="cloud://sittool-sccwy.7369-sittool-sccwy-1301779720/openMainSwitch_select-tipImage/selectInterview.jpg" class="image2"></image>
+        </view>
+      </view>
+    </view>
+    <view class="openMainSwitch_select-down">
+      <button class="openMainSwitch_select-down-button" type="primary" bindtap="goSetting">前往设置</button>
+    </view>
   </view>
 </view>
