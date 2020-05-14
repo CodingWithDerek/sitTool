@@ -51,7 +51,7 @@ Page({
             flag1: true
           })
         }
-        if (res.subscriptionsSetting.mainSwitch == true && res.subscriptionsSetting["IWuRiPxhYaRciLvy3S1h6WX50PZLZ3hl4-VHjHAKsdw"] == undefined) {
+        if (res.subscriptionsSetting.mainSwitch == true && res.subscriptionsSetting["IWuRiPxhYaRciLvy3S1h6WlHYYfSvWb0FQdj0qqncv0"] == undefined) {
           that.setData({
             flag2: true
           })
@@ -61,7 +61,7 @@ Page({
             flag3: true
           })
         }
-        if (res.subscriptionsSetting.mainSwitch == true && res.subscriptionsSetting["IWuRiPxhYaRciLvy3S1h6WX50PZLZ3hl4-VHjHAKsdw"] == "accept") {
+        if (res.subscriptionsSetting.mainSwitch == true && res.subscriptionsSetting["IWuRiPxhYaRciLvy3S1h6WlHYYfSvWb0FQdj0qqncv0"] == "accept") {
           that.setData({
             flag4: true
           })
@@ -71,7 +71,7 @@ Page({
             flag5: true
           })
         }
-        if (res.subscriptionsSetting.mainSwitch == true && res.subscriptionsSetting["IWuRiPxhYaRciLvy3S1h6WX50PZLZ3hl4-VHjHAKsdw"] == "reject") {
+        if (res.subscriptionsSetting.mainSwitch == true && res.subscriptionsSetting["IWuRiPxhYaRciLvy3S1h6WlHYYfSvWb0FQdj0qqncv0"] == "reject") {
           that.setData({
             flag6: true
           })
@@ -134,7 +134,7 @@ Page({
   subscribeInfo_student:function(){
     var that =this
     wx.requestSubscribeMessage({
-      tmplIds: ["IWuRiPxhYaRciLvy3S1h6WX50PZLZ3hl4-VHjHAKsdw"],
+      tmplIds: ["IWuRiPxhYaRciLvy3S1h6WlHYYfSvWb0FQdj0qqncv0"],
       success: function (res) {
         that.onShow()
       },

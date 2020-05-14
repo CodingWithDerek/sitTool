@@ -9,6 +9,11 @@ Page({
   data: {
     openid: "",
     superId:"1",
+    isManager:false,
+    showPopup:false,
+    goType:"",
+    goTypeArr: ["兼职管理", "赞助管理", "用户反馈处理", "广告管理"],
+    radio:"0",
     list: [{
         title: "我的面试",
         picture: "../res/myInterview.png",
@@ -54,6 +59,20 @@ Page({
         console.log(res.data)
         that.setData({
           openid:res.data
+        })
+        db.collection("managerArr").where({
+          _openid:res.data
+        }).get()
+        .then(res2=>{
+          console.log("检验是否为管理员的成功调用",res2)
+          if(res2.data.length>0){
+            that.setData({
+              isManager:true,
+              goType:res2.data[0].applyType
+            })
+          }
+        }).catch(err2=>{
+          console.log("检验是否为管理员的失败调用",err2)
         })
       },
       fail(err){
@@ -168,13 +187,48 @@ Page({
     })
   },
   goManage:function(){
-    wx.navigateTo({
-      url: 'manage',
-    })
+    var openid = this.data.openid
+    var superId = this.data.superId
+    var isManager = this.data.isManager
+    if(isManager==true&&openid!=superId){
+      wx.navigateTo({
+        url: 'manage?type=' + this.data.goType,
+      })
+    }
+    if(openid==superId){
+      this.setData({
+        showPopup: true
+      })
+    }
   },
   toManageMessage:function(){
     wx.navigateTo({
       url: 'manageMessage',
+    })
+  },
+  closePopup:function(){
+    this.setData({
+      showPopup:false
+    })
+  },
+  onChange:function(e){
+    //console.log("onChange",e)
+    this.setData({
+      radio:e.detail
+    })
+  },
+  onClick:function(e){
+    //console.log("onClick",e)
+    this.setData({
+      radio:e.currentTarget.dataset.name
+    })
+  },
+  superManager_goManage:function(){
+    var goTypeArr = this.data.goTypeArr
+    var radio = this.data.radio
+    var goType = goTypeArr[radio]
+    wx.navigateTo({
+      url: 'manage?type=' + goType,
     })
   }
 })

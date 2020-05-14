@@ -67,13 +67,13 @@
   margin: 0 20rpx;
   font-size: 40rpx
 }
-.manage{
+.manage,.buttonArea{
   height: 200rpx;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.manage-son{
+.manage-son,.buttonArea-son{
   padding: 10rpx 20rpx;
   border-radius: 10rpx;
   background-color: #33b5e5;

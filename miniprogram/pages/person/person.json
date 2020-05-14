@@ -1,5 +1,10 @@
 {
   "usingComponents": {
-    "van-icon": "../../miniprogram_npm/@vant/weapp/icon/index"
+    "van-icon": "../../miniprogram_npm/@vant/weapp/icon/index",
+    "van-popup": "../../miniprogram_npm/@vant/weapp/popup/index",
+    "van-radio": "../../miniprogram_npm/@vant/weapp/radio/index",
+    "van-radio-group": "../../miniprogram_npm/@vant/weapp/radio-group/index",
+    "van-cell": "../../miniprogram_npm/@vant/weapp/cell/index",
+    "van-cell-group": "../../miniprogram_npm/@vant/weapp/cell-group/index"
   }
 }

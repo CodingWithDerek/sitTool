@@ -21,46 +21,67 @@
   </view>
   <view class="gapLine"></view>
   <view class="buttom" bindtap="toManageMessage">
-    <van-icon name="chat-o" class="buttom-left"/>
+    <van-icon name="chat-o" class="buttom-left" />
     <view class="buttom-right">消息管理</view>
   </view>
   <view class="gapLine"></view>
   <view class="buttom" bindtap="toMyStar">
-    <van-icon name="star-o" class="buttom-left"/>
+    <van-icon name="star-o" class="buttom-left" />
     <view class="buttom-right">我的收藏</view>
   </view>
   <view class="gapLine"></view>
   <view class="buttom" bindtap="toRecommend">
-    <van-icon name="user-o" class="buttom-left"/>
+    <van-icon name="user-o" class="buttom-left" />
     <view class="buttom-right">推荐给好友</view>
   </view>
   <view class="gapLine"></view>
   <view class="buttom" bindtap="toSentJob">
-    <van-icon name="fire-o" class="buttom-left"/>
+    <van-icon name="fire-o" class="buttom-left" />
     <view class="buttom-right">发布兼职</view>
   </view>
   <view class="gapLine"></view>
   <view class="buttom" bindtap="toBeSponsor">
-    <van-icon name="gold-coin-o" class="buttom-left"/>
+    <van-icon name="gold-coin-o" class="buttom-left" />
     <view class="buttom-right">我要赞助</view>
   </view>
   <view class="gapLine"></view>
   <view class="buttom" bindtap="toFeedback">
-    <van-icon name="description" class="buttom-left"/>
+    <van-icon name="description" class="buttom-left" />
     <view class="buttom-right">意见反馈</view>
   </view>
   <view class="gapLine"></view>
   <view class="buttom" bindtap="toBeManager">
-    <van-icon name="eye-o" class="buttom-left"/>
+    <van-icon name="eye-o" class="buttom-left" />
     <view class="buttom-right">成为管理员</view>
   </view>
   <view class="gapLine" wx:if="{{openid==superId}}"></view>
   <view class="buttom" bindtap="toSuperManage" wx:if="{{openid==superId}}">
-    <van-icon name="diamond-o" class="buttom-left"/>
+    <van-icon name="diamond-o" class="buttom-left" />
     <view class="buttom-right">超级管理</view>
   </view>
   <view class="gapLine"></view>
   <view class="manage">
-    <view class="manage-son" bindtap="goManage">后台管理</view>
+    <view class="manage-son" bindtap="goManage" wx:if="{{openid==superId||isManager}}">后台管理</view>
   </view>
+  <van-popup show="{{showPopup}}" position="top" custom-style="height: 70%;" bind:close="closePopup">
+    <van-radio-group value="{{ radio }}" bind:change="onChange">
+      <van-cell-group>
+        <van-cell title="兼职管理" clickable data-name="0" bind:click="onClick">
+          <van-radio slot="right-icon" name="0" />
+        </van-cell>
+        <van-cell title="赞助管理" clickable data-name="1" bind:click="onClick">
+          <van-radio slot="right-icon" name="1" />
+        </van-cell>
+        <van-cell title="用户反馈处理" clickable data-name="2" bind:click="onClick">
+          <van-radio slot="right-icon" name="2" />
+        </van-cell>
+        <van-cell title="广告管理" clickable data-name="3" bind:click="onClick">
+          <van-radio slot="right-icon" name="3" />
+        </van-cell>
+      </van-cell-group>
+    </van-radio-group>
+    <view class="buttonArea" >
+      <view class="buttonArea-son" bindtap="superManager_goManage">确定</view>
+    </view>
+  </van-popup>
 </view>

@@ -12,7 +12,9 @@ Page({
     openid: "",
     show:false,
     index:0,
-    disabledCondition:false
+    disabledCondition:false,
+    star_disabledCondition:false,
+    unstar_disabledCondition:false
   },
 
   /**
@@ -132,6 +134,9 @@ Page({
 
   },
   star: function() {
+    this.setData({
+      star_disabledCondition:true
+    })
     var _id = this.data.currentItem._id
     var openid = this.data.openid
     if(openid!=""){
@@ -150,7 +155,8 @@ Page({
         .then(res => {
           console.log("updateItem",res)
           this.setData({
-            canStar: false
+            canStar: false,
+            star_disabledCondition:false
           })
           wx.hideLoading()
           wx.showToast({
@@ -161,6 +167,9 @@ Page({
           }, 500)
         })
         .catch(err => {
+          this.setData({
+            star_disabledCondition:false
+          })
           wx.hideLoading()
           console.log("updateItem",err)
           wx.showToast({
@@ -173,7 +182,7 @@ Page({
         })
     }else{
       wx.showLoading({
-        title: '请重新点击'
+        title: '请稍后再试'
       })
       setTimeout(function(){
         wx.hideLoading()
@@ -181,6 +190,9 @@ Page({
     }
   },
   unstar:function(){
+    this.setData({
+      unstar_disabledCondition:true
+    })
     wx.showLoading({
       title: '刷新中',
     })
@@ -198,7 +210,8 @@ Page({
       .then(res => {
         console.log("unstar",res)
         this.setData({
-          canStar: true
+          canStar: true,
+          unstar_disabledCondition:false
         })
         wx.hideLoading()
         wx.showToast({
@@ -209,6 +222,9 @@ Page({
         }, 500)
       })
       .catch(err => {
+        this.setData({
+          unstar_disabledCondition:false
+        })
         wx.hideLoading()
         console.log("unstar",err)
         wx.showToast({

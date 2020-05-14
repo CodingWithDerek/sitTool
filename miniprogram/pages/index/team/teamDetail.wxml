@@ -40,8 +40,8 @@
   <view class="gap"></view>
 </view>
 <van-goods-action>
-  <van-goods-action-icon icon="star-o" text="收藏" bind:click="star" wx:if="{{canStar}}"/>
-  <van-goods-action-icon icon="star" text="已收藏" bind:click="unstar" icon-class="unstar" wx:else/>
+  <van-goods-action-icon icon="star-o" text="收藏" bind:click="star" wx:if="{{canStar}}" disabled="{{star_disabledCondition}}"/>
+  <van-goods-action-icon icon="star" text="已收藏" bind:click="unstar" icon-class="unstar" wx:else disabled="{{unstar_disabledCondition}}"/>
   <van-goods-action-button color="#a7e4fa" text="分享给好友" type="warning" open-type="share"/>
   <van-goods-action-button color="#33b5e5" text="申请加入" bind:click="join" wx:if="{{canJoin}}"/>
   <van-goods-action-button color="#33b5e5" text="您已申请" bind:click="showAdded" wx:else/>
