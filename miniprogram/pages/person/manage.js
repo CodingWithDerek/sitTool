@@ -1,6 +1,7 @@
 // pages/person/manage.js
 const db = wx.cloud.database()
 const _ = db.command
+const $ = db.command.aggregate
 Page({
 
   /**
@@ -9,10 +10,6 @@ Page({
   data: {
     goTypeArr: ["兼职管理", "赞助管理", "用户反馈处理", "广告管理"],
     manageType:"",
-    isJob:true,
-    isSponsor:false,
-    isfeedback:false,
-    isAdvertisement:false,
     unprocessedDataTotalNum:0,
     processedDataTotalNum:0,
     bindNum:1,
@@ -21,7 +18,9 @@ Page({
     managerInfo:{
       name:"",
       school_id:""
-    }
+    },
+    queriedJob:[],
+    query_companyName:""
   },
 
   /**
@@ -93,22 +92,23 @@ Page({
       })
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
+  getUnprocessedDataTotalNum:function(){
     var that = this
     db.collection("jobArr").where({
-      agree:false,
-      reject:false
+      agree: false,
+      reject: false
     }).count()
-    .then(res=>{
-      that.setData({
-        unprocessedDataTotalNum:res.total
+      .then(res => {
+        that.setData({
+          unprocessedDataTotalNum: res.total
+        })
+      }).catch(err => {
+        console.log(err)
       })
-    }).catch(err=>{
-      console.log(err)
-    })
+  },
+
+  getProcessedDataTotalNum:function(){
+    var that =this
     db.collection("jobArr").where(_.or([
       {
         agree: true
@@ -117,14 +117,22 @@ Page({
         reject: true
       }
     ])).count()
-    .then(res=>{
-      that.setData({
-        processedDataTotalNum:res.total
+      .then(res => {
+        that.setData({
+          processedDataTotalNum: res.total
+        })
+      }).catch(err => {
+        console.log(err)
       })
-    }).catch(err=>{
-      console.log(err)
-    })
-    that.getUnprocessedData(0,true)
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    this.getUnprocessedDataTotalNum()
+    this.getProcessedDataTotalNum()
+    this.getUnprocessedData(0,true)
   },
 
   /**
@@ -202,6 +210,11 @@ Page({
     })
     this.getProcessedData(0,true)
   },
+  num3:function(){
+    this.setData({
+      bindNum:3
+    })
+  },
   getProcessedData:function(skipNum,isFirst){
     var that = this
     if(isFirst==false){
@@ -258,6 +271,8 @@ Page({
           managerInfo
         }
       }).then(res=>{
+        that.getUnprocessedDataTotalNum()
+        that.getProcessedDataTotalNum()
         wx.hideLoading()
         setTimeout(function(){
           wx.showToast({
@@ -268,14 +283,22 @@ Page({
           wx.hideToast()
         },700)
         let unProcessedData = that.data.unProcessedData
+        let queriedJob = that.data.queriedJob
         for(let i=0;i<unProcessedData.length;i++){
           if(id==unProcessedData[i]._id){
             unProcessedData.splice(i,1)
             break
           }
         }
+        for(let i=0;i<queriedJob.length;i++){
+          if(id==queriedJob[i]._id){
+            queriedJob.splice(i,1)
+            break
+          }
+        }
         that.setData({
-          unProcessedData:unProcessedData
+          unProcessedData:unProcessedData,
+          queriedJob:queriedJob
         })
       }).catch(err=>{
         wx.hideLoading()
@@ -307,6 +330,8 @@ Page({
           managerInfo
         }
       }).then(res => {
+        that.getUnprocessedDataTotalNum()
+        that.getProcessedDataTotalNum()
         wx.hideLoading()
         setTimeout(function () {
           wx.showToast({
@@ -317,14 +342,22 @@ Page({
           wx.hideToast()
         }, 700)
         let unProcessedData = that.data.unProcessedData
+        let queriedJob = that.data.queriedJob
         for (let i = 0; i < unProcessedData.length; i++) {
           if (id == unProcessedData[i]._id) {
             unProcessedData.splice(i, 1)
             break
           }
         }
+        for (let i = 0; i < queriedJob.length; i++) {
+          if (id == queriedJob[i]._id) {
+            queriedJob.splice(i, 1)
+            break
+          }
+        }
         that.setData({
-          unProcessedData: unProcessedData
+          unProcessedData: unProcessedData,
+          queriedJob:queriedJob
         })
       }).catch(err => {
         wx.hideLoading()
@@ -345,5 +378,62 @@ Page({
     wx.makePhoneCall({
       phoneNumber: e.currentTarget.dataset.phone,
     })
+  },
+  getCompanyName:function(e){
+    //console.log(e)
+    this.setData({
+      query_companyName:e.detail.value
+    })
+  },
+  queryJob:function(){
+    var that = this
+    this.setData({
+      queriedJob:[]
+    })
+    var query_companyName = this.data.query_companyName
+    db.collection("jobArr").aggregate()
+      .project({
+        _openid:1,
+        agree:1,
+        companyName:1,
+        detail:1,
+        fileID:1,
+        haveCertificate:1,
+        interviewPlace:1,
+        interviewTime:1,
+        managerInfo:1,
+        phone:1,
+        reject:1,
+        sentTime:1,
+        type:1,
+        wage:1,
+        workArea:1,
+        select_Index: $.indexOfBytes(['$companyName', query_companyName])
+      }).match({
+        select_Index:_.gte(0)
+      }).sort({
+        sentTime:-1
+      }).end()
+      .then(res=>{
+        if(res.list.length>0){
+          that.setData({
+            queriedJob:res.list
+          })
+        }else{
+          wx.showLoading({
+            title: '没有找到该数据',
+          })
+          setTimeout(function(){
+            wx.hideLoading()
+          },500)
+        }
+        console.log("聚合操作（查询兼职）",res)
+      }).catch(err=>{
+        console.log(err)
+        wx.showModal({
+          showCancel: false,
+          content: '似乎出现了什么问题，请稍后再试',
+        })
+      })
   }
 })

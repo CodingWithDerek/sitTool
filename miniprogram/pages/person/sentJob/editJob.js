@@ -268,6 +268,10 @@ Page({
     var haveCertificate = haveCertificateArr[haveCertificateIndex]
     var sentTime = app.createTime()
     var mutiplePickerIndex = this.data.mutiplePickerIndex
+    var managerInfo = {
+      name:"",
+      school_id:""
+    }
     if(currentItem==""){
       if(haveCertificate=="是"){
         if(companyName==""||phone==""||interviewPlace==""||wage==""||detail==""||tempAddress==""){
@@ -305,7 +309,8 @@ Page({
                 reject: false,
                 cancel:false,
                 sentTime,
-                mutiplePickerIndex
+                mutiplePickerIndex,
+                managerInfo
               }
             })
           }).then(res => {
@@ -359,7 +364,8 @@ Page({
               reject: false,
               cancel:false,
               sentTime,
-              mutiplePickerIndex
+              mutiplePickerIndex,
+              managerInfo
             }
           }).then(res => {
             wx.showToast({

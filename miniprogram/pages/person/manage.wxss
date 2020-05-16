@@ -92,10 +92,37 @@
 .container-left-result_reject text{
   color: red;
 }
+.container-left-result_wait text{
+  color: #33b5e5;
+}
 .container-left-manager text{
   color: #33b5e5;
 }
 .container-left-detailTitile{
   font-size: 35rpx;
   font-weight: bold;
+}
+.queryJob{
+  padding: 20rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  margin: 20rpx;
+  border-radius: 20rpx;
+}
+.queryJob-right{
+  margin-left: 20rpx;
+  width: 75%;
+}
+.buttonArea{
+  height: 150rpx;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.buttonArea-button{
+  padding: 5rpx 50rpx;
+  font-size: 30rpx;
 }
