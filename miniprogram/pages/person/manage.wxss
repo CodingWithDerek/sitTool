@@ -1,1 +1,101 @@
 /* pages/person/manage.wxss */
+.all{
+  background-color: #f2f2f2;
+  font-size: 30rpx;
+}
+.upTipTotalNum{
+  height: 100rpx;
+  background-color: white;
+  margin: 20rpx;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.upTipTotalNum-icon{
+  font-size: 50rpx;
+  color: #3bac6a;
+  margin-right: 20rpx;
+}
+.upTipTotalNum text{
+  background-color: #ff1d11;
+  color: white;
+  padding: 10rpx 20rpx;
+  border-radius: 10rpx;
+}
+.upBar{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.upBar-each_light{
+  color: white;
+  background-color: #33b5e5;
+  padding: 10rpx 20rpx;
+  border-radius: 10rpx;
+}
+.upBar-each_dark{
+  color: black;
+  background-color: white;
+  padding: 10rpx 20rpx;
+  border-radius: 10rpx;
+}
+.container{
+  margin: 20rpx;
+  padding: 20rpx;
+  border-radius: 20rpx;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.container-right-agree{
+  background-color: #3bac6a;
+  color: white;
+  padding: 10rpx 20rpx;
+  border-radius: 20rpx;
+  margin-bottom: 30rpx;
+}
+.container-right-reject{
+  background-color: #ff1d11;
+  color: white;
+  padding: 10rpx 20rpx;
+  border-radius: 20rpx;
+  margin-bottom: 30rpx;
+}
+.container-right-call{
+  background-color: #33b5e5;
+  color: white;
+  padding: 10rpx 20rpx;
+  border-radius: 20rpx;
+}
+.noDataContainer{
+  height: 100rpx;
+  margin: 20rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 20rpx;
+}
+.container-left-imageFather{
+  height: 200rpx;
+  width: 200rpx;
+}
+.container-left-imageFather image{
+  height: 100%;
+  width: 100%;
+}
+.container-left-result_agree text{
+  color: #05c160;
+}
+.container-left-result_reject text{
+  color: red;
+}
+.container-left-manager text{
+  color: #33b5e5;
+}
+.container-left-detailTitile{
+  font-size: 35rpx;
+  font-weight: bold;
+}

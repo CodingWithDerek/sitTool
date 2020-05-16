@@ -479,7 +479,7 @@ Page({
                     name:"sendSubscribe",
                     data:{
                       openid:currentItem.applyArr[i].openid,
-                      companyName:currentItem.companyName
+                      sentApplyersTime:app.createTime()
                     }
                   })
                 )

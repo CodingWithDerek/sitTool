@@ -22,7 +22,7 @@
 	},
 	"appid": "wxd53100bd0058be82",
 	"projectname": "sitTool",
-	"libVersion": "2.11.0",
+	"libVersion": "2.10.4",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {
@@ -142,6 +142,13 @@
 					"id": -1,
 					"name": "超级管理",
 					"pathName": "pages/person/superManage",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "后台管理",
+					"pathName": "pages/person/manage",
 					"scene": null
 				}
 			]
