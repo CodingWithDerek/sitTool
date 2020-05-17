@@ -2,14 +2,14 @@
 <view class="all">
   <view class="sentTip">
     <van-icon name="info-o" class="sentTip-icon" />
-    <view>您发布的兼职需要经过学校的审核，只有审核通过，您发布的兼职才会被发布，若您上传的兼职被学校拒绝时只能重新发布，在原有兼职上修改是不会提交到学校审核部门的</view>
+    <view>您发布的兼职需要经过学校的审核，只有审核通过，您发布的兼职才会被发布，若您上传的兼职被学校拒绝时只能重新发布，在原有兼职上修改是不会提交到学校审核部门的，可长按已发布的兼职进行删除，请注意：为了维护学生权益，当发布的兼职的申请人数大于0时不允许删除已发布的兼职（若您发布的兼职损害学生权益，我们会根据该兼职信息替学生维权）</view>
   </view>
   <view class="sentJobArea" bindtap="goEditJob">
     <view>发布兼职</view>
     <van-icon name="arrow" />
   </view>
   <block wx:for="{{sentJobArr}}" wx:key="{{item._id}}">
-    <view class="jobContainer">
+    <view class="jobContainer" bindlongpress="deleteItem" data-item="{{item}}">
       <view class="jobContainer-up">
         <view class="jobContainer-up-left">
           <view wx:if="{{item.agree==false&&item.reject==false}}">审核状态：
@@ -29,9 +29,13 @@
           <view>薪资：{{item.wage}}</view>
         </view>
         <view class="jobContainer-up-right">
-          <view class="jobContainer-up-right-delete">
+          <view class="jobContainer-up-right-cancel" wx:if="{{item.applyArr.length>0&&item.cancelInterview==false}}">
             <van-icon name="close" class="right-icon" />
-            <view class="right-text">取消</view>
+            <view class="right-text">取消面试</view>
+          </view>
+          <view class="jobContainer-up-right-cancelled" wx:if="{{item.applyArr.length>0&&item.cancelInterview==true}}">
+            <van-icon name="close" class="right-icon_cancelled" />
+            <view class="right-text_cancelled">已取消面试</view>
           </view>
           <view class="jobContainer-up-right-edit" bindtap="goEditJob" data-item="{{item}}">
             <van-icon name="edit" class="right-icon" />

@@ -132,5 +132,52 @@ Page({
     wx.previewImage({
       urls: [e.currentTarget.dataset.fileid],
     })
+  },
+  deleteItem:function(e){
+    var that = this
+    console.log(e)
+    var currentItem = e.currentTarget.dataset.item
+    var openid = this.data.openid
+    var sentJobArr = this.data.sentJobArr
+    wx.showModal({
+      title: '提示',
+      content: '您确定要删除此兼职吗？',
+      success(resM){
+        if(resM.confirm){
+          if (currentItem.applyArr.length > 0) {
+            wx.showModal({
+              showCancel: false,
+              content: '您发布的兼职中已有申请人员，所以该兼职不可删除',
+            })
+          }
+          else {
+            db.collection("jobArr").doc(currentItem._id).remove()
+              .then(res => {
+                return db.collection("jobArr").where({
+                  _openid: openid
+                }).count()
+              })
+              .then(res2 => {
+                for (let i = 0; i < sentJobArr.length; i++) {
+                  if (currentItem._id == sentJobArr[i]._id) {
+                    sentJobArr.splice(i, 1)
+                    break
+                  }
+                }
+                that.setData({
+                  totalNum: res2.total,
+                  sentJobArr: sentJobArr
+                })
+                wx.showToast({
+                  title: '删除成功',
+                })
+                setTimeout(function(){
+                  wx.hideToast()
+                })
+              },500)
+          }
+        }
+      }
+    })
   }
 })

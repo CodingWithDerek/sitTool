@@ -4,7 +4,6 @@
   font-size: 30rpx;
 }
 .sentTip{
-  height: 150rpx;
   margin: 20rpx;
   padding: 20rpx;
   background-color: white;
@@ -37,7 +36,11 @@
   justify-content: space-between;
   align-items: center;
 }
-.jobContainer-up-right-delete,
+.jobContainer-up-left{
+  margin-right: 20rpx;
+}
+.jobContainer-up-right-cancel,
+.jobContainer-up-right-cancelled,
 .jobContainer-up-right-edit,
 .jobContainer-up-right-open,
 .jobContainer-up-right-close{
@@ -45,15 +48,24 @@
   flex-direction: column;
   align-items: center;
 }
-.jobContainer-up-right-delete,
+.jobContainer-up-right-cancel,
+.jobContainer-up-right-cancelled,
 .jobContainer-up-right-edit{
   margin-bottom: 30rpx;
 }
 .right-icon{
   font-size: 50rpx;
 }
+.right-icon_cancelled{
+  font-size: 50rpx;
+  color: #ff1d11;
+}
 .right-text{
   font-size: 20rpx;
+}
+.right-text_cancelled{
+  font-size: 20rpx;
+  color: #ff1d11;
 }
 .jobContainer-buttom-interviewPeople{
   display: flex;

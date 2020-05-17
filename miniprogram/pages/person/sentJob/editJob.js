@@ -310,7 +310,8 @@ Page({
                 cancel:false,
                 sentTime,
                 mutiplePickerIndex,
-                managerInfo
+                managerInfo,
+                cancelInterview:false
               }
             })
           }).then(res => {
@@ -365,7 +366,8 @@ Page({
               cancel:false,
               sentTime,
               mutiplePickerIndex,
-              managerInfo
+              managerInfo,
+              cancelInterview:false
             }
           }).then(res => {
             wx.showToast({

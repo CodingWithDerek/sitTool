@@ -149,6 +149,13 @@
 					"id": -1,
 					"name": "后台管理",
 					"pathName": "pages/person/manage",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "首页兼职",
+					"pathName": "pages/index/job",
 					"scene": null
 				}
 			]

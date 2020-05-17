@@ -46,7 +46,7 @@
           <view class="body1-container-right">
             <view class="body1-container-right-first" bindtap="breakItem" data-id="{{item._id}}">
               <van-icon name="delete" class="faqi-rightIcon" />
-              <view class="faqi-rightWord">解散</view>
+              <view class="faqi-rightWord">删除</view>
             </view>
             <view bindtap="goCreateTeam" data-item="{{item}}">
               <van-icon name="edit" class="faqi-rightIcon" />
