@@ -14,6 +14,7 @@
   align-items: center;
   justify-content: space-between;
   white-space: nowrap;
+  padding-bottom: 0;
 }
 
 .up-each {
@@ -46,10 +47,6 @@
   background-color: #f2f2f2;
   margin-top: 10rpx;
   border-radius: 5rpx;
-}
-
-.up:last-child {
-  margin-right: 0;
 }
 .careful{
   background-color: #f2f2f2;

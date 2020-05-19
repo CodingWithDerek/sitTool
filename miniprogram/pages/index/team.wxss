@@ -14,9 +14,6 @@
   justify-content: center;
   border: 1px solid white;
 }
-.body :first-child{
-  margin-top: 0rpx;
-}
 .body-container-row{
   display: flex;
   align-content: center;

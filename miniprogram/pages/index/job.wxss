@@ -1,1 +1,27 @@
 /* pages/index/job.wxss */
+.body{
+  background-color: #f2f2f2;
+  font-size: 30rpx;
+  border: 1px solid #f2f2f2;
+}
+.body-container{
+  margin: 20rpx;
+  padding-left: 20rpx;
+  border-radius: 20rpx;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  border: 1px solid white;
+}
+.body-container-right-each{
+  margin: 20rpx;
+}
+.body-noData{
+  margin: 20rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 20rpx;
+  height: 100rpx;
+}

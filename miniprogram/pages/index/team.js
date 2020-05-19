@@ -1,6 +1,6 @@
 // pages/index/team.js
 const db = wx.cloud.database()
-var _ = _ = db.command
+var _ = db.command
 const app = getApp()
 Page({
 
