@@ -84,6 +84,20 @@ Page({
             that.setData({
               openid: res.result.openid
             })
+            db.collection("managerArr").where({
+              _openid: res.result.openid
+            }).get()
+              .then(res2 => {
+                console.log("检验是否为管理员的成功调用", res2)
+                if (res2.data.length > 0) {
+                  that.setData({
+                    isManager: true,
+                    goType: res2.data[0].applyType
+                  })
+                }
+              }).catch(err2 => {
+                console.log("检验是否为管理员的失败调用", err2)
+              })
             wx.setStorage({
               key: "openid",
               data: res.result.openid
