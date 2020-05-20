@@ -4,16 +4,12 @@
   font-size: 30rpx;
 }
 .updateItemTip,.updateItemTip2{
-  height: 150rpx;
   padding: 20rpx;
   margin: 20rpx;
   border-radius: 20rpx;
   background-color: white;
   display: flex;
   align-items: center;
-}
-.updateItemTip2{
-  height: 300rpx;
 }
 .updateItemTip-icon{
   font-size: 50rpx;

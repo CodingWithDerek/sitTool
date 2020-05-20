@@ -72,7 +72,7 @@
       <picker class="application-row-right4" range="{{currentItem.characterArr}}" range-key="character" bindchange="changeValue">{{currentItem.characterArr[index].character}}</picker>
     </view>
     <view class="application-area">
-      <button form-type="submit" class="application-area-button" disabled="{{disabledCondition}}">确认提交</button>
+      <button form-type="submit" class="application-area-button" disabled="{{disabledCondition}}" type="primary">确认提交</button>
     </view>
   </form>
 </van-popup>

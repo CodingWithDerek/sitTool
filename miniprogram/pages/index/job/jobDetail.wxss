@@ -1,0 +1,71 @@
+/* pages/index/job/jobDetail.wxss */
+.all{
+  background-color: #f2f2f2;
+  font-size: 30rpx;
+}
+.simpleContent{
+  background-color: white;
+  margin: 20rpx;
+  border: 1px solid white;
+  border-radius: 20rpx;
+  padding-left: 20rpx;
+  display: flex;
+  align-items: center;
+}
+.simpleContent-right-each{
+  margin: 20rpx;
+}
+.detailContent{
+  background-color: white;
+  margin: 20rpx;
+  padding: 20rpx;
+  border-radius: 20rpx;
+}
+.detailContent-title{
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+.detailContent-title-icon{
+  font-size: 50rpx;
+  color: #3bac6a;
+  margin-right: 20rpx;
+}
+.detailContent-title-text{
+  font-size: 35rpx;
+  font-weight: bold;
+}
+.gap{
+  height: 150rpx;
+  background-color: white;
+}
+.stared{
+  color: #ff1d11;
+}
+.popupEach{
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  font-size: 30rpx;
+}
+.popupEach-right{
+  margin-left: 20rpx;
+  height: 60rpx;
+  width: 70%;
+  background-color: #f2f2f2;
+}
+.gap2{
+  height: 90rpx;
+}
+.buttonArea{
+  height: 200rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.buttonArea-button{
+  padding: 5rpx 50rpx;
+  border-radius: 20rpx;
+  font-size: 30rpx;
+  color: white;
+}

@@ -63,7 +63,7 @@
   <view class="manage">
     <view class="manage-son" bindtap="goManage" wx:if="{{openid==superId||isManager}}">后台管理</view>
   </view>
-  <van-popup show="{{showPopup}}" position="top" custom-style="height: 70%;" bind:close="closePopup">
+  <van-popup show="{{showPopup}}" position="top" bind:close="closePopup">
     <van-radio-group value="{{ radio }}" bind:change="onChange">
       <van-cell-group>
         <van-cell title="兼职管理" clickable data-name="0" bind:click="onClick">

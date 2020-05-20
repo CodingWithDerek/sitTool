@@ -1,0 +1,44 @@
+<!--pages/index/job/jobDetail.wxml-->
+<view class="all">
+  <view class="simpleContent">
+    <van-icon name="passed" />
+    <view class="simpleContent-right">
+      <view class="simpleContent-right-each">招聘单位：{{currentItem.companyName}}</view>
+      <view class="simpleContent-right-each">类型：{{currentItem.type}}</view>
+      <view class="simpleContent-right-each">工作区域：{{currentItem.workArea}}</view>
+      <view class="simpleContent-right-each">面试时间：{{currentItem.interviewTime}}</view>
+      <view class="simpleContent-right-each">薪资：{{currentItem.wage}}</view>
+      <view class="simpleContent-right-each">已申请人数：{{currentItem.applyArr.length}}</view>
+    </view>
+  </view>
+  <view class="detailContent">
+    <view class="detailContent-title">
+      <van-icon name="info-o" class="detailContent-title-icon" />
+      <view class="detailContent-title-text">详细介绍</view>
+    </view>
+    <view>{{currentItem.detail}}</view>
+  </view>
+  <view class="gap"></view>
+</view>
+<van-goods-action>
+  <van-goods-action-icon icon="star" text="已收藏" icon-class="stared" wx:if="{{stared}}" disabled="{{unstar_disabledCondition}}" bind:click="unstar" />
+  <van-goods-action-icon icon="star-o" text="收藏" wx:else disabled="{{star_disabledCondition}}" bind:click="star" />
+  <van-goods-action-icon icon="phone-o" text="电话咨询" bind:click="call" />
+  <van-goods-action-button color="#a7e4fa" text="分享给好友" open-type="share" />
+  <van-goods-action-button color="#33b5e5" text="您已申请" wx:if="{{applied}}" bind:click="showAppliedInfo" />
+  <van-goods-action-button color="#33b5e5" text="申请职位" wx:else bind:click="openPopup" />
+</van-goods-action>
+<van-popup show="{{ showPopup }}" round position="bottom" bind:close="onClose" closeable close-icon="close">
+  <view class="gap2"></view>
+  <view class="popupEach">
+    <view>姓名</view>
+    <input class="popupEach-right"></input>
+  </view>
+  <view class="popupEach">
+    <view>手机号</view>
+    <input class="popupEach-right"></input>
+  </view>
+  <view class="buttonArea">
+    <button class="buttonArea-button" type="primary">确认提交</button>
+  </view>
+</van-popup>

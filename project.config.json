@@ -156,6 +156,13 @@
 					"id": -1,
 					"name": "首页兼职",
 					"pathName": "pages/index/job",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "兼职详情页",
+					"pathName": "pages/index/job/jobDetail",
 					"scene": null
 				}
 			]

@@ -2,6 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/index/job",
+    "pages/index/job/jobDetail",
     "pages/index/team",
     "pages/index/team/teamDetail",
     "pages/index/show",

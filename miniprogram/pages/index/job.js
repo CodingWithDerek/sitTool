@@ -214,4 +214,9 @@ Page({
       currentIndex: index
     })
   },
+  goJobDetail:function(e){
+    wx.navigateTo({
+      url: './job/jobDetail?item=' + JSON.stringify(e.currentTarget.dataset.item),
+    })
+  }
 })
