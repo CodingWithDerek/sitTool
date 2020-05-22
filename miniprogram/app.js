@@ -73,7 +73,7 @@ App({
       m + ":" + s + ":" + ms
     return time
   },
-  createInterviewTime:function(){
+  createSentSubscribeMsgTime:function(){
     var date = new Date()
     var year = date.getFullYear()
     var month = date.getMonth()

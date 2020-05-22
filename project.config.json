@@ -22,7 +22,7 @@
 	},
 	"appid": "wxd53100bd0058be82",
 	"projectname": "sitTool",
-	"libVersion": "2.10.4",
+	"libVersion": "2.11.1",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {
@@ -163,6 +163,13 @@
 					"id": -1,
 					"name": "兼职详情页",
 					"pathName": "pages/index/job/jobDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的面试",
+					"pathName": "pages/person/myInterview",
 					"scene": null
 				}
 			]

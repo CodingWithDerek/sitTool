@@ -98,28 +98,31 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    var that = this
-    this.setData({
-      showPopup_openMainSwitch: false,
-      showPopup_openInterviewArrange: false
-    })
-    wx.getSetting({
-      withSubscriptions: true,
-      success(res) {
-        console.log(res)
-        if (res.subscriptionsSetting.mainSwitch == true && res.subscriptionsSetting["IWuRiPxhYaRciLvy3S1h6WlHYYfSvWb0FQdj0qqncv0"] == "reject") {
-          that.setData({
-            showPopup_openInterviewArrange: true
-          })
+    var canJoin = this.data.canJoin
+    if(canJoin==true){
+      var that = this
+      this.setData({
+        showPopup_openMainSwitch: false,
+        showPopup_openInterviewArrange: false
+      })
+      wx.getSetting({
+        withSubscriptions: true,
+        success(res) {
+          console.log(res)
+          if (res.subscriptionsSetting.mainSwitch == true && res.subscriptionsSetting["IWuRiPxhYaRciLvy3S1h6WlHYYfSvWb0FQdj0qqncv0"] == "reject") {
+            that.setData({
+              showPopup_openInterviewArrange: true
+            })
+          }
+          if (res.subscriptionsSetting.mainSwitch == false) {
+            that.setData({
+              showPopup_openMainSwitch: true
+            })
+          }
+          //console.log(that.data)
         }
-        if (res.subscriptionsSetting.mainSwitch == false) {
-          that.setData({
-            showPopup_openMainSwitch: true
-          })
-        }
-        //console.log(that.data)
-      }
-    })
+      })
+    }
   },
 
   /**

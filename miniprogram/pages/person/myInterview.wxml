@@ -1,2 +1,22 @@
 <!--pages/person/myInterview.wxml-->
-<text>pages/person/myInterview.wxml</text>
+<view class="all">
+  <view wx:if="{{interviewArr.length>0}}">
+    <block wx:for="{{interviewArr}}" wx:key="{{item._id}}">
+      <view class="container" bindtap="goJobDetail" data-item="{{item}}">
+        <van-icon name="passed" />
+        <view class="container-right">
+          <view class="container-right-each" wx:if="{{item.cancelInterview==true}}">状态：
+            <text>已被兼职发布者取消面试</text>
+          </view>
+          <view class="container-right-each">招聘单位：{{item.companyName}}</view>
+          <view class="container-right-each">工作区域：{{item.workArea}}</view>
+          <view class="container-right-each">面试时间：{{item.interviewTime}}</view>
+          <view class="container-right-each">薪资：{{item.wage}}</view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view wx:else class="noDataTip">
+    <view>您还没有参加任何面试</view>
+  </view>
+</view>

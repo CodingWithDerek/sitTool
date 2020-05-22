@@ -29,7 +29,7 @@
           <view>薪资：{{item.wage}}</view>
         </view>
         <view class="jobContainer-up-right">
-          <view class="jobContainer-up-right-cancel" wx:if="{{item.applyArr.length>0&&item.cancelInterview==false}}">
+          <view class="jobContainer-up-right-cancel" wx:if="{{item.applyArr.length>0&&item.cancelInterview==false}}" bindtap="cancelInterview" data-item="{{item}}">
             <van-icon name="close" class="right-icon" />
             <view class="right-text">取消面试</view>
           </view>

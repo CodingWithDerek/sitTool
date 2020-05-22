@@ -1,2 +1,2 @@
 <!--pages/person/myStar.wxml-->
-<text>pages/person/myStar.wxml</text>
+<view class="all"></view>

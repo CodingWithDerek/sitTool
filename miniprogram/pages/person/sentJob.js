@@ -1,5 +1,6 @@
 // pages/person/sentJob.js
 const db = wx.cloud.database()
+const app = getApp()
 Page({
 
   /**
@@ -176,6 +177,58 @@ Page({
                 })
               },500)
           }
+        }
+      }
+    })
+  },
+  cancelInterview:function(e){
+    var that = this
+    var currentItem = e.currentTarget.dataset.item
+    var sentJobArr = this.data.sentJobArr
+    wx.showModal({
+      title: '提示',
+      content: '您确定要取消此次面试吗？一旦取消将不可恢复',
+      success:function(res){
+        if(res.confirm){
+          db.collection("jobArr").doc(currentItem._id).update({
+            data:{
+              cancelInterview:true
+            }
+          }).then(res2=>{
+            for(var i=0;i<sentJobArr.length;i++){
+              if(sentJobArr[i]._id==currentItem._id){
+                sentJobArr[i].cancelInterview=true
+                break
+              }
+            }
+            that.setData({
+              sentJobArr:sentJobArr
+            })
+            wx.showToast({
+              title: '已取消面试',
+            })
+            setTimeout(function(){
+              wx.hideToast()
+            },500)
+            let promiseArr=[]
+            for(var i=0;i<currentItem.applyArr.length;i++){
+              promiseArr.push(
+                wx.cloud.callFunction({
+                  name: "sendSubscribe",
+                  data: {
+                    openid: currentItem.applyArr[i].openid,
+                    sentApplyersTime: app.createSentSubscribeMsgTime(),
+                    info: "您参加的面试已被取消，请注意查看"
+                  }
+                })
+              )
+            }
+            Promise.all(promiseArr).then(res_all=>{
+              console.log("发送所有订阅消息成功的回调",res_all)
+            }).catch(err_all=>{
+              console.log("发送所有订阅消息失败的回调",err_all)
+            })
+          })
         }
       }
     })
