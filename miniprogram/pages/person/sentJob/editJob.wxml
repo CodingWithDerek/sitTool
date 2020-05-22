@@ -74,3 +74,42 @@
     </view>
   </form>
 </view>
+<van-popup show="{{ showpopup_subscribeMsg }}" position="top" bind:close="close_showpopup_subscribeMsg">
+  <view class="popupContainer">
+    <van-icon name="info-o" class="popupContainer-icon" />
+    <view>您发布的兼职需要经过学校的审核，只有审核通过，您发布的兼职才会被发布，若您希望学校审核后及时的将审核结果发送给您，请点击下方按钮，并在弹出框中点击“允许”按钮（若您不进行上述操作，学校不会给您发送审核结果通知）</view>
+  </view>
+  <view class="buttonArea">
+    <button class="buttonArea-button" type="primary" bindtap="allowNotice">允许通知</button>
+  </view>
+</van-popup>
+<van-popup show="{{ showpopup_subscribeMsgForever }}" position="top" bind:close="close_showpopup_subscribeMsgForever">
+  <view class="popupContainer">
+    <van-icon name="info-o" class="popupContainer-icon" />
+    <view>您发布的兼职需要经过学校的审核，只有审核通过，您发布的兼职才会被发布，若您希望学校审核后及时的将审核结果发送给您，请点击下方按钮（若您不进行上述操作，学校不会给您发送审核结果通知）</view>
+  </view>
+  <view class="buttonArea">
+    <button class="buttonArea-button" type="primary" bindtap="allowNotice">允许通知</button>
+  </view>
+</van-popup>
+<van-popup show="{{ showpopup_openResultSwitch }}" position="top" bind:close="close_showpopup_openResultSwitch">
+  <view class="popupContainer">
+    <van-icon name="warning-o" class="popupContainer-icon_warning" />
+    <view>系统监测到您没有勾选“业务审核结果通知”选项，若您希望学校审核后及时的将审核结果发送给您，请点击下方按钮并且按照下图指定步骤操作</view>
+  </view>
+  <view>
+    <image src="cloud://sittool-sccwy.7369-sittool-sccwy-1301779720/openMainSwitch_select-tipImage/selectResult.jpg" class="resultSwitch_image"></image>
+  </view>
+  <view class="buttonArea">
+    <button class="buttonArea-button" type="primary" bindtap="goSetting">前往设置</button>
+  </view>
+</van-popup>
+<van-popup show="{{ showpopup_openMainSwitch }}" position="top" bind:close="close_showpopup_openMainSwitch">
+  <view class="popupContainer">
+    <van-icon name="warning-o" class="popupContainer-icon_warning" />
+    <view>系统监测到您关闭了“接受订阅消息”开关，如果您还想收到和您有关的通知消息，请点击下方按钮前往开启</view>
+  </view>
+  <view class="buttonArea">
+    <button class="buttonArea-button" type="primary" bindtap="goSetting">前往开启</button>
+  </view>
+</van-popup>

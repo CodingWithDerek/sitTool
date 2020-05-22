@@ -19,8 +19,8 @@
       </view>
     </navigator>
   </view>
-  <view class="gapLine"></view>
-  <view class="buttom" bindtap="toManageMessage">
+  <view class="gapLine" wx:if="{{qiyong==true}}"></view>
+  <view class="buttom" bindtap="toManageMessage" wx:if="{{qiyong==true}}">
     <van-icon name="chat-o" class="buttom-left" />
     <view class="buttom-right">消息管理</view>
   </view>

@@ -29,7 +29,8 @@ Page({
         picture: "../res/myShow.png",
         url: "myShow"
       }
-    ]
+    ],
+    qiyong:true
   },
 
   /**

@@ -21,11 +21,11 @@
   <view class="gap"></view>
 </view>
 <van-goods-action>
-  <van-goods-action-icon icon="star-o" text="收藏" bind:click="star" wx:if="{{canStar}}" disabled="{{star_disabledCondition}}"/>
-  <van-goods-action-icon icon="star" text="已收藏" icon-class="stared" bind:click="unstar" wx:else disabled="{{unstar_disabledCondition}}"/>
-  <van-goods-action-icon icon="phone-o" text="电话咨询" bind:click="call"/>
-  <van-goods-action-button color="#a7e4fa" text="分享给好友" open-type="share"/>
-  <van-goods-action-button color="#33b5e5" text="申请职位" bind:click="openPopup" wx:if="{{canJoin}}"/>
+  <van-goods-action-icon icon="star-o" text="收藏" bind:click="star" wx:if="{{canStar}}" disabled="{{star_disabledCondition}}" />
+  <van-goods-action-icon icon="star" text="已收藏" icon-class="stared" bind:click="unstar" wx:else disabled="{{unstar_disabledCondition}}" />
+  <van-goods-action-icon icon="phone-o" text="电话咨询" bind:click="call" />
+  <van-goods-action-button color="#a7e4fa" text="分享给好友" open-type="share" />
+  <van-goods-action-button color="#33b5e5" text="申请职位" bind:click="openPopup" wx:if="{{canJoin}}" />
   <van-goods-action-button color="#33b5e5" text="您已申请" bind:click="showAppliedInfo" wx:else/>
 </van-goods-action>
 <van-popup show="{{ showPopup }}" round position="bottom" bind:close="onClose" closeable close-icon="close">
@@ -40,5 +40,26 @@
   </view>
   <view class="buttonArea">
     <button class="buttonArea-button" type="primary" bindtap="submit" disabled="{{submit_disabledCondition}}">确认提交</button>
+  </view>
+</van-popup>
+<van-popup show="{{ showPopup_openInterviewArrange }}" position="top" bind:close="close_showPopup_openInterviewArrange">
+  <view class="popup_openInterviewArrange">
+    <van-icon name="warning-o" class="popup_openInterviewArrange-icon" />
+    <view>系统监测到您没有勾选“面试安排提醒”选项，在您申请该兼职后如果希望在面试信息发生更改时通知到您，请点击下方按钮并且按照下图指定步骤操作</view>
+  </view>
+  <view>
+    <image src="cloud://sittool-sccwy.7369-sittool-sccwy-1301779720/openMainSwitch_select-tipImage/selectInterview.jpg" class="openInterviewArrange_image"></image>
+  </view>
+  <view class="buttonArea">
+    <button class="buttonArea-button" type="primary" bindtap="goSetting">前往设置</button>
+  </view>
+</van-popup>
+<van-popup show="{{ showPopup_openMainSwitch }}" position="top" bind:close="close_showPopup_openMainSwitch">
+  <view class="popup_openMainSwitch">
+    <van-icon name="warning-o" class="popup_openMainSwitch-icon" />
+    <view>系统监测到您关闭了“接受订阅消息”开关，如果您还想收到和您有关的通知消息，请点击下方按钮前往开启</view>
+  </view>
+  <view class="buttonArea">
+    <button class="buttonArea-button" type="primary" bindtap="goSetting">前往开启</button>
   </view>
 </van-popup>

@@ -4,7 +4,6 @@
   font-size: 30rpx;
 }
 .tipInfo{
-  height: 200rpx;
   background-color: white;
   margin: 20rpx;
   padding: 20rpx;

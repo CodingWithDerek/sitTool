@@ -69,3 +69,19 @@
   font-size: 30rpx;
   color: white;
 }
+.popup_openInterviewArrange,.popup_openMainSwitch{
+  margin: 20rpx;
+  padding: 20rpx;
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+}
+.popup_openInterviewArrange-icon,.popup_openMainSwitch-icon{
+  color: #ff1d11;
+  margin-right: 20rpx;
+  font-size: 50rpx;
+}
+.openInterviewArrange_image{
+  height: 508rpx;
+  width: 400rpx;
+}

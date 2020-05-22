@@ -26,7 +26,32 @@ Page({
     mutiplePickerIndex:[0,0,2,3,4],
     currentYear:"2019",
     interviewTime:"2019-01-03 03:04",
-    disabledCondition:false
+    disabledCondition:false,
+    showpopup_openMainSwitch:false,
+    showpopup_subscribeMsg:false,
+    showpopup_subscribeMsgForever:false,
+    showpopup_openResultSwitch:false
+  },
+
+  close_showpopup_subscribeMsg:function(){
+    this.setData({
+      showpopup_subscribeMsg:false
+    })
+  },
+  close_showpopup_subscribeMsgForever:function(){
+    this.setData({
+      showpopup_subscribeMsgForever:false
+    })
+  },
+  close_showpopup_openMainSwitch:function(){
+    this.setData({
+      showpopup_openMainSwitch:false
+    })
+  },
+  close_showpopup_openResultSwitch:function(){
+    this.setData({
+      showpopup_openResultSwitch:false
+    })
   },
 
   /**
@@ -108,7 +133,43 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var currentItem = this.data.currentItem
+    if(currentItem==""){
+      var that = this
+    this.setData({
+      showpopup_openMainSwitch: false,
+      showpopup_subscribeMsg: false,
+      showpopup_subscribeMsgForever:false,
+      showpopup_openResultSwitch: false
+    })
+    wx.getSetting({
+      withSubscriptions: true,
+      success(res) {
+        console.log(res)
+        if (res.subscriptionsSetting.mainSwitch == true && res.subscriptionsSetting.NqBtoPiR4u1v0pcuW_7Ygtb0O5o9VJN6JnsJHMgwX6g == undefined) {
+          that.setData({
+            showpopup_subscribeMsg: true
+          })
+        }
+        if (res.subscriptionsSetting.mainSwitch == true && res.subscriptionsSetting.NqBtoPiR4u1v0pcuW_7Ygtb0O5o9VJN6JnsJHMgwX6g == "accept") {
+          that.setData({
+            showpopup_subscribeMsgForever: true
+          })
+        }
+        if (res.subscriptionsSetting.mainSwitch == true && res.subscriptionsSetting.NqBtoPiR4u1v0pcuW_7Ygtb0O5o9VJN6JnsJHMgwX6g == "reject") {
+          that.setData({
+            showpopup_openResultSwitch: true
+          })
+        }
+        if (res.subscriptionsSetting.mainSwitch == false) {
+          that.setData({
+            showpopup_openMainSwitch: true
+          })
+        }
+        //console.log(that.data)
+      }
+    })
+    }
   },
 
   /**
@@ -487,7 +548,7 @@ Page({
                     name:"sendSubscribe",
                     data:{
                       openid:currentItem.applyArr[i].openid,
-                      sentApplyersTime:app.createTime()
+                      sentApplyersTime:app.createInterviewTime()
                     }
                   })
                 )
@@ -556,5 +617,26 @@ Page({
         }
       }
     }
+  },
+  allowNotice:function(){
+    var that = this
+    wx.requestSubscribeMessage({
+      tmplIds: ["NqBtoPiR4u1v0pcuW_7Ygtb0O5o9VJN6JnsJHMgwX6g"],
+      complete:function(res){
+        that.setData({
+          showpopup_subscribeMsg:false,
+          showpopup_subscribeMsgForever:false
+        })
+      }
+    })
+  },
+  goSetting: function () {
+    wx.openSetting({
+      success: function (res) {
+      },
+      fail: function (err) {
+        console.log(err)
+      }
+    })
   }
 })

@@ -5,8 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    flag1:false,
-    flag2:false,
+    flag1:true,
+    flag2:true,
     flag3:false,
     flag4:false,
     flag5:false,
@@ -32,58 +32,58 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    var that = this
-    this.setData({
-      flag1:false,
-      flag2:false,
-      flag3:false,
-      flag4:false,
-      flag5:false,
-      flag6:false,
-      flag7:false
-    })
-    wx.getSetting({
-      withSubscriptions: true,
-      success(res) {
-        //console.log(res)
-        if (res.subscriptionsSetting.mainSwitch == true && res.subscriptionsSetting.NqBtoPiR4u1v0pcuW_7Ygtb0O5o9VJN6JnsJHMgwX6g == undefined) {
-          that.setData({
-            flag1: true
-          })
-        }
-        if (res.subscriptionsSetting.mainSwitch == true && res.subscriptionsSetting["IWuRiPxhYaRciLvy3S1h6WlHYYfSvWb0FQdj0qqncv0"] == undefined) {
-          that.setData({
-            flag2: true
-          })
-        }
-        if (res.subscriptionsSetting.mainSwitch == true && res.subscriptionsSetting.NqBtoPiR4u1v0pcuW_7Ygtb0O5o9VJN6JnsJHMgwX6g == "accept") {
-          that.setData({
-            flag3: true
-          })
-        }
-        if (res.subscriptionsSetting.mainSwitch == true && res.subscriptionsSetting["IWuRiPxhYaRciLvy3S1h6WlHYYfSvWb0FQdj0qqncv0"] == "accept") {
-          that.setData({
-            flag4: true
-          })
-        }
-        if (res.subscriptionsSetting.mainSwitch == true && res.subscriptionsSetting.NqBtoPiR4u1v0pcuW_7Ygtb0O5o9VJN6JnsJHMgwX6g == "reject") {
-          that.setData({
-            flag5: true
-          })
-        }
-        if (res.subscriptionsSetting.mainSwitch == true && res.subscriptionsSetting["IWuRiPxhYaRciLvy3S1h6WlHYYfSvWb0FQdj0qqncv0"] == "reject") {
-          that.setData({
-            flag6: true
-          })
-        }
-        if (res.subscriptionsSetting.mainSwitch == false) {
-          that.setData({
-            flag7: true
-          })
-        }
-        //console.log(that.data)
-      }
-    })
+    // var that = this
+    // this.setData({
+    //   flag1:false,
+    //   flag2:false,
+    //   flag3:false,
+    //   flag4:false,
+    //   flag5:false,
+    //   flag6:false,
+    //   flag7:false
+    // })
+    // wx.getSetting({
+    //   withSubscriptions: true,
+    //   success(res) {
+    //     console.log(res)
+    //     if (res.subscriptionsSetting.mainSwitch == true && res.subscriptionsSetting.NqBtoPiR4u1v0pcuW_7Ygtb0O5o9VJN6JnsJHMgwX6g == undefined) {
+    //       that.setData({
+    //         flag1: true
+    //       })
+    //     }
+    //     if (res.subscriptionsSetting.mainSwitch == true && res.subscriptionsSetting["IWuRiPxhYaRciLvy3S1h6WlHYYfSvWb0FQdj0qqncv0"] == undefined) {
+    //       that.setData({
+    //         flag2: true
+    //       })
+    //     }
+    //     if (res.subscriptionsSetting.mainSwitch == true && res.subscriptionsSetting.NqBtoPiR4u1v0pcuW_7Ygtb0O5o9VJN6JnsJHMgwX6g == "accept") {
+    //       that.setData({
+    //         flag3: true
+    //       })
+    //     }
+    //     if (res.subscriptionsSetting.mainSwitch == true && res.subscriptionsSetting["IWuRiPxhYaRciLvy3S1h6WlHYYfSvWb0FQdj0qqncv0"] == "accept") {
+    //       that.setData({
+    //         flag4: true
+    //       })
+    //     }
+    //     if (res.subscriptionsSetting.mainSwitch == true && res.subscriptionsSetting.NqBtoPiR4u1v0pcuW_7Ygtb0O5o9VJN6JnsJHMgwX6g == "reject") {
+    //       that.setData({
+    //         flag5: true
+    //       })
+    //     }
+    //     if (res.subscriptionsSetting.mainSwitch == true && res.subscriptionsSetting["IWuRiPxhYaRciLvy3S1h6WlHYYfSvWb0FQdj0qqncv0"] == "reject") {
+    //       that.setData({
+    //         flag6: true
+    //       })
+    //     }
+    //     if (res.subscriptionsSetting.mainSwitch == false) {
+    //       that.setData({
+    //         flag7: true
+    //       })
+    //     }
+    //     //console.log(that.data)
+    //   }
+    // })
   },
 
   /**

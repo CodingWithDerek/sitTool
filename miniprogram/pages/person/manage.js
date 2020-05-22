@@ -391,6 +391,7 @@ Page({
       queriedJob:[]
     })
     var query_companyName = this.data.query_companyName
+    console.log("查看获取到的公司名称",query_companyName)
     db.collection("jobArr").aggregate()
       .project({
         _openid:1,
@@ -408,7 +409,7 @@ Page({
         type:1,
         wage:1,
         workArea:1,
-        select_Index: $.indexOfBytes(['$companyName', query_companyName])
+        select_Index: $.indexOfCP(['$companyName', query_companyName])
       }).match({
         select_Index:_.gte(0)
       }).sort({

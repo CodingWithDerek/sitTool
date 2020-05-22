@@ -84,13 +84,13 @@
     <view wx:if="{{bindNum==3}}">
       <view class="queryJob">
         <view>公司名称</view>
-        <input class="queryJob-right" placeholder="请输入要查询的兼职的公司名称" bindblur="getCompanyName"></input>
+        <input class="queryJob-right" placeholder="请输入要查询的兼职的公司名称" bindinput="getCompanyName"></input>
       </view>
       <view class="buttonArea">
         <button class="buttonArea-button" type="primary" bindtap="queryJob">查询</button>
       </view>
       <view wx:if="{{queriedJob.length>0}}">
-        <block wx:for="{{queriedJob}}">
+        <block wx:for="{{queriedJob}}" wx:key="{{item._id}}">
           <view class="container">
           <view class="container-left">
             <view wx:if="{{item.agree==true}}" class="container-left-result_agree">审核结果：

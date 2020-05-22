@@ -6,15 +6,17 @@ Page({
    */
   data: {
     currentItem: "",
-    canStar:true,
-    canJoin:true,
+    canStar: true,
+    canJoin: true,
     star_disabledCondition: false,
     unstar_disabledCondition: false,
     submit_disabledCondition: false,
-    showPopup:false,
-    openid:"",
-    applyName:"",
-    applyPhone:""
+    showPopup: false,
+    openid: "",
+    applyName: "",
+    applyPhone: "",
+    showPopup_openMainSwitch: false,
+    showPopup_openInterviewArrange: false
   },
 
   /**
@@ -35,7 +37,7 @@ Page({
     var that = this
     wx.getStorage({
       key: 'openid',
-      success: function (res) {
+      success: function(res) {
         that.setData({
           openid: res.data
         })
@@ -56,11 +58,11 @@ Page({
           }
         }
       },
-      fail: function (err) {
+      fail: function(err) {
         console.log(err)
         wx.cloud.callFunction({
-          name:"getOpenid",
-        }).then(res=>{
+          name: "getOpenid",
+        }).then(res => {
           console.log(res)
           that.setData({
             openid: res.result.openid
@@ -85,7 +87,7 @@ Page({
             key: 'openid',
             data: res.result.openid,
           })
-        }).catch(err2=>{
+        }).catch(err2 => {
           console.log(err2)
         })
       }
@@ -96,7 +98,28 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    
+    var that = this
+    this.setData({
+      showPopup_openMainSwitch: false,
+      showPopup_openInterviewArrange: false
+    })
+    wx.getSetting({
+      withSubscriptions: true,
+      success(res) {
+        console.log(res)
+        if (res.subscriptionsSetting.mainSwitch == true && res.subscriptionsSetting["IWuRiPxhYaRciLvy3S1h6WlHYYfSvWb0FQdj0qqncv0"] == "reject") {
+          that.setData({
+            showPopup_openInterviewArrange: true
+          })
+        }
+        if (res.subscriptionsSetting.mainSwitch == false) {
+          that.setData({
+            showPopup_openMainSwitch: true
+          })
+        }
+        //console.log(that.data)
+      }
+    })
   },
 
   /**
@@ -133,17 +156,34 @@ Page({
   onShareAppMessage: function() {
 
   },
-  openPopup:function(){
-    this.setData({
-      showPopup:true
+  openPopup: function() {
+    var that = this
+    wx.requestSubscribeMessage({
+      tmplIds: ["IWuRiPxhYaRciLvy3S1h6WlHYYfSvWb0FQdj0qqncv0"],
+      complete: function (res) {
+        console.log(res)
+        that.setData({
+          showPopup: true
+        })
+      },
     })
   },
-  onClose:function(){
+  onClose: function() {
     this.setData({
-      showPopup:false
+      showPopup: false
     })
   },
-  star:function(){
+  close_showPopup_openInterviewArrange:function(){
+    this.setData({
+      showPopup_openInterviewArrange:false
+    })
+  },
+  close_showPopup_openMainSwitch:function(){
+    this.setData({
+      showPopup_openMainSwitch:false
+    })
+  },
+  star: function() {
     this.setData({
       star_disabledCondition: true
     })
@@ -154,42 +194,42 @@ Page({
       title: '数据刷新中',
     })
     wx.cloud.callFunction({
-      name:"updateItem",
-      data:{
-        collectionName:"jobArr",
+      name: "updateItem",
+      data: {
+        collectionName: "jobArr",
         _id,
-        attributeName:"starArr",
+        attributeName: "starArr",
         openid
       }
-    }).then(res=>{
+    }).then(res => {
       wx.hideLoading()
-      setTimeout(function(){
+      setTimeout(function() {
         wx.showToast({
           title: '已收藏',
         })
-      },200)
-      setTimeout(function(){
+      }, 200)
+      setTimeout(function() {
         wx.hideToast()
-      },700)
+      }, 700)
       that.setData({
-        star_disabledCondition:false,
-        canStar:false
+        star_disabledCondition: false,
+        canStar: false
       })
-    }).catch(err=>{
+    }).catch(err => {
       console.log(err)
       that.setData({
-        star_disabledCondition:false
+        star_disabledCondition: false
       })
       wx.hideLoading()
       wx.showModal({
-        showCancel:false,
+        showCancel: false,
         content: '似乎出现了什么问题，请稍后再试',
       })
     })
   },
-  unstar:function(){
+  unstar: function() {
     this.setData({
-      unstar_disabledCondition:true
+      unstar_disabledCondition: true
     })
     var that = this
     var _id = this.data.currentItem._id
@@ -198,27 +238,27 @@ Page({
       title: '数据刷新中',
     })
     wx.cloud.callFunction({
-      name:"unstar",
-      data:{
+      name: "unstar",
+      data: {
         openid,
         _id,
-        collectionName:"jobArr"
+        collectionName: "jobArr"
       }
-    }).then(res=>{
+    }).then(res => {
       wx.hideLoading()
-      setTimeout(function () {
+      setTimeout(function() {
         wx.showToast({
           title: '已取消收藏',
         })
       }, 200)
-      setTimeout(function () {
+      setTimeout(function() {
         wx.hideToast()
       }, 700)
       that.setData({
         unstar_disabledCondition: false,
-        canStar:true
+        canStar: true
       })
-    }).catch(err=>{
+    }).catch(err => {
       console.log(err)
       that.setData({
         unstar_disabledCondition: false
@@ -230,38 +270,38 @@ Page({
       })
     })
   },
-  call:function(){
+  call: function() {
     var phone = this.data.currentItem.phone
     wx.makePhoneCall({
       phoneNumber: phone,
     })
   },
-  getName:function(e){
+  getName: function(e) {
     this.setData({
-      applyName:e.detail.value
+      applyName: e.detail.value
     })
   },
-  getPhone:function(e){
+  getPhone: function(e) {
     this.setData({
-      applyPhone:e.detail.value
+      applyPhone: e.detail.value
     })
     //console.log("phone的类型",typeof(e.detail.value))
   },
-  submit:function(){
+  submit: function() {
     this.setData({
-      submit_disabledCondition:true
+      submit_disabledCondition: true
     })
     var that = this
     var currentItem = this.data.currentItem
     var name = this.data.applyName
     var phone = this.data.applyPhone
     //console.log("name和phone",name,phone)
-    var applyEach={
-      openid : this.data.openid,
+    var applyEach = {
+      openid: this.data.openid,
       name,
       phone
     }
-    if(name!=""&&phone.length==11){
+    if (name != "" && phone.length == 11) {
       wx.showLoading({
         title: "正在提交",
       })
@@ -275,14 +315,14 @@ Page({
         }
       }).then(res => {
         wx.hideLoading()
-        setTimeout(function () {
+        setTimeout(function(){
           wx.showToast({
             title: '已成功提交',
           })
-        }, 200)
-        setTimeout(function () {
+        },200)
+        setTimeout(function(){
           wx.hideToast()
-        }, 700)
+        },700)
         currentItem.applyArr.push(applyEach)
         that.setData({
           currentItem: currentItem,
@@ -300,25 +340,33 @@ Page({
           content: '似乎出现了什么问题，请稍后再试',
         })
       })
-    }
-    else{
+    } else {
       wx.showLoading({
         title: '请补充完整信息',
       })
-      setTimeout(function(){
+      setTimeout(function() {
         wx.hideLoading()
-      },500)
+      }, 500)
       this.setData({
         submit_disabledCondition: false
       })
     }
   },
-  showAppliedInfo:function(){
+  showAppliedInfo: function() {
     wx.showLoading({
       title: '您已经申请过了',
     })
-    setTimeout(function(){
+    setTimeout(function() {
       wx.hideLoading()
-    },500)
+    }, 500)
+  },
+  goSetting: function () {
+    wx.openSetting({
+      success: function (res) {
+      },
+      fail: function (err) {
+        console.log(err)
+      }
+    })
   }
 })

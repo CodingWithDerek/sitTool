@@ -73,6 +73,22 @@ App({
       m + ":" + s + ":" + ms
     return time
   },
+  createInterviewTime:function(){
+    var date = new Date()
+    var year = date.getFullYear()
+    var month = date.getMonth()
+    month = month + 1
+    var day = date.getDate()
+    var h = date.getHours()
+    var m = date.getMinutes()
+    if (month < 10) month = "0" + month
+    if (day < 10) day = "0" + day
+    if (h < 10) h = "0" + h
+    if (m < 10) m = "0" + m
+    var time = year + "年" + month + "月" + day + "日" + " " + h + ":" +
+      m 
+    return time
+  },
   getRandom: function() {
     var date = new Date()
     var year = date.getFullYear()

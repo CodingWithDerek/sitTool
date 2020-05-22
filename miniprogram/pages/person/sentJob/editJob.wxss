@@ -3,15 +3,16 @@
   background-color: #f2f2f2;
   font-size: 30rpx;
 }
-.updateItemTip,.updateItemTip2{
+.updateItemTip,.updateItemTip2,.popupContainer{
   padding: 20rpx;
   margin: 20rpx;
   border-radius: 20rpx;
   background-color: white;
   display: flex;
   align-items: center;
+  font-size: 30rpx;
 }
-.updateItemTip-icon{
+.updateItemTip-icon,.popupContainer-icon{
   font-size: 50rpx;
   color: #3bac6a;
   margin-right: 20rpx;
@@ -59,7 +60,16 @@
   align-items: center;
   background-color: white;
 }
-.submitButton{
+.submitButton,.buttonArea-button{
   padding: 5rpx 50rpx;
   font-size: 30rpx;
+}
+.resultSwitch_image{
+  height: 508rpx;
+  width: 400rpx;
+}
+.popupContainer-icon_warning{
+  font-size: 50rpx;
+  color: #ff1d11;
+  margin-right: 20rpx;
 }
