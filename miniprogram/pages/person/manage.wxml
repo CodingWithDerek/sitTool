@@ -12,7 +12,7 @@
       <view class="{{bindNum==3?'upBar-each_light':'upBar-each_dark'}}" bindtap="num3">查询兼职</view>
     </view>
     <view wx:if="{{bindNum==1}}">
-      <block wx:for="{{unProcessedData}}" wx:key="{{item._id}}">
+      <block wx:for="{{unProcessedData}}" wx:key="_id">
         <view class="container">
           <view class="container-left">
             <view>招聘单位：{{item.companyName}}</view>
@@ -42,7 +42,7 @@
       </view>
     </view>
     <view wx:if="{{bindNum==2}}">
-      <block wx:for="{{processedData}}" wx:key="{{item._id}}">
+      <block wx:for="{{processedData}}" wx:key="_id">
         <view class="container">
           <view class="container-left">
             <view wx:if="{{item.agree==true}}" class="container-left-result_agree">审核结果：
@@ -90,7 +90,7 @@
         <button class="buttonArea-button" type="primary" bindtap="queryJob">查询</button>
       </view>
       <view wx:if="{{queriedJob.length>0}}">
-        <block wx:for="{{queriedJob}}" wx:key="{{item._id}}">
+        <block wx:for="{{queriedJob}}" wx:key="_id">
           <view class="container">
           <view class="container-left">
             <view wx:if="{{item.agree==true}}" class="container-left-result_agree">审核结果：

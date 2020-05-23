@@ -1,7 +1,7 @@
 <!--pages/person/myInterview.wxml-->
 <view class="all">
   <view wx:if="{{interviewArr.length>0}}">
-    <block wx:for="{{interviewArr}}" wx:key="{{item._id}}">
+    <block wx:for="{{interviewArr}}" wx:key="_id">
       <view class="container" bindtap="goJobDetail" data-item="{{item}}">
         <van-icon name="passed" />
         <view class="container-right">

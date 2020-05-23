@@ -94,7 +94,35 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-
+    var that = this
+    var totalNum = this.data.totalNum
+    var sentJobArr = this.data.sentJobArr
+    var openid = this.data.openid
+    if(totalNum==sentJobArr.length){
+      wx.showToast({
+        title: '已加载全部数据',
+      })
+      setTimeout(function(){
+        wx.hideToast()
+      },500)
+    }
+    else{
+      wx.showLoading({
+        title: '数据加载中',
+      })
+      db.collection("jobArr").where({
+        _openid:openid
+      }).orderBy("sentTime","desc").skip(sentJobArr.length).get()
+      .then(res=>{
+        wx.hideLoading()
+        for(var i=0;i<res.data.length;i++)
+          res.data[i].close = true
+        let newArr = sentJobArr.concat(res.data)
+        that.setData({
+          sentJobArr:newArr
+        })
+      })
+    }
   },
 
   /**

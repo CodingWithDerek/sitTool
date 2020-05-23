@@ -8,7 +8,7 @@
     <view>发布兼职</view>
     <van-icon name="arrow" />
   </view>
-  <block wx:for="{{sentJobArr}}" wx:key="{{item._id}}">
+  <block wx:for="{{sentJobArr}}" wx:key="_id">
     <view class="jobContainer" bindlongpress="deleteItem" data-item="{{item}}">
       <view class="jobContainer-up">
         <view class="jobContainer-up-left">
@@ -61,7 +61,7 @@
         <view class="jobContainer-buttom-interviewPeople" wx:if="{{item.applyArr.length>0}}">
           <view>面试者</view>
           <view>
-            <block wx:for="{{item.applyArr}}" wx:key="{{item.openid}}">
+            <block wx:for="{{item.applyArr}}" wx:key="openid">
               <view class="jobContainer-buttom-interviewPeople-right-each">
                 <view>
                   <view>{{item.name}}</view>

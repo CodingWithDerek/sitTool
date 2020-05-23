@@ -24,7 +24,7 @@
         <view>删除</view>
       </view>
       <view class="form-swipeCell-area">
-        <block wx:for="{{characterArr}}" wx:key="{{index}}">
+        <block wx:for="{{characterArr}}">
           <view class="form-swipeCell-area-eachRow">
             <input placeholder="请输入角色名称" class="form-swipeCell-area-eachRow-left" value="{{item.character}}" bindblur="renameCharacter" data-id="{{index}}"></input>
             <van-stepper value="{{item.num}}" integer bind:change="updateNum" data-id="{{index}}" />

@@ -13,7 +13,7 @@
     </block>
   </scroll-view>
   <view class="careful">
-    <block wx:for="{{personShowData[currentIndex].data}}" wx:key="{{item._id}}">
+    <block wx:for="{{personShowData[currentIndex].data}}" wx:key="_id">
       <view class="careful-container" bindtap="goShowDetail" data-item="{{item}}">
         <view class="careful-container-up">
           <image src="{{item.imgArr[0]}}" mode="aspectFill"></image>

@@ -42,15 +42,28 @@ Page({
       key: 'openid',
       success: function(res) {
         db.collection("managerArr").where({
-          _openid:res.data
+          _openid:res.data,
+          agree:true
         }).get()
         .then(res2=>{
-          that.setData({
-            ["managerInfo.name"]:res2.data[0].name,
-            ["managerInfo.school_id"]:res2.data[0].school_id
-          })
-        }).catch(err2=>{
-          console.log(err2)
+          if(res2.data.length>0){
+            that.setData({
+              ["managerInfo.name"]:res2.data[0].name,
+              ["managerInfo.school_id"]:res2.data[0].school_id
+            })
+          }
+          return db.collection("superManager").where({
+            openid:res.data
+          }).get()
+        }).then(res3=>{
+          if(res3.data.length>0){
+            that.setData({
+              ["managerInfo.name"]:res3.data[0].name,
+              ["managerInfo.school_id"]:res3.data[0].school_id
+            })
+          }
+        }).catch(err_all=>{
+          console.log(err_all)
         })
       },
       fail:function(err){

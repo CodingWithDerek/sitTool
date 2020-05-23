@@ -22,7 +22,7 @@
 	},
 	"appid": "wxd53100bd0058be82",
 	"projectname": "sitTool",
-	"libVersion": "2.11.1",
+	"libVersion": "2.11.0",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {

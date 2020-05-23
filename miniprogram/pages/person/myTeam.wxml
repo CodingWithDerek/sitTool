@@ -11,7 +11,7 @@
       <view class="body1-buttom-area-button">发起组队</view>
       <van-icon name="arrow" />
     </view>
-    <block wx:for="{{team}}" wx:key="{{item._id}}">
+    <block wx:for="{{team}}" wx:key="_id">
       <view class="body1-all">
         <view class="body1-container">
           <view class="body1-container-left">
@@ -67,7 +67,7 @@
           <view>{{item.detail}}</view>
           <view class="body1-container-detail-check">人员管理:</view>
           <view class="body1-container-detail-noData" wx:if="{{item.applyArr.length==0}}">还没有人员申请加入您的项目</view>
-          <block wx:for="{{item.applyArr}}" wx:key="{{item.openid}}">
+          <block wx:for="{{item.applyArr}}" wx:key="openid">
             <view class="body1-container-detail-joinPeople">
               <view class="body1-container-detail-joinPeople-left">
                 <view class="body1-container-detail-joinPeople-left-row">申请人：{{item.name}}</view>
@@ -93,7 +93,7 @@
     </block>
   </view>
   <view class="body2" wx:if="{{bindNum!=1}}">
-    <block wx:for="{{applyCollection[applyIndex].data}}" wx:key="{{item._id}}">
+    <block wx:for="{{applyCollection[applyIndex].data}}" wx:key="_id">
       <view class="body2-container" bindtap="goDetail" data-item="{{item}}">
         <view class="body2-container-row">
           <van-icon name="flag-o" />
@@ -103,7 +103,7 @@
           <van-icon name="orders-o" />
           <view>项目类别：{{item.type}}</view>
         </view>
-        <block wx:for="{{item.applyArr}}" wx:key="{{item.openid}}">
+        <block wx:for="{{item.applyArr}}" wx:key="openid">
           <view wx:if="{{item.openid==openid}}" class="body2-container-row">
             <van-icon name="friends-o" />
             <view>申请角色：{{item.character}}</view>

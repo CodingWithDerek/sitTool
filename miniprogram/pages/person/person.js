@@ -62,7 +62,8 @@ Page({
           openid:res.data
         })
         db.collection("managerArr").where({
-          _openid:res.data
+          _openid:res.data,
+          agree:true
         }).get()
         .then(res2=>{
           console.log("检验是否为管理员的成功调用",res2)
@@ -86,7 +87,8 @@ Page({
               openid: res.result.openid
             })
             db.collection("managerArr").where({
-              _openid: res.result.openid
+              _openid: res.result.openid,
+              agree:true
             }).get()
               .then(res2 => {
                 console.log("检验是否为管理员的成功调用", res2)

@@ -30,7 +30,7 @@
     <van-icon name="arrow-down" class="icon1"/>
   </view>
   <view class="careful">
-    <block wx:for="{{goodMenArr}}" wx:key="{{item._id}}">
+    <block wx:for="{{goodMenArr}}" wx:key="_id">
       <view class="careful-container" bindtap="goShowDetail" data-item="{{item}}">
         <view class="careful-container-up">
           <image src="{{item.imgArr[0]}}" mode="aspectFill"></image>

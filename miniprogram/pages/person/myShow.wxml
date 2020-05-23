@@ -31,7 +31,7 @@
       <view>如果您想删除您的项目的话，您可以长按相关项目进行删除</view>
     </view>
     <view class="careful">
-    <block wx:for="{{myShowArr}}" wx:key="{{item._id}}">
+    <block wx:for="{{myShowArr}}" wx:key="_id">
       <view class="careful-container" bindtap="goShowDetail" data-item="{{item}}" bindlongpress="deleteItem">
         <view class="careful-container-up">
           <image src="{{item.imgArr[0]}}" mode="aspectFill"></image>

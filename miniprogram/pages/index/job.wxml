@@ -13,7 +13,7 @@
     </block>
   </scroll-view>
   <view class="body">
-    <block wx:for="{{jobData[currentIndex].data}}" wx:key="{{item._id}}">
+    <block wx:for="{{jobData[currentIndex].data}}" wx:key="_id">
       <view class="body-container" bindtap="goJobDetail" data-item="{{item}}">
         <van-icon name="passed" />
         <view class="body-container-right">
