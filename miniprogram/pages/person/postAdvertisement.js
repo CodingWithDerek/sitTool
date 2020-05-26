@@ -1,72 +1,12 @@
 // pages/person/postAdvertisement.js
+const db = wx.cloud.database()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    joinedAdvertisements:[
-      {
-        _id:1,
-        name:"上海里岙实业有限公司",
-        inTime:"2020-12-30 12:45",
-        expireTime:"2021-01-01 05:46"
-      },
-      {
-        _id:2,
-        name:"上海里岙实业有限公司",
-        inTime:"2020-12-30 12:45",
-        expireTime:"2021-01-01 05:46"
-      },
-      {
-        _id:3,
-        name:"上海里岙实业有限公司",
-        inTime:"2020-12-30 12:45",
-        expireTime:"2021-01-01 05:46"
-      },
-      {
-        _id:3,
-        name:"上海里岙实业有限公司",
-        inTime:"2020-12-30 12:45",
-        expireTime:"2021-01-01 05:46"
-      },
-      {
-        _id:4,
-        name:"上海里岙实业有限公司",
-        inTime:"2020-12-30 12:45",
-        expireTime:"2021-01-01 05:46"
-      },
-      {
-        _id:5,
-        name:"上海里岙实业有限公司",
-        inTime:"2020-12-30 12:45",
-        expireTime:"2021-01-01 05:46"
-      },
-      {
-        _id:6,
-        name:"上海里岙实业有限公司",
-        inTime:"2020-12-30 12:45",
-        expireTime:"2021-01-01 05:46"
-      },
-      {
-        _id:7,
-        name:"上海里岙实业有限公司",
-        inTime:"2020-12-30 12:45",
-        expireTime:"2021-01-01 05:46"
-      },
-      {
-        _id:8,
-        name:"上海里岙实业有限公司",
-        inTime:"2020-12-30 12:45",
-        expireTime:"2021-01-01 05:46"
-      },
-      {
-        _id:9,
-        name:"上海里岙实业有限公司",
-        inTime:"2020-12-30 12:45",
-        expireTime:"2021-01-01 05:46"
-      }
-    ],
+    joinedAdvertisements:[],
     show:false
   },
 
@@ -88,7 +28,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    db.collection("advertisementsArr").orderBy("expireTime","asc").get()
+    .then(res=>{
+      this.setData({
+        joinedAdvertisements:res.data
+      })
+    })
   },
 
   /**

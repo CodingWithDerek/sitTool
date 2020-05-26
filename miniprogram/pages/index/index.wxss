@@ -1,17 +1,17 @@
 .swiFather{
   height: 270rpx;
   padding: 20rpx;
+  padding-top: 0;
 }
 .swiFather-swiper{
   height: 270rpx;
 }
 .swiFather-swiper-view{
   height: 270rpx;
-  border-radius: 10rpx;
 }
 .swiFather-swiper-view-image{
   height: 270rpx;
-  border-radius: 10rpx;
+  border-radius: 20rpx;
   width: 100%;
 }
 .father{

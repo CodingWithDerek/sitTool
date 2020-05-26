@@ -136,14 +136,14 @@
 	<view wx:if="{{manageType=='广告管理'}}">
 		<view class="advertisement_tip">
 			<van-icon name="info-o" class="advertisement_tip-icon" />
-			<view>广告位只有8个，当广告位满了后不可再上传广告，只有删除已上传的广告才能上传新的广告</view>
+			<view>广告位只有8个，当广告位满了后不可再上传广告，只有删除已上传的广告才能上传新的广告，在上传模块的详细介绍中，可进行格式控制，即输入时是什么格式，最终显示就是什么格式，长按已上传的广告可进行删除</view>
 		</view>
 		<view class="upBar">
 			<view class="{{bindNum==1?'upBar-each_light':'upBar-each_dark'}}" bindtap="num1">上传</view>
 			<view class="{{bindNum==2?'upBar-each_light':'upBar-each_dark'}}" bindtap="num2">已上传</view>
 		</view>
-		<view class="gap"></view>
 		<view wx:if="{{bindNum==1}}">
+			<view class="gap"></view>
 			<form bindsubmit="advertisement_submit">
 				<view class="eachRow">
 					<view>入驻商名称</view>
@@ -171,6 +171,22 @@
 					<button class="buttonArea-button" type="primary" form-type="submit" disabled="{{advertisement_disabledCondition}}">提交</button>
 				</view>
 			</form>
+		</view>
+		<view wx:if="{{bindNum==2}}">
+			<block wx:for="{{advertisementsArr}}">
+				<view class="advertisementEach" bindlongpress="deleteAdvertisement" data-item="{{item}}">
+					<view>入驻商：{{item.name}}</view>
+					<view>电话：{{item.phone}}</view>
+					<view>入住时间：{{item.inTime}}</view>
+					<view>过期时间：{{item.expireTime}}</view>
+					<view>访问量：{{item.visitedNum}}</view>
+					<view class="advertisementEach-detailTitle">详细介绍</view>
+					<view>{{item.detail}}</view>
+				</view>
+			</block>
+			<view class="noDataContainer" wx:if="{{advertisementsArr.length==0}}">
+				<view>您还没有上传任何广告</view>
+			</view>
 		</view>
 	</view>
 </view>

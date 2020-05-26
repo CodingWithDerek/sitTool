@@ -31,7 +31,8 @@ Page({
     currentYear_inTime: "2019",
     currentYear_expireTime: "2019",
     tempArr:[],
-    advertisement_disabledCondition:false
+    advertisement_disabledCondition:false,
+    advertisementsArr : []
   },
 
   /**
@@ -115,6 +116,19 @@ Page({
       this.setData({
         mutiplePickerArr_inTime: arr,
         mutiplePickerArr_expireTime:arr
+      })
+      db.collection("advertisementsArr").orderBy("expireTime","asc").get()
+      .then(res=>{
+        that.setData({
+          advertisementsArr:res.data
+        })
+        if(res.data.length==8){
+          that.setData({
+            advertisement_disabledCondition:true
+          })
+        }
+      }).catch(err=>{
+        console.log(err)
       })
     }
   },
@@ -223,35 +237,38 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    var bindNum = this.data.bindNum
-    if(bindNum==1){
-      let skipNum = this.data.unProcessedData.length
-      let unprocessedDataTotalNum = this.data.unprocessedDataTotalNum
-      if(skipNum==unprocessedDataTotalNum){
-        wx.showToast({
-          title: '已加载全部数据',
-        })
-        setTimeout(function(){
-          wx.hideToast()
-        },500)
+    var manageType = this.data.manageType
+    if(manageType=="兼职管理"){
+      var bindNum = this.data.bindNum
+      if(bindNum==1){
+        let skipNum = this.data.unProcessedData.length
+        let unprocessedDataTotalNum = this.data.unprocessedDataTotalNum
+        if(skipNum==unprocessedDataTotalNum){
+          wx.showToast({
+            title: '已加载全部数据',
+          })
+          setTimeout(function(){
+            wx.hideToast()
+          },500)
+        }
+        else{
+          this.getUnprocessedData(skipNum, false)
+        }
       }
-      else{
-        this.getUnprocessedData(skipNum, false)
-      }
-    }
-    if(bindNum==2){
-      let skipNum = this.data.processedData.length
-      let processedDataTotalNum = this.data.processedDataTotalNum
-      if(skipNum==processedDataTotalNum){
-        wx.showToast({
-          title: '已加载全部数据',
-        })
-        setTimeout(function () {
-          wx.hideToast()
-        }, 500)
-      }
-      else{
-        this.getProcessedData(skipNum, false)
+      if(bindNum==2){
+        let skipNum = this.data.processedData.length
+        let processedDataTotalNum = this.data.processedDataTotalNum
+        if(skipNum==processedDataTotalNum){
+          wx.showToast({
+            title: '已加载全部数据',
+          })
+          setTimeout(function () {
+            wx.hideToast()
+          }, 500)
+        }
+        else{
+          this.getProcessedData(skipNum, false)
+        }
       }
     }
   },
@@ -700,5 +717,55 @@ Page({
         })
       })
     }
+  },
+  deleteAdvertisement:function(e){
+    var that = this
+    var item = e.currentTarget.dataset.item
+    var fileIDs = []
+    fileIDs.push(item.swiperImg)
+    wx.showModal({
+      title: '提示',
+      content: '您确定要删除该广告吗',
+      success (res) {
+        if (res.confirm) {
+          wx.showLoading({
+            title: '数据删除中',
+          })
+          Promise.all([
+            wx.cloud.callFunction({
+              name:"delete_advertisementImg",
+              data:{
+                fileIDs
+              }
+            }),
+            wx.cloud.callFunction({
+              name:"delete_advertisementRecord",
+              data:{
+                id: item._id
+              }
+            })
+          ]).then(res2=>{
+            console.log(res2)
+            wx.hideLoading()
+            setTimeout(function(){
+              wx.showToast({
+                title: '删除成功',
+              })
+            },200)
+            setTimeout(function(){
+              wx.hideToast()
+            },700)
+            that.onReady()
+          }).catch(err2=>{
+            console.log(err2)
+            wx.hideLoading()
+            wx.showModal({
+              showCancel:false,
+              content: "似乎出现了什么问题，请稍后再试"
+            })
+          })
+        }
+      }
+    })
   }
 })

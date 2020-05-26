@@ -174,3 +174,14 @@
   padding: 20rpx;
   border-radius: 20rpx;
 }
+.advertisementEach{
+  margin: 20rpx;
+  padding: 20rpx;
+  background-color: white;
+  border-radius: 20rpx;
+  white-space: pre-wrap;
+}
+.advertisementEach-detailTitle{
+  font-size: 35rpx;
+  font-weight: bold;
+}

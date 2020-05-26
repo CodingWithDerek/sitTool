@@ -1,9 +1,9 @@
 <view class="all">
 	<view class="swiFather">
 		<swiper indicator-dots="{{indicator_dots}}" duration="{{duration}}" interval="{{interval}}" autoplay="{{autoplay}}" circular="{{circular}}" class="swiFather-swiper">
-			<swiper-item wx:for="{{tupian}}">
+			<swiper-item wx:for="{{advertisementsArr}}">
 				<view class="swiFather-swiper-view">
-          <image src="{{item}}" class="swiFather-swiper-view-image"></image>
+          <image src="{{item.swiperImg}}" class="swiFather-swiper-view-image" bindtap="goAdvertisementDetail" data-item="{{item}}"></image>
         </view>
 			</swiper-item>
 		</swiper>

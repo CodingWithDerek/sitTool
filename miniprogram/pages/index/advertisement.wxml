@@ -1,2 +1,21 @@
 <!--pages/index/advertisement.wxml-->
-<text>pages/index/advertisement.wxml</text>
+<view class="all">
+  <view class="simpleInfo">
+    <view class="simpleInfo-row">
+      <text class="simpleInfo-row-left">商家</text>
+      <text>{{currentItem.name}}</text>
+    </view>
+    <view class="simpleInfo-row">
+      <text class="simpleInfo-row-left">电话</text>
+      <text>{{currentItem.phone}}</text>
+      <text class="simpleInfo-row-call" bindtap="call" data-phone="{{currentItem.phone}}">拨打</text>
+    </view>
+  </view>
+  <view class="detailInfo">
+      <view class="detailInfo-title">
+        <van-icon name="info-o" class="detailInfo-title-icon" />
+        <text>详细介绍</text>
+      </view>
+      <view class="detailInfo-content">{{currentItem.detail}}</view>
+    </view>
+</view>

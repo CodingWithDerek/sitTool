@@ -5,10 +5,6 @@ const app = getApp()
 
 Page({
   data: {
-    tupian:[
-      "cloud://sittool-sccwy.7369-sittool-sccwy-1301779720/schoolImage/school4.jpg",
-      "cloud://sittool-sccwy.7369-sittool-sccwy-1301779720/schoolImage/school4.jpg"
-    ],
     logo:[
       {
         way:"../res/job2.png",
@@ -41,7 +37,8 @@ Page({
     duration:500,
     interval:7000,
     autoplay:true,
-    circular:true
+    circular:true,
+    advertisementsArr:[]
   },
   onShow:function(){
     var that = this
@@ -70,10 +67,22 @@ Page({
       .catch(err=>{
         console.log("聚合失败",err)
       })
+      db.collection("advertisementsArr").get()
+      .then(res=>{
+        that.setData({
+          advertisementsArr:res.data
+        })
+      })
   },
   goShowDetail:function(e){
     wx.navigateTo({
       url: './show/showDetail?item=' + JSON.stringify(e.currentTarget.dataset.item),
+    })
+  },
+  goAdvertisementDetail:function(e){
+    console.log(e)
+    wx.navigateTo({
+      url: 'advertisement?item=' + JSON.stringify(e.currentTarget.dataset.item),
     })
   }
 })

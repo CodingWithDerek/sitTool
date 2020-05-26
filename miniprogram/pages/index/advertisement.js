@@ -5,14 +5,17 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    currentItem:""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var item = JSON.parse(options.item)
+    this.setData({
+      currentItem:item
+    })
   },
 
   /**
@@ -26,7 +29,19 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var currentItem = this.data.currentItem
+    if(currentItem!=""){
+      wx.cloud.callFunction({
+        name:"addVisitedNum",
+        data:{
+          id:currentItem._id
+        }
+      }).then(res=>{
+        console.log("访问量增加成功的res",res)
+      }).catch(err=>{
+        console.log(err)
+      })
+    }
   },
 
   /**
@@ -62,5 +77,10 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  call:function(e){
+    wx.makePhoneCall({
+      phoneNumber: e.currentTarget.dataset.phone,
+    })
   }
 })
