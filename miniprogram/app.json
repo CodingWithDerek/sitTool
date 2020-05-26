@@ -21,6 +21,7 @@
     "pages/person/recommend",
     "pages/person/sentJob",
     "pages/person/sentJob/editJob",
+    "pages/person/postAdvertisement",
     "pages/person/beSponsor",
     "pages/person/feedback",
     "pages/person/beManager",

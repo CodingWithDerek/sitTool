@@ -20,24 +20,29 @@
     </navigator>
   </view>
   <view class="gapLine" wx:if="{{qiyong==false}}"></view>
-  <view class="buttom" bindtap="toManageMessage" wx:if="{{qiyong==false}}">
+  <view class="buttom" bindtap="goManageMessage" wx:if="{{qiyong==false}}">
     <van-icon name="chat-o" class="buttom-left" />
     <view class="buttom-right">消息管理</view>
   </view>
   <view class="gapLine"></view>
-  <view class="buttom" bindtap="toMyStar">
+  <view class="buttom" bindtap="goMyStar">
     <van-icon name="star-o" class="buttom-left" />
     <view class="buttom-right">我的收藏</view>
   </view>
   <view class="gapLine"></view>
-  <view class="buttom" bindtap="toRecommend">
+  <view class="buttom" bindtap="goRecommend">
     <van-icon name="user-o" class="buttom-left" />
     <view class="buttom-right">推荐给好友</view>
   </view>
   <view class="gapLine"></view>
-  <view class="buttom" bindtap="toSentJob">
+  <view class="buttom" bindtap="goSentJob">
     <van-icon name="fire-o" class="buttom-left" />
     <view class="buttom-right">发布兼职</view>
+  </view>
+  <view class="gapLine"></view>
+  <view class="buttom" bindtap="goPostAdvertisement">
+    <van-icon name="bullhorn-o" class="buttom-left" />
+    <view class="buttom-right">申请广告入驻</view>
   </view>
   <view class="gapLine"></view>
   <view class="buttom" bindtap="toBeSponsor">
@@ -45,7 +50,7 @@
     <view class="buttom-right">我要赞助</view>
   </view>
   <view class="gapLine"></view>
-  <view class="buttom" bindtap="toFeedback">
+  <view class="buttom" bindtap="goFeedback">
     <van-icon name="description" class="buttom-left" />
     <view class="buttom-right">意见反馈</view>
   </view>
@@ -55,7 +60,7 @@
     <view class="buttom-right">成为管理员</view>
   </view>
   <view class="gapLine" wx:if="{{openid==superId}}"></view>
-  <view class="buttom" bindtap="toSuperManage" wx:if="{{openid==superId}}">
+  <view class="buttom" bindtap="goSuperManage" wx:if="{{openid==superId}}">
     <van-icon name="diamond-o" class="buttom-left" />
     <view class="buttom-right">超级管理</view>
   </view>

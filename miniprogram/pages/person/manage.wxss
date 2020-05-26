@@ -12,7 +12,7 @@
   align-items: center;
   justify-content: center;
 }
-.upTipTotalNum-icon{
+.upTipTotalNum-icon,.advertisement_tip-icon{
   font-size: 50rpx;
   color: #3bac6a;
   margin-right: 20rpx;
@@ -125,4 +125,52 @@
 .buttonArea-button{
   padding: 5rpx 50rpx;
   font-size: 30rpx;
+}
+.advertisement_tip{
+  background-color: white;
+  margin: 20rpx;
+  padding: 20rpx;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+}
+.gap{
+  height: 20rpx;
+  background-color: #f2f2f2;
+}
+.eachRow{
+  height: 80rpx;
+  background-color: white;
+  margin: 1px 0;
+  padding: 20rpx;
+  display: flex;
+  align-items: center;
+}
+.eachRow-right{
+  margin-left: 20rpx;
+  width: 65%;
+}
+.uploaderContainer{
+  background-color: white;
+  padding: 20rpx;
+}
+.uploaderContainer-first{
+  color: gray;
+  margin-bottom: 20rpx;
+}
+.detailTitle{
+  height: 80rpx;
+  color: gray;
+  margin: 1px 0;
+  padding: 20rpx;
+  display: flex;
+  align-items: center;
+}
+.detailContent{
+  height: 400rpx;
+  width: auto;
+  margin: 20rpx;
+  background-color: white;
+  padding: 20rpx;
+  border-radius: 20rpx;
 }

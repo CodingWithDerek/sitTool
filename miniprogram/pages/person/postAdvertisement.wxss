@@ -1,0 +1,57 @@
+/* pages/person/postAdvertisement.wxss */
+.all{
+  background-color: #f2f2f2;
+  font-size: 30rpx;
+}
+.tipContainer{
+  height: 100rpx;
+  background-color: white;
+  margin: 20rpx;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tipContainer-icon{
+  font-size: 50rpx;
+  color: #3bac6a;
+  margin-right: 20rpx;
+}
+.tipContainer text{
+  background-color: #ff1d11;
+  color: white;
+  padding: 10rpx 20rpx;
+  border-radius: 10rpx;
+}
+.tipInfo{
+  margin: 20rpx;
+  padding: 20rpx;
+  background-color: white;
+  border-radius: 20rpx;
+}
+.emphasizeText{
+  color: #ff1d11;
+}
+.buttonArea{
+  height: 150rpx;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.buttonArea-button{
+  padding: 5rpx 50rpx;
+  font-size: 30rpx;
+}
+.containerArea{
+  background-color: #f2f2f2;
+  font-size: 30rpx;
+}
+.containerArea-son{
+  background-color: white;
+  margin-top: 1px;
+  border: 1px solid white;
+}
+.containerArea-son-each{
+  margin: 20rpx;
+}

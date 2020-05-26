@@ -1,2 +1,7 @@
 <!--pages/index/service.wxml-->
-<text>pages/index/service.wxml</text>
+<view class="all">
+  <view class="infoContainer">
+    <view>如果您在使用这款小程序中有任何疑问，或者遇到什么技术问题，请点击下方“联系客服”按钮，我们的客服会解答您的问题</view>
+    <button open-type="contact" class="infoContainer-button" type="primary">联系客服</button>
+  </view>
+</view>

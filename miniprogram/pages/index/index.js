@@ -6,9 +6,8 @@ const app = getApp()
 Page({
   data: {
     tupian:[
-      "cloud://hezhilong-lv42e.6865-hezhilong-lv42e-1259281086/swiperImage/52b34e39d8482efd94ae2b54d55aea23.jpg",
-      "cloud://hezhilong-lv42e.6865-hezhilong-lv42e-1259281086/swiperImage/d5a5c5d37c2e442e3a936ecbb6a18494.jpg"
-
+      "cloud://sittool-sccwy.7369-sittool-sccwy-1301779720/schoolImage/school4.jpg",
+      "cloud://sittool-sccwy.7369-sittool-sccwy-1301779720/schoolImage/school4.jpg"
     ],
     logo:[
       {
@@ -37,39 +36,12 @@ Page({
         url:"service"
       }
     ],
-    pseudoData:[
-      {
-        image:"../res/service.png",
-        summary:"用照片记录生活中的美，你也可以这样的",
-        label:["摄影","生活","美丽"],
-        people:"2016"
-      },
-      {
-        image: "../res/service.png",
-        summary: "用照片记录生活中的美丽瞬间",
-        label: ["网页开发", "生活", "美丽"],
-        people: "3698"
-      },
-      {
-        image: "../res/service.png",
-        summary: "用照片记录生活中的美",
-        label: ["视频剪辑", "生活", "美丽"],
-        people: "2097"
-      },
-      {
-        image: "../res/service.png",
-        summary: "用照片记录生活中的美",
-        label: ["摄影", "生活", "美丽"],
-        people: "2016"
-      },
-      {
-        image: "../res/service.png",
-        summary: "用照片记录生活中的点点滴滴",
-        label: ["摄影", "生活", "美丽"],
-        people: "20"
-      }
-    ],
-    goodMenArr:[]
+    goodMenArr:[],
+    indicator_dots: true,
+    duration:500,
+    interval:7000,
+    autoplay:true,
+    circular:true
   },
   onShow:function(){
     var that = this

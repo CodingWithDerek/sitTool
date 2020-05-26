@@ -1,136 +1,176 @@
 <!--pages/person/manage.wxml-->
 <view class="all">
-  <view wx:if="{{manageType=='兼职管理'}}">
-    <view class="upTipTotalNum">
-      <van-icon name="info-o" class="upTipTotalNum-icon" />
-      <view>当前未处理兼职总数：</view>
-      <text>{{unprocessedDataTotalNum}}</text>
-    </view>
-    <view class="upBar">
-      <view class="{{bindNum==1?'upBar-each_light':'upBar-each_dark'}}" bindtap="num1">待处理</view>
-      <view class="{{bindNum==2?'upBar-each_light':'upBar-each_dark'}}" bindtap="num2">已处理</view>
-      <view class="{{bindNum==3?'upBar-each_light':'upBar-each_dark'}}" bindtap="num3">查询兼职</view>
-    </view>
-    <view wx:if="{{bindNum==1}}">
-      <block wx:for="{{unProcessedData}}" wx:key="_id">
-        <view class="container">
-          <view class="container-left">
-            <view>招聘单位：{{item.companyName}}</view>
-            <view>兼职类型：{{item.type}}</view>
-            <view>面试时间：{{item.interviewTime}}</view>
-            <view>面试地点：{{item.interviewPlace}}</view>
-            <view>薪资：{{item.wage}}</view>
-            <view>工作区域：{{item.workArea}}</view>
-            <view>联系电话：{{item.phone}}</view>
-            <view>申请时间：{{item.sentTime}}</view>
-            <view>是否有工商执照：{{item.haveCertificate}}</view>
-            <view wx:if="{{item.haveCertificate=='是'}}" class="container-left-imageFather">
-              <image src="{{item.fileID}}" bindtap="previewCertificate" data-fileid="{{item.fileID}}"></image>
-            </view>
-            <view class="container-left-detailTitile">详情介绍</view>
-            <view>{{item.detail}}</view>
-          </view>
-          <view class="container-right">
-            <view class="container-right-agree" bindtap="agree" data-id="{{item._id}}">同意</view>
-            <view class="container-right-reject" bindtap="reject" data-id="{{item._id}}">拒绝</view>
-            <view class="container-right-call" bindtap="call" data-phone="{{item.phone}}">拨打</view>
-          </view>
-        </view>
-      </block>
-      <view wx:if="{{unProcessedData.length==0}}" class="noDataContainer">
-        <view>该状态暂时没有数据</view>
-      </view>
-    </view>
-    <view wx:if="{{bindNum==2}}">
-      <block wx:for="{{processedData}}" wx:key="_id">
-        <view class="container">
-          <view class="container-left">
-            <view wx:if="{{item.agree==true}}" class="container-left-result_agree">审核结果：
-              <text>已通过</text>
-            </view>
-            <view wx:if="{{item.reject==true}}" class="container-left-result_reject">审核结果：
-              <text>已拒绝</text>
-            </view>
-            <view class="container-left-manager">审核人姓名：
-              <text>{{item.managerInfo.name}}</text>
-            </view>
-            <view class="container-left-manager">审核人学号：
-              <text>{{item.managerInfo.school_id}}</text>
-            </view>
-            <view>招聘单位：{{item.companyName}}</view>
-            <view>兼职类型：{{item.type}}</view>
-            <view>面试时间：{{item.interviewTime}}</view>
-            <view>面试地点：{{item.interviewPlace}}</view>
-            <view>薪资：{{item.wage}}</view>
-            <view>工作区域：{{item.workArea}}</view>
-            <view>联系电话：{{item.phone}}</view>
-            <view>申请时间：{{item.sentTime}}</view>
-            <view>是否有工商执照：{{item.haveCertificate}}</view>
-            <view wx:if="{{item.haveCertificate=='是'}}" class="container-left-imageFather">
-              <image src="{{item.fileID}}" bindtap="previewCertificate" data-fileid="{{item.fileID}}"></image>
-            </view>
-            <view class="container-left-detailTitile">详情介绍</view>
-            <view>{{item.detail}}</view>
-          </view>
-          <view class="container-right">
-            <view class="container-right-call" bindtap="call" data-phone="{{item.phone}}">拨打</view>
-          </view>
-        </view>
-      </block>
-      <view wx:if="{{processedData.length==0}}" class="noDataContainer">
-        <view>该状态暂时没有数据</view>
-      </view>
-    </view>
-    <view wx:if="{{bindNum==3}}">
-      <view class="queryJob">
-        <view>公司名称</view>
-        <input class="queryJob-right" placeholder="请输入要查询的兼职的公司名称" bindinput="getCompanyName"></input>
-      </view>
-      <view class="buttonArea">
-        <button class="buttonArea-button" type="primary" bindtap="queryJob">查询</button>
-      </view>
-      <view wx:if="{{queriedJob.length>0}}">
-        <block wx:for="{{queriedJob}}" wx:key="_id">
-          <view class="container">
-          <view class="container-left">
-            <view wx:if="{{item.agree==true}}" class="container-left-result_agree">审核结果：
-              <text>已通过</text>
-            </view>
-            <view wx:if="{{item.reject==true}}" class="container-left-result_reject">审核结果：
-              <text>已拒绝</text>
-            </view>
-            <view wx:if="{{item.agree==false&&item.reject==false}}" class="container-left-result_wait">审核结果：
-              <text>等待审核</text>
-            </view>
-            <view class="container-left-manager">审核人姓名：
-              <text>{{item.managerInfo.name}}</text>
-            </view>
-            <view class="container-left-manager">审核人学号：
-              <text>{{item.managerInfo.school_id}}</text>
-            </view>
-            <view>招聘单位：{{item.companyName}}</view>
-            <view>兼职类型：{{item.type}}</view>
-            <view>面试时间：{{item.interviewTime}}</view>
-            <view>面试地点：{{item.interviewPlace}}</view>
-            <view>薪资：{{item.wage}}</view>
-            <view>工作区域：{{item.workArea}}</view>
-            <view>联系电话：{{item.phone}}</view>
-            <view>申请时间：{{item.sentTime}}</view>
-            <view>是否有工商执照：{{item.haveCertificate}}</view>
-            <view wx:if="{{item.haveCertificate=='是'}}" class="container-left-imageFather">
-              <image src="{{item.fileID}}" bindtap="previewCertificate" data-fileid="{{item.fileID}}"></image>
-            </view>
-            <view class="container-left-detailTitile">详情介绍</view>
-            <view>{{item.detail}}</view>
-          </view>
-          <view class="container-right">
-            <view class="container-right-agree" bindtap="agree" data-id="{{item._id}}" wx:if="{{item.agree==false&&item.reject==false}}">同意</view>
-            <view class="container-right-reject" bindtap="reject" data-id="{{item._id}}" wx:if="{{item.agree==false&&item.reject==false}}">拒绝</view>
-            <view class="container-right-call" bindtap="call" data-phone="{{item.phone}}">拨打</view>
-          </view>
-        </view>
-        </block>
-      </view>
-    </view>
-  </view>
+	<view wx:if="{{manageType=='兼职管理'}}">
+		<view class="upTipTotalNum">
+			<van-icon name="info-o" class="upTipTotalNum-icon" />
+			<view>当前未处理兼职总数：</view>
+			<text>{{unprocessedDataTotalNum}}</text>
+		</view>
+		<view class="upBar">
+			<view class="{{bindNum==1?'upBar-each_light':'upBar-each_dark'}}" bindtap="num1">待处理</view>
+			<view class="{{bindNum==2?'upBar-each_light':'upBar-each_dark'}}" bindtap="num2">已处理</view>
+			<view class="{{bindNum==3?'upBar-each_light':'upBar-each_dark'}}" bindtap="num3">查询兼职</view>
+		</view>
+		<view wx:if="{{bindNum==1}}">
+			<block wx:for="{{unProcessedData}}" wx:key="_id">
+				<view class="container">
+					<view class="container-left">
+						<view>招聘单位：{{item.companyName}}</view>
+						<view>兼职类型：{{item.type}}</view>
+						<view>面试时间：{{item.interviewTime}}</view>
+						<view>面试地点：{{item.interviewPlace}}</view>
+						<view>薪资：{{item.wage}}</view>
+						<view>工作区域：{{item.workArea}}</view>
+						<view>联系电话：{{item.phone}}</view>
+						<view>申请时间：{{item.sentTime}}</view>
+						<view>是否有工商执照：{{item.haveCertificate}}</view>
+						<view wx:if="{{item.haveCertificate=='是'}}" class="container-left-imageFather">
+							<image src="{{item.fileID}}" bindtap="previewCertificate" data-fileid="{{item.fileID}}"></image>
+						</view>
+						<view class="container-left-detailTitile">详情介绍</view>
+						<view>{{item.detail}}</view>
+					</view>
+					<view class="container-right">
+						<view class="container-right-agree" bindtap="agree" data-id="{{item._id}}">同意</view>
+						<view class="container-right-reject" bindtap="reject" data-id="{{item._id}}">拒绝</view>
+						<view class="container-right-call" bindtap="call" data-phone="{{item.phone}}">拨打</view>
+					</view>
+				</view>
+			</block>
+			<view wx:if="{{unProcessedData.length==0}}" class="noDataContainer">
+				<view>该状态暂时没有数据</view>
+			</view>
+		</view>
+		<view wx:if="{{bindNum==2}}">
+			<block wx:for="{{processedData}}" wx:key="_id">
+				<view class="container">
+					<view class="container-left">
+						<view wx:if="{{item.agree==true}}" class="container-left-result_agree">审核结果：
+							<text>已通过</text>
+						</view>
+						<view wx:if="{{item.reject==true}}" class="container-left-result_reject">审核结果：
+							<text>已拒绝</text>
+						</view>
+						<view class="container-left-manager">审核人姓名：
+							<text>{{item.managerInfo.name}}</text>
+						</view>
+						<view class="container-left-manager">审核人学号：
+							<text>{{item.managerInfo.school_id}}</text>
+						</view>
+						<view>招聘单位：{{item.companyName}}</view>
+						<view>兼职类型：{{item.type}}</view>
+						<view>面试时间：{{item.interviewTime}}</view>
+						<view>面试地点：{{item.interviewPlace}}</view>
+						<view>薪资：{{item.wage}}</view>
+						<view>工作区域：{{item.workArea}}</view>
+						<view>联系电话：{{item.phone}}</view>
+						<view>申请时间：{{item.sentTime}}</view>
+						<view>是否有工商执照：{{item.haveCertificate}}</view>
+						<view wx:if="{{item.haveCertificate=='是'}}" class="container-left-imageFather">
+							<image src="{{item.fileID}}" bindtap="previewCertificate" data-fileid="{{item.fileID}}"></image>
+						</view>
+						<view class="container-left-detailTitile">详情介绍</view>
+						<view>{{item.detail}}</view>
+					</view>
+					<view class="container-right">
+						<view class="container-right-call" bindtap="call" data-phone="{{item.phone}}">拨打</view>
+					</view>
+				</view>
+			</block>
+			<view wx:if="{{processedData.length==0}}" class="noDataContainer">
+				<view>该状态暂时没有数据</view>
+			</view>
+		</view>
+		<view wx:if="{{bindNum==3}}">
+			<view class="queryJob">
+				<view>公司名称</view>
+				<input class="queryJob-right" placeholder="请输入要查询的兼职的公司名称" bindinput="getCompanyName"></input>
+			</view>
+			<view class="buttonArea">
+				<button class="buttonArea-button" type="primary" bindtap="queryJob">查询</button>
+			</view>
+			<view wx:if="{{queriedJob.length>0}}">
+				<block wx:for="{{queriedJob}}" wx:key="_id">
+					<view class="container">
+						<view class="container-left">
+							<view wx:if="{{item.agree==true}}" class="container-left-result_agree">审核结果：
+								<text>已通过</text>
+							</view>
+							<view wx:if="{{item.reject==true}}" class="container-left-result_reject">审核结果：
+								<text>已拒绝</text>
+							</view>
+							<view wx:if="{{item.agree==false&&item.reject==false}}" class="container-left-result_wait">审核结果：
+								<text>等待审核</text>
+							</view>
+							<view class="container-left-manager">审核人姓名：
+								<text>{{item.managerInfo.name}}</text>
+							</view>
+							<view class="container-left-manager">审核人学号：
+								<text>{{item.managerInfo.school_id}}</text>
+							</view>
+							<view>招聘单位：{{item.companyName}}</view>
+							<view>兼职类型：{{item.type}}</view>
+							<view>面试时间：{{item.interviewTime}}</view>
+							<view>面试地点：{{item.interviewPlace}}</view>
+							<view>薪资：{{item.wage}}</view>
+							<view>工作区域：{{item.workArea}}</view>
+							<view>联系电话：{{item.phone}}</view>
+							<view>申请时间：{{item.sentTime}}</view>
+							<view>是否有工商执照：{{item.haveCertificate}}</view>
+							<view wx:if="{{item.haveCertificate=='是'}}" class="container-left-imageFather">
+								<image src="{{item.fileID}}" bindtap="previewCertificate" data-fileid="{{item.fileID}}"></image>
+							</view>
+							<view class="container-left-detailTitile">详情介绍</view>
+							<view>{{item.detail}}</view>
+						</view>
+						<view class="container-right">
+							<view class="container-right-agree" bindtap="agree" data-id="{{item._id}}" wx:if="{{item.agree==false&&item.reject==false}}">同意</view>
+							<view class="container-right-reject" bindtap="reject" data-id="{{item._id}}" wx:if="{{item.agree==false&&item.reject==false}}">拒绝</view>
+							<view class="container-right-call" bindtap="call" data-phone="{{item.phone}}">拨打</view>
+						</view>
+					</view>
+				</block>
+			</view>
+		</view>
+	</view>
+	<view wx:if="{{manageType=='广告管理'}}">
+		<view class="advertisement_tip">
+			<van-icon name="info-o" class="advertisement_tip-icon" />
+			<view>广告位只有8个，当广告位满了后不可再上传广告，只有删除已上传的广告才能上传新的广告</view>
+		</view>
+		<view class="upBar">
+			<view class="{{bindNum==1?'upBar-each_light':'upBar-each_dark'}}" bindtap="num1">上传</view>
+			<view class="{{bindNum==2?'upBar-each_light':'upBar-each_dark'}}" bindtap="num2">已上传</view>
+		</view>
+		<view class="gap"></view>
+		<view wx:if="{{bindNum==1}}">
+			<form bindsubmit="advertisement_submit">
+				<view class="eachRow">
+					<view>入驻商名称</view>
+					<input class="eachRow-right" name="name"></input>
+				</view>
+				<view class="eachRow">
+					<view>入驻时间</view>
+					<picker class="eachRow-right" name="inTime"  mode="multiSelector" bindchange="updateMutipleIndex_inTime" bindcolumnchange="updateColumnValue_inTime" value="{{mutiplePickerIndex_inTime}}" range="{{mutiplePickerArr_inTime}}">{{inTime}}</picker>
+				</view>
+				<view class="eachRow">
+					<view>过期时间</view>
+					<picker class="eachRow-right" name="expireTime"  mode="multiSelector" bindchange="updateMutipleIndex_expireTime" bindcolumnchange="updateColumnValue_expireTime" value="{{mutiplePickerIndex_expireTime}}" range="{{mutiplePickerArr_expireTime}}">{{expireTime}}</picker>
+				</view>
+				<view class="eachRow">
+					<view>电话</view>
+					<input class="eachRow-right" name="phone"></input>
+				</view>
+				<view class="uploaderContainer">
+					<view class="uploaderContainer-first">请上传首页轮播展示图</view>
+					<van-uploader file-list="{{tempArr}}" max-count="1" bind:after-read="afterRead" bind:delete="deleteImg" />
+				</view>
+				<view class="detailTitle">详细介绍</view>
+				<textarea class="detailContent" maxlength="-1" name="detail"></textarea>
+				<view class="buttonArea">
+					<button class="buttonArea-button" type="primary" form-type="submit" disabled="{{advertisement_disabledCondition}}">提交</button>
+				</view>
+			</form>
+		</view>
+	</view>
 </view>

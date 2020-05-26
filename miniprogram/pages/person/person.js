@@ -152,19 +152,24 @@ Page({
   onShareAppMessage: function() {
 
   },
-  toMyStar: function() {
+  goMyStar: function() {
     wx.navigateTo({
       url: 'myStar',
     })
   },
-  toRecommend: function() {
+  goRecommend: function() {
     wx.navigateTo({
       url: 'recommend',
     })
   },
-  toSentJob: function() {
+  goSentJob: function() {
     wx.navigateTo({
       url: 'sentJob',
+    })
+  },
+  goPostAdvertisement:function(){
+    wx.navigateTo({
+      url: 'postAdvertisement',
     })
   },
   toBeSponsor: function() {
@@ -172,7 +177,7 @@ Page({
       url: 'beSponsor',
     })
   },
-  toFeedback: function() {
+  goFeedback: function() {
     wx.navigateTo({
       url: 'feedback',
     })
@@ -182,7 +187,7 @@ Page({
       url: 'beManager',
     })
   },
-  toSuperManage:function(){
+  goSuperManage:function(){
     wx.navigateTo({
       url: 'superManage',
     })
@@ -218,7 +223,7 @@ Page({
       })
     }
   },
-  toManageMessage:function(){
+  goManageMessage:function(){
     wx.navigateTo({
       url: 'manageMessage',
     })

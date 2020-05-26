@@ -1,0 +1,25 @@
+<!--pages/person/postAdvertisement.wxml-->
+<view class="all">
+	<view class="tipContainer">
+		<van-icon name="info-o" class="tipContainer-icon" />
+		<view>当前广告空位数：</view>
+    <text>{{8-joinedAdvertisements.length}}</text>
+	</view>
+	<view class="tipInfo">
+		<view>如果您想申请广告入驻，请添加微信号<text class="emphasizeText" bindtap="copyWechat_id">shijianjiuwei</text>（点击红色字体可快速复制），我们的广告部管理员会和您详谈具体的费用和入驻注意事项</view>
+	</view>
+	<view class="buttonArea">
+		<button bindtap="showPopup" class="buttonArea-button" type="primary">查看已入驻广告</button>
+	</view>
+</view>
+<van-popup show="{{ show }}" position="top" bind:close="onClose" custom-style="height: 80%;">
+	<view class="containerArea">
+		<block wx:for="{{joinedAdvertisements}}" wx:key="_id">
+			<view class="containerArea-son">
+				<view class="containerArea-son-each">入驻商：{{item.name}}</view>
+				<view class="containerArea-son-each">入驻时间：{{item.inTime}}</view>
+				<view class="containerArea-son-each">过期时间：{{item.expireTime}}</view>
+			</view>
+		</block>
+	</view>
+</van-popup>

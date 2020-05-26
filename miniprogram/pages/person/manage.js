@@ -2,6 +2,7 @@
 const db = wx.cloud.database()
 const _ = db.command
 const $ = db.command.aggregate
+const app = getApp()
 Page({
 
   /**
@@ -20,7 +21,17 @@ Page({
       school_id:""
     },
     queriedJob:[],
-    query_companyName:""
+    query_companyName:"",
+    mutiplePickerArr_inTime: [],
+    mutiplePickerArr_expireTime: [],
+    inTime: "2019-01-03 03:04",
+    expireTime: "2019-01-03 03:04",
+    mutiplePickerIndex_inTime: [0, 0, 2, 3, 4],
+    mutiplePickerIndex_expireTime: [0, 0, 2, 3, 4],
+    currentYear_inTime: "2019",
+    currentYear_expireTime: "2019",
+    tempArr:[],
+    advertisement_disabledCondition:false
   },
 
   /**
@@ -38,38 +49,74 @@ Page({
    */
   onReady: function () {
     var that = this
-    wx.getStorage({
-      key: 'openid',
-      success: function(res) {
-        db.collection("managerArr").where({
-          _openid:res.data,
-          agree:true
-        }).get()
-        .then(res2=>{
-          if(res2.data.length>0){
-            that.setData({
-              ["managerInfo.name"]:res2.data[0].name,
-              ["managerInfo.school_id"]:res2.data[0].school_id
-            })
-          }
-          return db.collection("superManager").where({
-            openid:res.data
+    var manageType = this.data.manageType
+    if(manageType=="兼职管理"){
+      wx.getStorage({
+        key: 'openid',
+        success: function(res) {
+          db.collection("managerArr").where({
+            _openid:res.data,
+            agree:true
           }).get()
-        }).then(res3=>{
-          if(res3.data.length>0){
-            that.setData({
-              ["managerInfo.name"]:res3.data[0].name,
-              ["managerInfo.school_id"]:res3.data[0].school_id
-            })
-          }
-        }).catch(err_all=>{
-          console.log(err_all)
-        })
-      },
-      fail:function(err){
-        console.log(err)
+          .then(res2=>{
+            if(res2.data.length>0){
+              that.setData({
+                ["managerInfo.name"]:res2.data[0].name,
+                ["managerInfo.school_id"]:res2.data[0].school_id
+              })
+            }
+            return db.collection("superManager").where({
+              openid:res.data
+            }).get()
+          }).then(res3=>{
+            if(res3.data.length>0){
+              that.setData({
+                ["managerInfo.name"]:res3.data[0].name,
+                ["managerInfo.school_id"]:res3.data[0].school_id
+              })
+            }
+          }).catch(err_all=>{
+            console.log(err_all)
+          })
+        },
+        fail:function(err){
+          console.log(err)
+        }
+      })
+    }
+    if(manageType=="广告管理"){
+      var date = new Date()
+      var years = []
+      var months = []
+      var days = []
+      var hours = []
+      var minutes = []
+      var year = date.getFullYear()
+      for (var i = 2019; i <= year + 5; i++) {
+        years.push(i)
       }
-    })
+      for (var i = 1; i <= 12; i++) {
+        if (i < 10) i = "0" + i
+        months.push("" + i)
+      }
+      for (var i = 1; i <= 31; i++) {
+        if (i < 10) i = "0" + i
+        days.push("" + i)
+      }
+      for (var i = 0; i < 24; i++) {
+        if (i < 10) i = "0" + i
+        hours.push("" + i)
+      }
+      for (var i = 0; i < 60; i++) {
+        if (i < 10) i = "0" + i
+        minutes.push("" + i)
+      }
+      var arr = [years, months, days, hours, minutes]
+      this.setData({
+        mutiplePickerArr_inTime: arr,
+        mutiplePickerArr_expireTime:arr
+      })
+    }
   },
 
   getUnprocessedData:function(skipNum,isFirst){
@@ -143,9 +190,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getUnprocessedDataTotalNum()
-    this.getProcessedDataTotalNum()
-    this.getUnprocessedData(0,true)
+    var manageType = this.data.manageType
+    if(manageType=="兼职管理"){
+      this.getUnprocessedDataTotalNum()
+      this.getProcessedDataTotalNum()
+      this.getUnprocessedData(0,true)
+    }
   },
 
   /**
@@ -218,10 +268,13 @@ Page({
     })
   },
   num2:function(){
+    var manageType = this.data.manageType
     this.setData({
       bindNum:2
     })
-    this.getProcessedData(0,true)
+    if(manageType=="兼职管理"){
+      this.getProcessedData(0,true)
+    }
   },
   num3:function(){
     this.setData({
@@ -449,5 +502,203 @@ Page({
           content: '似乎出现了什么问题，请稍后再试',
         })
       })
+  },
+  updateMutipleIndex_inTime:function(e){
+    var mutiplePickerArr = this.data.mutiplePickerArr_inTime
+    var indexArr = e.detail.value
+    var year = mutiplePickerArr[0][indexArr[0]]
+    var month = mutiplePickerArr[1][indexArr[1]]
+    var day = mutiplePickerArr[2][indexArr[2]]
+    var hour = mutiplePickerArr[3][indexArr[3]]
+    var minute = mutiplePickerArr[4][indexArr[4]]
+    var time = `${year}-${month}-${day} ${hour}:${minute}`
+    this.setData({
+      inTime: time,
+      mutiplePickerIndex_inTime: indexArr
+    })
+  },
+  updateMutipleIndex_expireTime:function(e){
+    var mutiplePickerArr = this.data.mutiplePickerArr_expireTime
+    var indexArr = e.detail.value
+    var year = mutiplePickerArr[0][indexArr[0]]
+    var month = mutiplePickerArr[1][indexArr[1]]
+    var day = mutiplePickerArr[2][indexArr[2]]
+    var hour = mutiplePickerArr[3][indexArr[3]]
+    var minute = mutiplePickerArr[4][indexArr[4]]
+    var time = `${year}-${month}-${day} ${hour}:${minute}`
+    this.setData({
+      expireTime: time,
+      mutiplePickerIndex_expireTime: indexArr
+    })
+  },
+  updateColumnValue_inTime:function(e){
+    if (e.detail.column == 0) {
+      this.setData({
+        currentYear_inTime: this.data.mutiplePickerArr_inTime[0][e.detail.value]
+      })
+    }
+    if (e.detail.column == 1) {
+      let month = this.data.mutiplePickerArr_inTime[1][e.detail.value]
+      let arr = []
+      if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
+        for (let i = 1; i <= 31; i++) {
+          if (i < 10) i = "0" + i
+          arr.push("" + i)
+        }
+        this.setData({
+          ["mutiplePickerArr_inTime[2]"]: arr
+        })
+      }
+      if (month == 4 || month == 6 || month == 9 || month == 11) {
+        for (let i = 1; i <= 30; i++) {
+          if (i < 10) i = "0" + i
+          arr.push("" + i)
+        }
+        this.setData({
+          ["mutiplePickerArr_inTime[2]"]: arr
+        })
+      }
+      if (month == 2) {
+        let currentYear = this.data.currentYear_inTime
+        if ((currentYear % 4 == 0 && currentYear % 100 != 0) || currentYear % 400 == 0) {
+          for (let i = 1; i <= 29; i++) {
+            if (i < 10) i = "0" + i
+            arr.push("" + i)
+          }
+          this.setData({
+            ["mutiplePickerArr_inTime[2]"]: arr
+          })
+        } else {
+          for (let i = 1; i <= 28; i++) {
+            if (i < 10) i = "0" + i
+            arr.push("" + i)
+          }
+          this.setData({
+            ["mutiplePickerArr_inTime[2]"]: arr
+          })
+        }
+      }
+    }    
+  },
+  updateColumnValue_expireTime:function(e){
+    if (e.detail.column == 0) {
+      this.setData({
+        currentYear_expireTime: this.data.mutiplePickerArr_expireTime[0][e.detail.value]
+      })
+    }
+    if (e.detail.column == 1) {
+      let month = this.data.mutiplePickerArr_expireTime[1][e.detail.value]
+      let arr = []
+      if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
+        for (let i = 1; i <= 31; i++) {
+          if (i < 10) i = "0" + i
+          arr.push("" + i)
+        }
+        this.setData({
+          ["mutiplePickerArr_expireTime[2]"]: arr
+        })
+      }
+      if (month == 4 || month == 6 || month == 9 || month == 11) {
+        for (let i = 1; i <= 30; i++) {
+          if (i < 10) i = "0" + i
+          arr.push("" + i)
+        }
+        this.setData({
+          ["mutiplePickerArr_expireTime[2]"]: arr
+        })
+      }
+      if (month == 2) {
+        let currentYear = this.data.currentYear_expireTime
+        if ((currentYear % 4 == 0 && currentYear % 100 != 0) || currentYear % 400 == 0) {
+          for (let i = 1; i <= 29; i++) {
+            if (i < 10) i = "0" + i
+            arr.push("" + i)
+          }
+          this.setData({
+            ["mutiplePickerArr_expireTime[2]"]: arr
+          })
+        } else {
+          for (let i = 1; i <= 28; i++) {
+            if (i < 10) i = "0" + i
+            arr.push("" + i)
+          }
+          this.setData({
+            ["mutiplePickerArr_expireTime[2]"]: arr
+          })
+        }
+      }
+    }    
+  },
+  afterRead: function(e) {
+    console.log(e)
+    this.setData({
+      ["tempArr[0]"]: e.detail.file
+    })
+  },
+  deleteImg: function(e) {
+    this.setData({
+      tempArr: []
+    })
+  },
+  advertisement_submit:function(e){
+    this.setData({
+      advertisement_disabledCondition: true
+    })
+    var name = e.detail.value.name
+    var phone = e.detail.value.phone
+    var detail = e.detail.value.detail
+    var tempArr = this.data.tempArr
+    var inTime = this.data.inTime
+    var expireTime = this.data.expireTime
+    var that = this
+    if(name==""||phone==""||tempArr.length==0||detail==""){
+      wx.showLoading({
+        title: '请补充完整信息',
+      })
+      setTimeout(function(){
+        wx.hideLoading()
+      },500)
+      this.setData({
+        advertisement_disabledCondition:false
+      })
+    }
+    else{
+      wx.showLoading({
+        title: '数据上传中',
+      })
+      wx.cloud.uploadFile({
+        cloudPath: app.getRandom() + /\.[^\.]+$/.exec(tempArr[0].path),
+        filePath: tempArr[0].path
+      }).then(res=>{
+        return db.collection("advertisementsArr").add({
+          data:{
+            name,
+            phone,
+            detail,
+            inTime,
+            expireTime,
+            swiperImg:res.fileID,
+            visitedNum:0
+          }
+        })
+      }).then(res=>{
+        wx.hideLoading()
+        setTimeout(function(){
+          wx.showToast({
+            title: '上传成功',
+          })
+        },200)
+        setTimeout(function(){
+          wx.hideToast()
+        },700)
+        wx.navigateBack()
+      }).catch(err=>{
+        wx.hideLoading()
+        console.log(err)
+        that.setData({
+          advertisement_disabledCondition: false
+        })
+      })
+    }
   }
 })
