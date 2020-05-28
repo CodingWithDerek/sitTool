@@ -1,2 +1,88 @@
 <!--pages/person/myStar.wxml-->
-<view class="all"></view>
+<view class="all">
+	<view class="tipContainer">
+		<van-icon name="info-o" class="tipContainer-icon" />
+		<view>您可长按自己收藏项目进行删除操作</view>
+	</view>
+	<view class="upBar">
+		<view class="{{bindNum==1?'upBar-each_light':'upBar-each_dark'}}" bindtap="num1">兼职</view>
+		<view class="{{bindNum==2?'upBar-each_light':'upBar-each_dark'}}" bindtap="num2">项目组队</view>
+		<view class="{{bindNum==3?'upBar-each_light':'upBar-each_dark'}}" bindtap="num3">个人show</view>
+	</view>
+	<view wx:if="{{bindNum==1}}">
+		<block wx:for="{{jobArr}}" wx:key="_id">
+			<view class="jobContainer" bindtap="goJobDetail" data-item="{{item}}" bindlongpress="cancelStar_job">
+				<van-icon name="passed" />
+				<view class="jobContainer-right">
+					<view class="jobContainer-right-each">招聘单位：{{item.companyName}}</view>
+					<view class="jobContainer-right-each">工作区域：{{item.workArea}}</view>
+					<view class="jobContainer-right-each">面试时间：{{item.interviewTime}}</view>
+					<view class="jobContainer-right-each">薪资：{{item.wage}}</view>
+				</view>
+			</view>
+		</block>
+		<view wx:if="{{jobArr.length==0}}" class="noData">
+			<view>该类别您暂时没有收藏项目</view>
+		</view>
+	</view>
+	<view wx:if="{{bindNum==2}}">
+		<block wx:for="{{teamArr}}" wx:key="_id">
+			<view class="teamContainer" bindtap="goTeamDetail" data-item="{{item}}" bindlongpress="cancelStar_team">
+				<view class="teamContainer-row">
+					<van-icon name="flag-o" />
+					<text>队伍名称：{{item.teamName}}</text>
+				</view>
+				<view class="teamContainer-row">
+					<van-icon name="orders-o" />
+					<text>项目类别：{{item.type}}</text>
+				</view>
+				<view class="teamContainer-people">
+					<view class="teamContainer-people-left">
+						<van-icon name="friends-o" />
+						<text>项目人员</text>
+					</view>
+					<view class="teamContainer-people-right">
+						<block wx:for="{{item.characterArr}}">
+							<view class="teamContainer-people-right-content">
+								<view>{{item.character}}</view>
+								<view class="teamContainer-people-right-content-c2">所需<text>{{item.num}}</text></view>
+								<view class="teamContainer-people-right-content-c3">还差<text>{{item.needNum}}</text></view>
+							</view>
+						</block>
+					</view>
+				</view>
+				<view class="teamContainer-row">
+					<van-icon name="underway-o" />
+					<text>发布时间：{{item.time}}</text>
+				</view>
+			</view>
+		</block>
+		<view wx:if="{{teamArr.length==0}}" class="noData">
+			<view>该类别您暂时没有收藏项目</view>
+		</view>
+	</view>
+	<view wx:if="{{bindNum==3}}">
+		<view class="careful">
+			<block wx:for="{{showArr}}" wx:key="_id">
+				<view class="careful-container" bindtap="goShowDetail" data-item="{{item}}" bindlongpress="cancelStar_show">
+					<view class="careful-container-up">
+						<image src="{{item.imgArr[0]}}" mode="aspectFill"></image>
+					</view>
+					<view class="careful-container-down">
+						<view class="careful-container-down-row1">{{item.detail}}</view>
+						<view class="careful-container-down-row2">
+							<view class="careful-container-down-row2-left">{{item.type}}</view>
+							<view class="careful-container-down-row2-right">
+								<text>{{item.likeArr.length}}</text>
+								<van-icon name="like" color="#ff1d11" class="icon2" />
+							</view>
+						</view>
+					</view>
+				</view>
+			</block>
+		</view>
+		<view wx:if="{{showArr.length==0}}" class="noData">
+			<view>该类别您暂时没有收藏项目</view>
+		</view>
+	</view>
+</view>

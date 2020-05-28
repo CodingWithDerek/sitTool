@@ -177,6 +177,13 @@
 					"id": -1,
 					"name": "申请广告入驻",
 					"pathName": "pages/person/postAdvertisement",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的收藏",
+					"pathName": "pages/person/myStar",
 					"scene": null
 				}
 			]

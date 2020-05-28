@@ -1,1 +1,95 @@
 /* pages/person/myStar.wxss */
+.all{
+  background-color: #f2f2f2;
+  font-size: 30rpx;
+}
+.tipContainer{
+  height: 100rpx;
+  background-color: white;
+  margin: 20rpx;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tipContainer-icon{
+  font-size: 50rpx;
+  color: #3bac6a;
+  margin-right: 20rpx;
+}
+.upBar{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.upBar-each_light{
+  color: white;
+  background-color: #33b5e5;
+  padding: 10rpx 20rpx;
+  border-radius: 10rpx;
+}
+.upBar-each_dark{
+  color: black;
+  background-color: white;
+  padding: 10rpx 20rpx;
+  border-radius: 10rpx;
+}
+.jobContainer{
+  margin: 20rpx;
+  padding-left: 20rpx;
+  border-radius: 20rpx;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  border: 1px solid white;
+}
+.jobContainer-right-each{
+  margin: 20rpx;
+}
+.noData{
+  margin: 20rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 20rpx;
+  height: 100rpx;
+}
+.teamContainer{
+  margin: 20rpx;
+  padding: 20rpx;
+  border-radius: 20rpx;
+  background-color: white;
+  border: 1px solid white;
+}
+.teamContainer-row{
+  display: flex;
+  align-content: center;
+}
+.teamContainer-people{
+  display: flex;
+  align-items: center;
+}
+.teamContainer-people-right{
+  margin-left: 20rpx;
+  border: 1px solid #33b5e5;
+  border-radius: 20rpx;
+  padding: 20rpx;
+}
+.teamContainer-people-right-content{
+  height: 90rpx;
+  display: flex;
+  align-items: center;
+}
+.teamContainer-people-right-content-c2,.teamContainer-people-right-content-c3{
+  margin-left: 20rpx;
+}
+.teamContainer-people-right-content-c2 text,.teamContainer-people-right-content-c3 text{
+  padding: 10rpx 20rpx;
+  background-color: #f2f2f2;
+  border-radius: 10rpx;
+  color: #ff1d11;
+}
+.teamContainer-people-right-content-c3 text{
+  color: #33b5e5;
+}
