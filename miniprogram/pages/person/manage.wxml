@@ -189,4 +189,9 @@
 			</view>
 		</view>
 	</view>
+	<view wx:if="{{manageType=='赞助管理'}}">
+		<view class="noDataContainer">
+			<view>该功能暂未开放</view>
+		</view>
+	</view>
 </view>

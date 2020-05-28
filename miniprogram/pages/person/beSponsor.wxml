@@ -1,2 +1,12 @@
 <!--pages/person/beSponsor.wxml-->
-<text>pages/person/beSponsor.wxml</text>
+<view class="all">
+	<view class="tipContainer">
+		<van-icon name="info-o" class="tipContainer-icon" />
+		<view>
+			<view>目前因为我们的小程序注册身份不是企业而是个体，所以无法开通微信支付功能，再加上开发者对用户体验要求较高（如果小程序没有微信支付功能想要实现赞助功能，步骤繁多，难以管理，用户体验太差），经过再三考虑，决定先不开发这个功能，等后面如果有可能的话，开发者会将这款小程序主体身份迁移，到时候会将这部分功能完善，请大家拭目以待，这款小程序从产品构想到UI设计，以及最终的代码实现都是由Chilo一个人完成，目前阶段如果大家真的想鼓励Chilo，想打赏的话，点击下方收款码，并长按图片，将图片保存到本地，再从微信的扫一扫进行转账，谢谢大家</view>
+			<view class="imageContainer">
+				<image src="{{tupian}}" bindtap="previewImage"></image>
+			</view>
+		</view>
+	</view>
+</view>

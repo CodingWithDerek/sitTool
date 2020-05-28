@@ -1,1 +1,30 @@
 /* pages/person/beSponsor.wxss */
+.all{
+  font-size: 30rpx;
+  background-color: #f2f2f2;
+}
+.tipContainer{
+  margin: 20rpx;
+  padding: 20rpx;
+  background-color: white;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+}
+.tipContainer-icon{
+  font-size: 50rpx;
+  color: #3bac6a;
+  margin-right: 20rpx;
+
+}
+.imageContainer{
+  height: 411rpx;
+  width: 300rpx;
+  margin: 20rpx 0;
+}
+.imageContainer image{
+  height: 100%;
+  width: 100%;
+  border: 1px solid #22ab38;
+  border-radius: 20rpx;
+}

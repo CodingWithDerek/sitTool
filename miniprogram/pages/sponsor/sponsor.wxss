@@ -1,8 +1,18 @@
 /* pages/sponsor/sponsor.wxss */
 .all{
   background-color: #f2f2f2;
+  font-size: 30rpx;
 }
-.container{
+.noData{
+  height: 100rpx;
+  background-color: white;
+  margin: 20rpx;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* .container{
   height: 130rpx;
   margin: 20rpx;
   border-radius: 20rpx;
@@ -41,4 +51,4 @@
 }
 .gap{
   height: 1rpx;
-}
+} */

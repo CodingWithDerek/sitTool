@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    tupian:"cloud://sittool-sccwy.7369-sittool-sccwy-1301779720/wechat_money/receiveMoney.png"
   },
 
   /**
@@ -62,5 +62,10 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  previewImage:function(){
+    wx.previewImage({
+      urls: [this.data.tupian],
+    })
   }
 })

@@ -184,6 +184,13 @@
 					"id": -1,
 					"name": "我的收藏",
 					"pathName": "pages/person/myStar",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我要赞助",
+					"pathName": "pages/person/beSponsor",
 					"scene": null
 				}
 			]
