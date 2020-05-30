@@ -33,27 +33,6 @@ App({
       })
     }
   },
-  showDialog: function() {
-    wx.showModal({
-      content: '请点击确定按钮当您被提及的时候给您发送通知消息',
-      showCancel: false,
-      success(res) {
-        if (res.confirm) {
-          wx.requestSubscribeMessage({
-            tmplIds: ['-W2Q06WDJyuYjFjN4zaVGkvigMkVGwASbh9JttbMA-M',
-              'NqBtoPiR4u1v0pcuW_7Ygtb0O5o9VJN6JnsJHMgwX6g'
-            ],
-            success(res) {
-              console.log(res)
-            },
-            fail(err) {
-              console.log(err)
-            }
-          })
-        }
-      }
-    })
-  },
   createTime: function() {
     var date = new Date()
     var year = date.getFullYear()

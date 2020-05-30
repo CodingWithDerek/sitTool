@@ -191,6 +191,13 @@
 					"id": -1,
 					"name": "我要赞助",
 					"pathName": "pages/person/beSponsor",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "意见反馈",
+					"pathName": "pages/person/feedback",
 					"scene": null
 				}
 			]

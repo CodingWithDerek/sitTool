@@ -11,17 +11,23 @@ Page({
   data: {
     goTypeArr: ["兼职管理", "赞助管理", "用户反馈处理", "广告管理"],
     manageType:"",
-    unprocessedDataTotalNum:0,
+    unProcessedDataTotalNum:0,
+    unProcessedDataTotalNum_feedback:0,
     processedDataTotalNum:0,
+    processedDataTotalNum_feedback:0,
     bindNum:1,
     processedData:[],
+    processedData_feedback:[],
     unProcessedData:[],
+    unProcessedData_feedback:[],
     managerInfo:{
       name:"",
       school_id:""
     },
     queriedJob:[],
     query_companyName:"",
+    queriedFeedbacks:[],
+    queried_phone:"",
     mutiplePickerArr_inTime: [],
     mutiplePickerArr_expireTime: [],
     inTime: "2019-01-03 03:04",
@@ -35,6 +41,39 @@ Page({
     advertisementsArr : []
   },
 
+  getTotalNum_feedback:function(processCondition,arg){
+    var that = this
+    db.collection("feedbacks").where({
+      processed:processCondition
+    }).count()
+    .then(res=>{
+      that.setData({
+        [arg]: res.total
+      })
+    }).catch(err=>{
+      console.log(err)
+    })
+  },
+  getData_feedback:function(isFirst,skipNum,processCondition,oldArr,arg,order){
+    var that = this
+    if(isFirst==false){
+      wx.showLoading({
+        title: '数据加载中',
+      })
+    }
+    db.collection("feedbacks").where({
+      processed:processCondition
+    }).orderBy("time",order).skip(skipNum).get()
+    .then(res=>{
+      if(isFirst==false){
+        wx.hideLoading()
+      }
+      let newArr = oldArr.concat(res.data)
+      that.setData({
+        [arg]: newArr
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -131,9 +170,19 @@ Page({
         console.log(err)
       })
     }
+    if(manageType=="用户反馈处理"){
+      var orderArr = ["asc","desc"]
+      var conditionArr = [false,true]
+      var totalNumArr = ["unProcessedDataTotalNum_feedback","processedDataTotalNum_feedback"]
+      var dataArr = ["unProcessedData_feedback","processedData_feedback"]
+      for(var i=0;i<2;i++){
+        this.getTotalNum_feedback(conditionArr[i],totalNumArr[i])
+        this.getData_feedback(true,0,conditionArr[i],[],dataArr[i],orderArr[i])
+      }
+    }
   },
 
-  getUnprocessedData:function(skipNum,isFirst){
+  getUnProcessedData:function(skipNum,isFirst){
     var that = this
     if(isFirst==false){
       wx.showLoading({
@@ -166,7 +215,7 @@ Page({
       })
   },
 
-  getUnprocessedDataTotalNum:function(){
+  getUnProcessedDataTotalNum:function(){
     var that = this
     db.collection("jobArr").where({
       agree: false,
@@ -174,7 +223,7 @@ Page({
     }).count()
       .then(res => {
         that.setData({
-          unprocessedDataTotalNum: res.total
+          unProcessedDataTotalNum: res.total
         })
       }).catch(err => {
         console.log(err)
@@ -206,9 +255,9 @@ Page({
   onShow: function () {
     var manageType = this.data.manageType
     if(manageType=="兼职管理"){
-      this.getUnprocessedDataTotalNum()
+      this.getUnProcessedDataTotalNum()
       this.getProcessedDataTotalNum()
-      this.getUnprocessedData(0,true)
+      this.getUnProcessedData(0,true)
     }
   },
 
@@ -238,12 +287,12 @@ Page({
    */
   onReachBottom: function () {
     var manageType = this.data.manageType
+    var bindNum = this.data.bindNum
     if(manageType=="兼职管理"){
-      var bindNum = this.data.bindNum
       if(bindNum==1){
         let skipNum = this.data.unProcessedData.length
-        let unprocessedDataTotalNum = this.data.unprocessedDataTotalNum
-        if(skipNum==unprocessedDataTotalNum){
+        let unProcessedDataTotalNum = this.data.unProcessedDataTotalNum
+        if(skipNum==unProcessedDataTotalNum){
           wx.showToast({
             title: '已加载全部数据',
           })
@@ -252,7 +301,7 @@ Page({
           },500)
         }
         else{
-          this.getUnprocessedData(skipNum, false)
+          this.getUnProcessedData(skipNum, false)
         }
       }
       if(bindNum==2){
@@ -268,6 +317,38 @@ Page({
         }
         else{
           this.getProcessedData(skipNum, false)
+        }
+      }
+    }
+    if(manageType=="用户反馈处理"){
+      if(bindNum==1){
+        let unProcessedDataTotalNum_feedback = this.data.unProcessedDataTotalNum_feedback
+        let unProcessedData_feedback = this.data.unProcessedData_feedback
+        if(unProcessedDataTotalNum_feedback==unProcessedData_feedback.length){
+          wx.showToast({
+            title: '已加载全部数据',
+          })
+          setTimeout(function () {
+            wx.hideToast()
+          }, 500)
+        }
+        else{
+          this.getData_feedback(false,unProcessedData_feedback.length,false,unProcessedData_feedback,"unProcessedData_feedback","asc")
+        }
+      }
+      if(bindNum==2){
+        let processedDataTotalNum_feedback = this.data.processedDataTotalNum_feedback
+        let processedData_feedback = this.data.processedData_feedback
+        if(processedDataTotalNum_feedback==processedData_feedback.length){
+          wx.showToast({
+            title: '已加载全部数据',
+          })
+          setTimeout(function () {
+            wx.hideToast()
+          }, 500)
+        }
+        else{
+          this.getData_feedback(false,processedData_feedback.length,true,processedData_feedback,"processedData_feedback","desc")
         }
       }
     }
@@ -354,7 +435,7 @@ Page({
           managerInfo
         }
       }).then(res=>{
-        that.getUnprocessedDataTotalNum()
+        that.getUnProcessedDataTotalNum()
         that.getProcessedDataTotalNum()
         wx.hideLoading()
         setTimeout(function(){
@@ -413,7 +494,7 @@ Page({
           managerInfo
         }
       }).then(res => {
-        that.getUnprocessedDataTotalNum()
+        that.getUnProcessedDataTotalNum()
         that.getProcessedDataTotalNum()
         wx.hideLoading()
         setTimeout(function () {
@@ -766,6 +847,87 @@ Page({
           })
         }
       }
+    })
+  },
+  copyPhone:function(e){
+    wx.setClipboardData({
+      data: e.currentTarget.datset.phone,
+      success (res) {
+        wx.getClipboardData()
+      }
+    })
+  },
+  setProcessed:function(e){
+    var that = this
+    var item = e.currentTarget.dataset.item
+    wx.showLoading({
+      title: '数据更新中',
+    })
+    wx.cloud.callFunction({
+      name:"processFeedback",
+      data:{
+        id:item._id
+      }
+    }).then(res=>{
+      console.log("调用云函数后的res",res)
+      wx.hideLoading()
+      that.onReady()
+      if(res.result.stats.updated==0){
+        wx.showModal({
+          showCancel:false,
+          content:"该记录在刚才已被其他管理员修改，您无法再次修改"
+        })
+      }
+      else{
+        that.setData({
+          queriedFeedbacks:[]
+        })
+        setTimeout(function(){
+          wx.showToast({
+            title: '数据更新成功',
+          })
+        },200)
+        setTimeout(function(){
+          wx.hideToast()
+        },700)
+      }
+    }).catch(err=>{
+      console.log(err)
+      wx.hideLoading()
+      wx.showModal({
+        showCancel:false,
+        content: '似乎出现了什么问题，请稍后再试',
+      })
+    })
+  },
+  getPhone:function(e){
+    this.setData({
+      queried_phone:e.detail.value
+    })
+  },
+  queryFeedbacks:function(){
+    var that = this
+    var phone = this.data.queried_phone
+    db.collection("feedbacks").where({
+      phone:phone
+    }).get()
+    .then(res=>{
+      console.log(res)
+      if(res.data.length == 0){
+        wx.showLoading({
+          title: '没有找到该记录',
+        })
+        setTimeout(function(){
+          wx.hideLoading()
+        },500)
+      }
+      else{
+        that.setData({
+          queriedFeedbacks:res.data
+        })
+      }
+    }).catch(err=>{
+      console.log(err)
     })
   }
 })

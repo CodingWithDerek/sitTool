@@ -1,2 +1,18 @@
 <!--pages/person/feedback.wxml-->
-<text>pages/person/feedback.wxml</text>
+<view class="all">
+	<form bindsubmit="submit_feedback">
+		<view class="body">
+			<view class="body-row">
+				<view>手机号</view>
+				<input class="body-row-right" name="phone" type="number"></input>
+			</view>
+			<view class="body-detail">
+				<view class="body-detail-title">详细说明</view>
+				<textarea class="body-detail-content" maxlength="-1" name="detail"></textarea>
+			</view>
+			<view class="body-buttonArea">
+				<button class="body-buttonArea-button" type="primary" form-type="submit" disabled="{{disabledCondition}}">提交</button>
+			</view>
+		</view>
+	</form>
+</view>

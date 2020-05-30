@@ -4,7 +4,7 @@
 		<view class="upTipTotalNum">
 			<van-icon name="info-o" class="upTipTotalNum-icon" />
 			<view>当前未处理兼职总数：</view>
-			<text>{{unprocessedDataTotalNum}}</text>
+			<text>{{unProcessedDataTotalNum}}</text>
 		</view>
 		<view class="upBar">
 			<view class="{{bindNum==1?'upBar-each_light':'upBar-each_dark'}}" bindtap="num1">待处理</view>
@@ -192,6 +192,72 @@
 	<view wx:if="{{manageType=='赞助管理'}}">
 		<view class="noDataContainer">
 			<view>该功能暂未开放</view>
+		</view>
+	</view>
+	<view wx:if="{{manageType=='用户反馈处理'}}">
+		<view class="feedback_upBar">
+			<view class="{{bindNum==1?'upBar-each_light':'upBar-each_dark'}}" bindtap="num1">待处理</view>
+			<view class="{{bindNum==2?'upBar-each_light':'upBar-each_dark'}}" bindtap="num2">已处理</view>
+			<view class="{{bindNum==3?'upBar-each_light':'upBar-each_dark'}}" bindtap="num3">查询反馈</view>
+		</view>
+		<view wx:if="{{bindNum==1}}">
+			<block wx:for="{{unProcessedData_feedback}}" wx:key="_id">
+				<view class="feedbackContainer">
+					<view>
+						<view>联系电话：{{item.phone}}</view>
+						<view class="feedbackContainer-left-detailTitle">详细说明</view>
+						<view>{{item.detail}}</view>
+					</view>
+					<view class="feedbackContainer-right">
+						<view class="feedbackContainer-right-signal" bindtap="setProcessed" data-item="{{item}}">标为已处理</view>
+						<view class="feedbackContainer-right-call" bindtap="copyPhone" data-phone="{{item.phone}}">复制手机号</view>
+					</view>
+				</view>
+			</block>
+			<view class="noDataContainer" wx:if="{{unProcessedData_feedback.length==0}}">
+				<view>该状态暂时没有数据</view>
+			</view>
+		</view>
+		<view wx:if="{{bindNum==2}}">
+			<block wx:for="{{processedData_feedback}}" wx:key="_id">
+				<view class="feedbackContainer">
+					<view>
+						<view>联系电话：{{item.phone}}</view>
+						<view class="feedbackContainer-left-detailTitle">详细说明</view>
+						<view>{{item.detail}}</view>
+					</view>
+					<view class="feedbackContainer-right">
+						<view class="feedbackContainer-right-call" bindtap="copyPhone" data-phone="{{item.phone}}">复制手机号</view>
+					</view>
+				</view>
+			</block>
+			<view class="noDataContainer" wx:if="{{processedData_feedback.length==0}}">
+				<view>该状态暂时没有数据</view>
+			</view>
+		</view>
+		<view wx:if="{{bindNum==3}}">
+			<view class="queryFeedback">
+				<view>手机号</view>
+				<input class="queryFeedback-right" placeholder="请输入要查询记录的手机号" bindinput="getPhone" type="number"></input>
+			</view>
+			<view class="buttonArea">
+				<button class="buttonArea-button" type="primary" bindtap="queryFeedbacks">查询</button>
+			</view>
+			<view wx:if="{{queriedFeedbacks.length>0}}">
+				<block wx:for="{{queriedFeedbacks}}" wx:key="_id">
+					<view class="feedbackContainer">
+					<view>
+						<view>联系电话：{{item.phone}}</view>
+						<view class="feedbackContainer-left-detailTitle">详细说明</view>
+						<view>{{item.detail}}</view>
+					</view>
+					<view class="feedbackContainer-right">
+						<view class="feedbackContainer-right-signal" bindtap="setProcessed" data-item="{{item}}" wx:if="{{item.processed==false}}">标为已处理</view>
+						<view class="feedbackContainer-right-call" bindtap="copyPhone" data-phone="{{item.phone}}">复制手机号</view>
+					</view>
+				</view>
+				</block>
+			</view>
 		</view>
 	</view>
 </view>

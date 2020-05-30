@@ -1,1 +1,46 @@
 /* pages/person/feedback.wxss */
+.all{
+  background-color: #f2f2f2;
+  font-size: 30rpx;
+}
+.body{
+  margin: 20rpx;
+  padding: 20rpx;
+  padding-bottom: 0;
+  background-color: white;
+  border-radius: 20rpx;
+}
+.body-row{
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+.body-row-right{
+  width:70%;
+  background-color: #f2f2f2;
+  margin-left: 20rpx;
+  height: 80rpx;
+}
+.body-detail{
+  border: 1px solid #33b5e5;
+  border-radius: 10rpx;
+  padding: 20rpx;
+}
+.body-detail-title{
+  color: grey;
+  margin-bottom: 20rpx;
+}
+.body-detail-content{
+  height: 300rpx;
+  width: auto;
+}
+.body-buttonArea{
+  height: 200rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.body-buttonArea-button{
+  padding: 5rpx 50rpx;
+  font-size: 30rpx;
+}
