@@ -915,6 +915,9 @@ Page({
   },
   queryFeedbacks:function(){
     var that = this
+    this.setData({
+      queriedFeedbacks:[]
+    })
     var phone = this.data.queried_phone
     db.collection("feedbacks").where({
       phone:phone

@@ -222,6 +222,7 @@ Page({
             }
           }).then(res2=>{
             wx.hideLoading()
+            that.onShow()
             setTimeout(function(){
               wx.showToast({
                 title: '已取消收藏',
@@ -230,7 +231,6 @@ Page({
             setTimeout(function(){
               wx.hideToast()
             },700)
-            that.onShow()
           }).catch(err2=>{
             console.log(err2)
           })
@@ -259,6 +259,7 @@ Page({
             }
           }).then(res2=>{
             wx.hideLoading()
+            that.onShow()
             setTimeout(function(){
               wx.showToast({
                 title: '已取消收藏',
@@ -267,7 +268,6 @@ Page({
             setTimeout(function(){
               wx.hideToast()
             },700)
-            that.onShow()
           }).catch(err2=>{
             console.log(err2)
           })
@@ -296,6 +296,7 @@ Page({
             }
           }).then(res2=>{
             wx.hideLoading()
+            that.onShow()
             setTimeout(function(){
               wx.showToast({
                 title: '已取消收藏',
@@ -304,7 +305,6 @@ Page({
             setTimeout(function(){
               wx.hideToast()
             },700)
-            that.onShow()
           }).catch(err2=>{
             console.log(err2)
           })

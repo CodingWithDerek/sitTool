@@ -166,7 +166,6 @@ Page({
     var that = this
     console.log(e)
     var currentItem = e.currentTarget.dataset.item
-    var openid = this.data.openid
     var sentJobArr = this.data.sentJobArr
     wx.showModal({
       title: '提示',
@@ -180,13 +179,15 @@ Page({
             })
           }
           else {
-            db.collection("jobArr").doc(currentItem._id).remove()
-              .then(res => {
-                return db.collection("jobArr").where({
-                  _openid: openid
-                }).count()
-              })
-              .then(res2 => {
+            if(currentItem.fileID!=""){
+              let deleteFileIDArr = []
+              deleteFileIDArr.push(currentItem.fileID)
+              Promise.all([
+                db.collection("jobArr").doc(currentItem._id).remove(),
+                wx.cloud.deleteFile({
+                  fileList: deleteFileIDArr
+                })
+              ]).then(res=>{
                 for (let i = 0; i < sentJobArr.length; i++) {
                   if (currentItem._id == sentJobArr[i]._id) {
                     sentJobArr.splice(i, 1)
@@ -194,7 +195,7 @@ Page({
                   }
                 }
                 that.setData({
-                  totalNum: res2.total,
+                  totalNum: that.data.totalNum - 1,
                   sentJobArr: sentJobArr
                 })
                 wx.showToast({
@@ -202,8 +203,30 @@ Page({
                 })
                 setTimeout(function(){
                   wx.hideToast()
+                },500)
+              })
+            }
+            else{
+              db.collection("jobArr").doc(currentItem._id).remove()
+              .then(res=>{
+                for (let i = 0; i < sentJobArr.length; i++) {
+                  if (currentItem._id == sentJobArr[i]._id) {
+                    sentJobArr.splice(i, 1)
+                    break
+                  }
+                }
+                that.setData({
+                  totalNum: that.data.totalNum - 1,
+                  sentJobArr: sentJobArr
                 })
-              },500)
+                wx.showToast({
+                  title: '删除成功',
+                })
+                setTimeout(function(){
+                  wx.hideToast()
+                },500)
+              })
+            }
           }
         }
       }

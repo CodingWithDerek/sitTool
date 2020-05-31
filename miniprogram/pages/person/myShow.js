@@ -274,17 +274,22 @@ Page({
   },
   deleteItem:function(e){
     var that = this
-    var id = e.currentTarget.dataset.item._id
+    var item =  e.currentTarget.dataset.item
     wx.showModal({
       content: '是否删除该项目',
       success(res) {
         if (res.confirm) {
-          db.collection("personShow").doc(id).remove()
+          Promise.all([
+            db.collection("personShow").doc(item._id).remove(),
+            wx.cloud.deleteFile({
+              fileList: item.imgArr
+            })
+          ])
           .then(res2=>{
+            that.onShow()
             wx.showToast({
               title: '删除成功',
             })
-            that.onShow()
             setTimeout(function(){
               wx.hideToast()
             },500)
