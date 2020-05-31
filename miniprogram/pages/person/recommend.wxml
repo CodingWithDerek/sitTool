@@ -1,2 +1,7 @@
 <!--pages/person/recommend.wxml-->
-<text>pages/person/recommend.wxml</text>
+<view class="all">
+  <view class="container">
+    <view>身为SIT的学生，怎么能不知道这款好用的小程序呢，赶快点击下方按钮将它分享给你的同学吧</view>
+    <button open-type="share" type="primary" class="share_button">分享给好友</button>
+  </view>
+</view>

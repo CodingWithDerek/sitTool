@@ -31,8 +31,8 @@
 						<view>{{item.detail}}</view>
 					</view>
 					<view class="container-right">
-						<view class="container-right-agree" bindtap="agree" data-id="{{item._id}}">同意</view>
-						<view class="container-right-reject" bindtap="reject" data-id="{{item._id}}">拒绝</view>
+						<view class="container-right-agree" bindtap="agree" data-item="{{item}}">同意</view>
+						<view class="container-right-reject" bindtap="reject" data-item="{{item}}">拒绝</view>
 						<view class="container-right-call" bindtap="call" data-phone="{{item.phone}}">拨打</view>
 					</view>
 				</view>
@@ -124,8 +124,8 @@
 							<view>{{item.detail}}</view>
 						</view>
 						<view class="container-right">
-							<view class="container-right-agree" bindtap="agree" data-id="{{item._id}}" wx:if="{{item.agree==false&&item.reject==false}}">同意</view>
-							<view class="container-right-reject" bindtap="reject" data-id="{{item._id}}" wx:if="{{item.agree==false&&item.reject==false}}">拒绝</view>
+							<view class="container-right-agree" bindtap="agree" data-item="{{item}}" wx:if="{{item.agree==false&&item.reject==false}}">同意</view>
+							<view class="container-right-reject" bindtap="reject" data-item="{{item}}" wx:if="{{item.agree==false&&item.reject==false}}">拒绝</view>
 							<view class="container-right-call" bindtap="call" data-phone="{{item.phone}}">拨打</view>
 						</view>
 					</view>

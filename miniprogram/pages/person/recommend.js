@@ -61,6 +61,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      path: "/pages/index/index",
+      imageUrl:"cloud://sittool-sccwy.7369-sittool-sccwy-1301779720/share_image/share_coverImage.jpg"
+    }
   }
 })

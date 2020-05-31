@@ -367,11 +367,11 @@ Page({
                 starArr: [],
                 agree: false,
                 reject: false,
-                cancel: false,
                 sentTime,
                 mutiplePickerIndex,
                 managerInfo,
-                cancelInterview: false
+                cancelInterview: false,
+                canUpdate: true
               }
             })
           }).then(res => {
@@ -421,11 +421,11 @@ Page({
               starArr: [],
               agree: false,
               reject: false,
-              cancel: false,
               sentTime,
               mutiplePickerIndex,
               managerInfo,
-              cancelInterview: false
+              cancelInterview: false,
+              canUpdate: true
             }
           }).then(res => {
             wx.showToast({

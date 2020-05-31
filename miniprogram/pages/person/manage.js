@@ -72,6 +72,11 @@ Page({
       that.setData({
         [arg]: newArr
       })
+    }).catch(err=>{
+      if(isFirst==false){
+        wx.hideLoading()
+      }
+      console.log(err)
     })
   },
   /**
@@ -258,6 +263,7 @@ Page({
       this.getUnProcessedDataTotalNum()
       this.getProcessedDataTotalNum()
       this.getUnProcessedData(0,true)
+      this.getProcessedData(0,true)
     }
   },
 
@@ -366,13 +372,9 @@ Page({
     })
   },
   num2:function(){
-    var manageType = this.data.manageType
     this.setData({
       bindNum:2
     })
-    if(manageType=="兼职管理"){
-      this.getProcessedData(0,true)
-    }
   },
   num3:function(){
     this.setData({
@@ -423,7 +425,7 @@ Page({
   agree:function(e){
     var that =this
     var managerInfo = this.data.managerInfo
-    var id = e.currentTarget.dataset.id
+    var item = e.currentTarget.dataset.item
     if(managerInfo.name!=""){
       wx.showLoading({
         title: '数据更新中',
@@ -431,39 +433,42 @@ Page({
       wx.cloud.callFunction({
         name:"agreeSentJob",
         data:{
-          id,
+          id:item._id,
           managerInfo
         }
       }).then(res=>{
-        that.getUnProcessedDataTotalNum()
-        that.getProcessedDataTotalNum()
         wx.hideLoading()
-        setTimeout(function(){
-          wx.showToast({
-            title: '已同意',
+        that.onShow()
+        if(res.result.stats.updated==0){
+          wx.showModal({
+            showCancel:false,
+            content:"该记录在刚才已被其他管理员修改，您无法再次修改"
           })
-        },200)
-        setTimeout(function(){
-          wx.hideToast()
-        },700)
-        let unProcessedData = that.data.unProcessedData
-        let queriedJob = that.data.queriedJob
-        for(let i=0;i<unProcessedData.length;i++){
-          if(id==unProcessedData[i]._id){
-            unProcessedData.splice(i,1)
-            break
-          }
         }
-        for(let i=0;i<queriedJob.length;i++){
-          if(id==queriedJob[i]._id){
-            queriedJob.splice(i,1)
-            break
-          }
+        else{
+          that.setData({
+            queriedJob:[]
+          })
+          setTimeout(function(){
+            wx.showToast({
+              title: '已同意',
+            })
+          },200)
+          setTimeout(function(){
+            wx.hideToast()
+          },700)
+          wx.cloud.callFunction({
+            name:"sendSubscribe_result",
+            data:{
+              openid: item._openid,
+              content: "已通过"
+            }
+          }).then(res2=>{
+            console.log(res2)
+          }).catch(err2=>{
+            console.log(err2)
+          })
         }
-        that.setData({
-          unProcessedData:unProcessedData,
-          queriedJob:queriedJob
-        })
       }).catch(err=>{
         wx.hideLoading()
         wx.showModal({
@@ -475,14 +480,14 @@ Page({
     else{
       wx.showModal({
         showCancel: false,
-        content: '似乎出现了什么问题,请返回上一级页面重新进入该页面',
+        content: '似乎出现了什么问题,请返回上一级页面重新进入该页面再试',
       })
     }
   },
   reject:function(e){
     var that = this
     var managerInfo = this.data.managerInfo
-    var id = e.currentTarget.dataset.id
+    var item = e.currentTarget.dataset.item
     if (managerInfo.name != "") {
       wx.showLoading({
         title: '数据更新中',
@@ -490,39 +495,42 @@ Page({
       wx.cloud.callFunction({
         name: "rejectSentJob",
         data: {
-          id,
+          id: item._id,
           managerInfo
         }
       }).then(res => {
-        that.getUnProcessedDataTotalNum()
-        that.getProcessedDataTotalNum()
         wx.hideLoading()
-        setTimeout(function () {
-          wx.showToast({
-            title: '已拒绝',
+        that.onShow()
+        if(res.result.stats.updated==0){
+          wx.showModal({
+            showCancel:false,
+            content:"该记录在刚才已被其他管理员修改，您无法再次修改"
           })
-        }, 200)
-        setTimeout(function () {
-          wx.hideToast()
-        }, 700)
-        let unProcessedData = that.data.unProcessedData
-        let queriedJob = that.data.queriedJob
-        for (let i = 0; i < unProcessedData.length; i++) {
-          if (id == unProcessedData[i]._id) {
-            unProcessedData.splice(i, 1)
-            break
-          }
         }
-        for (let i = 0; i < queriedJob.length; i++) {
-          if (id == queriedJob[i]._id) {
-            queriedJob.splice(i, 1)
-            break
-          }
+        else{
+          that.setData({
+            queriedJob:[]
+          })
+          setTimeout(function(){
+            wx.showToast({
+              title: '已拒绝',
+            })
+          },200)
+          setTimeout(function(){
+            wx.hideToast()
+          },700)
+          wx.cloud.callFunction({
+            name:"sendSubscribe_result",
+            data:{
+              openid: item._openid,
+              content: "已被拒绝"
+            }
+          }).then(res2=>{
+            console.log(res2)
+          }).catch(err2=>{
+            console.log(err2)
+          })
         }
-        that.setData({
-          unProcessedData: unProcessedData,
-          queriedJob:queriedJob
-        })
       }).catch(err => {
         wx.hideLoading()
         wx.showModal({
@@ -534,7 +542,7 @@ Page({
     else {
       wx.showModal({
         showCancel: false,
-        content: '似乎出现了什么问题,请返回上一级页面重新进入该页面',
+        content: '似乎出现了什么问题,请返回上一级页面重新进入该页面再试',
       })
     }
   },
