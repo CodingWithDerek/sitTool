@@ -32,7 +32,7 @@ Page({
     var that = this
     db.collection("team").where({
         applyArr: _.elemMatch({
-          openid: _.eq(openid),
+          openid: openid,
           added: addedFlag,
           rejected: rejectedFlag
         })
@@ -51,7 +51,7 @@ Page({
     var that = this
     db.collection("team").where({
         applyArr: _.elemMatch({
-          openid: _.eq(openid),
+          openid: openid,
           added: addedFlag,
           rejected: rejectedFlag
         })
@@ -101,7 +101,7 @@ Page({
             })
           })
           .catch(errT => {
-            console.log(err)
+            console.log(errT)
           })
         db.collection("team").where({
           _openid: res.data
@@ -113,8 +113,8 @@ Page({
           that.setData({
             team: teamArr
           })
-        }).catch(err => {
-          console.log(err)
+        }).catch(err2 => {
+          console.log(err2)
         })
         that.getTotalNum(res.data, false, false, "applyCollection[0].total")
         that.getData(res.data, false, false, "applyCollection[0].data")
@@ -208,7 +208,7 @@ Page({
         })
         db.collection("team").where({
           applyArr: _.elemMatch({
-            openid: _.eq(that.data.openid),
+            openid: that.data.openid,
             added: false,
             rejected: false
           })
@@ -245,7 +245,7 @@ Page({
         })
         db.collection("team").where({
           applyArr: _.elemMatch({
-            openid: _.eq(that.data.openid),
+            openid: that.data.openid,
             added: true,
             rejected: false
           })
@@ -282,7 +282,7 @@ Page({
         })
         db.collection("team").where({
           applyArr: _.elemMatch({
-            openid: _.eq(that.data.openid),
+            openid: that.data.openid,
             added: false,
             rejected: true
           })
@@ -377,7 +377,7 @@ Page({
     wx.setClipboardData({
       data: wechat,
       success(res) {
-        wx.getClipboardData({})
+        wx.getClipboardData()
       }
     })
   },
@@ -447,8 +447,8 @@ Page({
         }
         if (ample == false && cannotJoin == false) {
           team[i].characterArr[characterArrIndex].needNum--
-            team[i].characterArr[characterArrIndex].addedNum++
-            item.added = true
+          team[i].characterArr[characterArrIndex].addedNum++
+          item.added = true
           item.argue = 2
           for (var t = 0; t < team[i].applyArr.length; t++) {
             if (team[i].applyArr[t].openid == item.openid) {
@@ -470,7 +470,7 @@ Page({
           db.collection("team").doc(item._id).update({
               data: {
                 applyArr: _.pull({
-                  openid: _.eq(item.openid)
+                  openid: item.openid
                 })
               }
             })
@@ -481,7 +481,7 @@ Page({
                 }
               })
             })
-            .then(res2 => {
+            .then(res => {
               wx.hideLoading()
             })
             .catch(err => {
@@ -515,7 +515,7 @@ Page({
     db.collection("team").doc(item._id).update({
         data: {
           applyArr: _.pull({
-            openid: _.eq(item.openid)
+            openid: item.openid
           })
         }
       })
@@ -526,7 +526,7 @@ Page({
           }
         })
       })
-      .then(res2 => {
+      .then(res => {
         wx.hideLoading()
       })
       .catch(err => {
@@ -566,10 +566,10 @@ Page({
             }
           }
           team[i].characterArr[characterArrIndex].needNum++
-            team[i].characterArr[characterArrIndex].addedNum--
-            this.setData({
-              team: team
-            })
+          team[i].characterArr[characterArrIndex].addedNum--
+          this.setData({
+            team: team
+          })
           db.collection("team").doc(item._id).update({
             data: {
               characterArr: team[i].characterArr
@@ -581,7 +581,7 @@ Page({
           db.collection("team").doc(item._id).update({
               data: {
                 applyArr: _.pull({
-                  openid: _.eq(item.openid)
+                  openid: item.openid
                 })
               }
             }).then(res => {

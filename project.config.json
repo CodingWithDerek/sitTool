@@ -198,6 +198,13 @@
 					"id": -1,
 					"name": "意见反馈",
 					"pathName": "pages/person/feedback",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "客服",
+					"pathName": "pages/index/service",
 					"scene": null
 				}
 			]
