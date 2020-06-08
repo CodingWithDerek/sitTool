@@ -117,6 +117,9 @@
   font-size: 35rpx;
   font-weight: bold;
 }
+.container-left-detailContent{
+  white-space: pre-line;
+}
 .queryJob,.queryFeedback{
   padding: 20rpx;
   height: 80rpx;
@@ -194,9 +197,11 @@
   padding: 20rpx;
   background-color: white;
   border-radius: 20rpx;
-  white-space: pre-wrap;
 }
 .advertisementEach-detailTitle{
   font-size: 35rpx;
   font-weight: bold;
+}
+.advertisementEach-detailContent{
+  white-space: pre-line;
 }

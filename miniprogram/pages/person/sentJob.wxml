@@ -73,7 +73,7 @@
           </view>
         </view>
         <view class="detailTitle">详细介绍</view>
-        <view>{{item.detail}}</view>
+        <view class="detailContent">{{item.detail}}</view>
       </view>
     </view>
   </block>

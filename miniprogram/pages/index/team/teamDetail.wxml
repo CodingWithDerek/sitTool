@@ -34,7 +34,10 @@
     </view>
   </view>
   <view class="detail">
-    <view class="detail-title"><text>项目介绍以及入伍要求</text></view>
+    <view class="detail-title">
+      <van-icon name="info-o" class="detail-title-icon" />
+      <view class="detail-title-text">项目介绍以及入伍要求</view>
+    </view>
     <view class="detail-content">{{currentItem.detail}}</view>
   </view>
   <view class="gap"></view>

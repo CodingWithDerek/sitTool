@@ -35,6 +35,9 @@
   font-size: 35rpx;
   font-weight: bold;
 }
+.detailContent-body{
+  white-space: pre-line;
+}
 .gap{
   height: 150rpx;
   background-color: white;

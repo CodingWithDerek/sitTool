@@ -101,6 +101,9 @@
   font-size: 35rpx;
   font-weight: bold;
 }
+.body1-container-detail-content{
+  white-space: pre-line;
+}
 .body1-container-detail-noData{
   padding: 20rpx;
   border-radius: 20rpx;

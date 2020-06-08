@@ -76,6 +76,7 @@ Page({
         console.log(err)
       }
     })
+    console.log("测试onShow的执行顺序")
   },
 
   /**

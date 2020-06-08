@@ -6,7 +6,7 @@
   </view>
   <view class="updateItemTip2" wx:if="{{currentItem==''}}">
     <van-icon name="info-o" class="updateItemTip-icon" />
-    <view>请注意，如果您拥有工商执照，上传后一经提交，是不允许再次修改的，为了使您能够通过学校的审核，请上传真实的工商执照，为保护学生权益，兼职发布者在上传兼职后只能在特定的时间（特定时间是指审核状态为：“等待审核、已通过、已被拒绝”中的三者之一）内修改兼职信息，兼职内不可修改的信息会自动隐藏</view>
+    <view>请注意，如果您拥有工商执照，上传后一经提交，是不允许再次修改的，为了使您能够通过学校的审核，请上传真实的工商执照，为保护学生权益，兼职发布者在上传兼职后只能在特定的时间（特定时间是指审核状态为：“等待审核、已通过、已被拒绝”中的三者之一）内修改兼职信息，兼职内不可修改的信息会自动隐藏。在“详细介绍”中，键入回车键格式会被保留，但是您如果连续键入多个空格的话会合并成一个空格</view>
   </view>
   <form bindsubmit="submit">
     <view class="eachRow" wx:if="{{currentItem==''||currentItem.agree==false}}">
@@ -65,7 +65,7 @@
     </view>
     <view wx:if="{{haveCertificateIndex==0&&currentItem==''}}" class="uploaderContainer">
       <view class="uploaderContainer-first">请上传您的工商执照</view>
-      <van-uploader file-list="{{tempAddress}}" bind:after-read="afterRead" bind:delete="deleteImg" />
+      <van-uploader file-list="{{tempAddress}}" bind:after-read="getTemp" bind:delete="deleteImg" max-count="1" />
     </view>
     <view class="detailTitle" wx:if="{{currentItem==''||currentItem.agree==false}}">详细介绍</view>
     <textarea class="detailContent" maxlength="-1" name="detail" wx:if="{{currentItem==''||currentItem.agree==false}}" value="{{currentItem.detail}}"></textarea>

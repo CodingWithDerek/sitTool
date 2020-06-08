@@ -1,53 +1,59 @@
 <!--pages/person/myShow.wxml-->
 <view class="all">
-  <view class="all-up">
-    <view class="{{selectedNum==1?'up-upload-light':'up-upload-dark'}}" bindtap="num1">上传</view>
-    <view class="{{selectedNum==2?'up-upload-light':'up-upload-dark'}}" bindtap="num2">已上传</view>
-  </view>
-  <view wx:if="{{selectedNum==1}}" class="body1">
-    <view class="body1-firstRow">展示图片</view>
-    <van-uploader file-list="{{tempArr}}" bind:after-read="afterRead" bind:delete="deleteImg" multiple accept="image"/>
-    <view class="body1-picker">
-      <view class="body1-picker-left">类型</view>
-      <picker class="body1-picker-right" bindchange="bindPickerChange" value="{{pickerIndex}}" range="{{typeArr}}">{{typeArr[pickerIndex]}}</picker>
+	<view class="all-up">
+		<view class="{{selectedNum==1?'up-upload-light':'up-upload-dark'}}" bindtap="num1">上传</view>
+		<view class="{{selectedNum==2?'up-upload-light':'up-upload-dark'}}" bindtap="num2">已上传</view>
+	</view>
+	<view wx:if="{{selectedNum==1}}">
+    <view class="body1_tip">
+      <van-icon name="info-o" class="body1_tip-icon" />
+      <view>在“详细介绍”中，键入回车键格式会被保留，但是您如果连续键入多个空格的话会合并成一个空格</view>
     </view>
-    <form bindsubmit="submit">
-      <view class="body1-contact">
-        <view>商务联系</view>
-        <input class="body1-contact-right" placeholder="请输入您的邮箱号码" name="contact"></input>
-      </view>
-      <view class="body1-detail">
-        <view class="body1-detail-title">详情介绍</view>
-        <textarea class="body1-detail-body" name="detail" maxlength="-1"></textarea>
-      </view>
-      <view class="body1-buttonArea">
-        <button class="body1-buttonArea-button" form-type="submit" type="primary" disabled="{{disabledCondition}}">提交</button>
-      </view>
-    </form>
-  </view>
-  <view wx:if="{{selectedNum==2}}">
-    <view class="body2-tip">
-      <van-icon name="info-o" class="body2-tip-icon"/>
-      <view>如果您想删除您的项目的话，您可以长按相关项目进行删除</view>
-    </view>
-    <view class="careful">
-    <block wx:for="{{myShowArr}}" wx:key="_id">
-      <view class="careful-container" bindtap="goShowDetail" data-item="{{item}}" bindlongpress="deleteItem">
-        <view class="careful-container-up">
-          <image src="{{item.imgArr[0]}}" mode="aspectFill"></image>
-        </view>
-        <view class="careful-container-down">
-          <view class="careful-container-down-row1">{{item.detail}}</view>
-          <view class="careful-container-down-row2">
-            <view class="careful-container-down-row2-left">{{item.type}}</view>
-            <view class="careful-container-down-row2-right">
-              <text>{{item.likeArr.length}}</text>
-              <van-icon name="like" color="#ff1d11" class="icon2"/>
-            </view>
-          </view>
-        </view>
-      </view>
-    </block>
-  </view>
-  </view>
+		<view class="body1">
+			<view class="body1-firstRow">展示图片</view>
+			<van-uploader file-list="{{tempArr}}" bind:after-read="afterRead" bind:delete="deleteImg" multiple accept="image" />
+			<view class="body1-picker">
+				<view class="body1-picker-left">类型</view>
+				<picker class="body1-picker-right" bindchange="bindPickerChange" value="{{pickerIndex}}" range="{{typeArr}}">{{typeArr[pickerIndex]}}</picker>
+			</view>
+			<form bindsubmit="submit">
+				<view class="body1-contact">
+					<view>商务联系</view>
+					<input class="body1-contact-right" placeholder="请输入您的邮箱号码" name="contact"></input>
+				</view>
+				<view class="body1-detail">
+					<view class="body1-detail-title">详情介绍</view>
+					<textarea class="body1-detail-body" name="detail" maxlength="-1"></textarea>
+				</view>
+				<view class="body1-buttonArea">
+					<button class="body1-buttonArea-button" form-type="submit" type="primary" disabled="{{disabledCondition}}">提交</button>
+				</view>
+			</form>
+		</view>
+	</view>
+	<view wx:if="{{selectedNum==2}}">
+		<view class="body2-tip">
+			<van-icon name="info-o" class="body2-tip-icon" />
+			<view>如果您想删除您的项目的话，您可以长按相关项目进行删除</view>
+		</view>
+		<view class="careful">
+			<block wx:for="{{myShowArr}}" wx:key="_id">
+				<view class="careful-container" bindtap="goShowDetail" data-item="{{item}}" bindlongpress="deleteItem">
+					<view class="careful-container-up">
+						<image src="{{item.imgArr[0]}}" mode="aspectFill"></image>
+					</view>
+					<view class="careful-container-down">
+						<view class="careful-container-down-row1">{{item.detail}}</view>
+						<view class="careful-container-down-row2">
+							<view class="careful-container-down-row2-left">{{item.type}}</view>
+							<view class="careful-container-down-row2-right">
+								<text>{{item.likeArr.length}}</text>
+								<van-icon name="like" color="#ff1d11" class="icon2" />
+							</view>
+						</view>
+					</view>
+				</view>
+			</block>
+		</view>
+	</view>
 </view>

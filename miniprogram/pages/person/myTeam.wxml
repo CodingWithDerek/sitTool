@@ -64,7 +64,7 @@
         </view>
         <view class="body1-container-detail" wx:if="{{!item.close}}">
           <view class="body1-container-detail-title">项目介绍以及入伍要求：</view>
-          <view>{{item.detail}}</view>
+          <view class="body1-container-detail-content">{{item.detail}}</view>
           <view class="body1-container-detail-check">人员管理:</view>
           <view class="body1-container-detail-noData" wx:if="{{item.applyArr.length==0}}">还没有人员申请加入您的项目</view>
           <block wx:for="{{item.applyArr}}" wx:key="openid">

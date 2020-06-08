@@ -4,7 +4,6 @@
   font-size: 30rpx;
 }
 .all-up{
-  height: 200rpx;
   background-color: white;
   margin: 20rpx;
   padding: 20rpx;
@@ -79,6 +78,7 @@
   border-radius: 20rpx;
   padding: 20rpx;
   background-color: white;
+  white-space: pre-line;
 }
 .form-detailContent textarea{
   width:auto;

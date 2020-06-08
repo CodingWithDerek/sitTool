@@ -16,7 +16,7 @@
       <van-icon name="info-o" class="detailContent-title-icon" />
       <view class="detailContent-title-text">详细介绍</view>
     </view>
-    <view>{{currentItem.detail}}</view>
+    <view class="detailContent-body">{{currentItem.detail}}</view>
   </view>
   <view class="gap"></view>
 </view>

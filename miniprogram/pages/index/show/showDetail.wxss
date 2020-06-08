@@ -54,6 +54,9 @@
   display: flex;
   align-items: center;
 }
+.detailArea-container-down{
+  white-space: pre-line;
+}
 .detailIcon{
   font-size: 50rpx;
   color: #3bac6a;

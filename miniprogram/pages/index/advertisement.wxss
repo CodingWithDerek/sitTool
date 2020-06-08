@@ -41,5 +41,5 @@
   font-weight: bold;
 }
 .detailInfo-content{
-  white-space: pre-wrap;
+  white-space: pre-line;
 }

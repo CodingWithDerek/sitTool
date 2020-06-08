@@ -80,8 +80,7 @@
   padding: 5rpx 50rpx;
   font-size: 30rpx;
 }
-.body2-tip{
-  height: 120rpx;
+.body1_tip,.body2-tip{
   margin: 20rpx;
   margin-top:0;
   display: flex;
@@ -90,7 +89,7 @@
   background-color: white;
   border-radius: 20rpx;
 }
-.body2-tip-icon{
+.body2-tip-icon,.body1_tip-icon{
   font-size: 50rpx;
   color: #3bac6a;
   margin-right: 20rpx;

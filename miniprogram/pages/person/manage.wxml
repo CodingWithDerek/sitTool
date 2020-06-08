@@ -28,7 +28,7 @@
 							<image src="{{item.fileID}}" bindtap="previewCertificate" data-fileid="{{item.fileID}}"></image>
 						</view>
 						<view class="container-left-detailTitile">详情介绍</view>
-						<view>{{item.detail}}</view>
+						<view class="container-left-detailContent">{{item.detail}}</view>
 					</view>
 					<view class="container-right">
 						<view class="container-right-agree" bindtap="agree" data-item="{{item}}">同意</view>
@@ -70,7 +70,7 @@
 							<image src="{{item.fileID}}" bindtap="previewCertificate" data-fileid="{{item.fileID}}"></image>
 						</view>
 						<view class="container-left-detailTitile">详情介绍</view>
-						<view>{{item.detail}}</view>
+						<view class="container-left-detailContent">{{item.detail}}</view>
 					</view>
 					<view class="container-right">
 						<view class="container-right-call" bindtap="call" data-phone="{{item.phone}}">拨打</view>
@@ -121,7 +121,7 @@
 								<image src="{{item.fileID}}" bindtap="previewCertificate" data-fileid="{{item.fileID}}"></image>
 							</view>
 							<view class="container-left-detailTitile">详情介绍</view>
-							<view>{{item.detail}}</view>
+							<view class="container-left-detailContent">{{item.detail}}</view>
 						</view>
 						<view class="container-right">
 							<view class="container-right-agree" bindtap="agree" data-item="{{item}}" wx:if="{{item.agree==false&&item.reject==false}}">同意</view>
@@ -136,7 +136,7 @@
 	<view wx:if="{{manageType=='广告管理'}}">
 		<view class="advertisement_tip">
 			<van-icon name="info-o" class="advertisement_tip-icon" />
-			<view>广告位只有8个，当广告位满了后不可再上传广告，只有删除已上传的广告才能上传新的广告，在上传模块的详细介绍中，可进行格式控制，即输入时是什么格式，最终显示就是什么格式，长按已上传的广告可进行删除</view>
+			<view>广告位只有8个，当广告位满了后不可再上传广告，只有删除已上传的广告才能上传新的广告，在上传模块的“详细介绍”中，键入回车键格式会被保留，但是您如果连续键入多个空格的话会合并成一个空格，长按已上传的广告可进行删除</view>
 		</view>
 		<view class="upBar">
 			<view class="{{bindNum==1?'upBar-each_light':'upBar-each_dark'}}" bindtap="num1">上传</view>
@@ -181,7 +181,7 @@
 					<view>过期时间：{{item.expireTime}}</view>
 					<view>访问量：{{item.visitedNum}}</view>
 					<view class="advertisementEach-detailTitle">详细介绍</view>
-					<view>{{item.detail}}</view>
+					<view class="advertisementEach-detailContent">{{item.detail}}</view>
 				</view>
 			</block>
 			<view class="noDataContainer" wx:if="{{advertisementsArr.length==0}}">

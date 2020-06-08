@@ -133,6 +133,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    console.log("onShow已经执行过了")
     var currentItem = this.data.currentItem
     var tempAddress = this.data.tempAddress
     if (currentItem == "" && tempAddress.length == 0) {
@@ -292,8 +293,8 @@ Page({
       haveCertificateIndex: e.detail.value
     })
   },
-  afterRead: function(e) {
-    console.log(e)
+  getTemp: function(e) {
+    console.log("getTemp已经执行过了")
     this.setData({
       ["tempAddress[0]"]: e.detail.file
     })
