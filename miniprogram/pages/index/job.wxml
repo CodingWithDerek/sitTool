@@ -1,31 +1,33 @@
 <!--pages/index/job.wxml-->
 <view class="all">
-  <scroll-view class="up" scroll-x="true" enable-flex="true">
-    <block wx:for="{{type}}">
-      <view class="up-each" wx:if="{{item.flag==1}}" data-id="{{index}}" bindtap="changeType">
-        <view class="up-each-name">{{item.name}}</view>
-        <view class="up-each-line"></view>
-      </view>
-      <view class="up-each-noClick" wx:else data-id="{{index}}" bindtap="changeType">
-        <view class="up-each-noClick-name">{{item.name}}</view>
-        <view class="up-each-noClick-line"></view>
-      </view>
-    </block>
-  </scroll-view>
-  <view class="body">
-    <block wx:for="{{jobData[currentIndex].data}}" wx:key="_id">
-      <view class="body-container" bindtap="goJobDetail" data-item="{{item}}">
-        <van-icon name="passed" />
-        <view class="body-container-right">
-          <view class="body-container-right-each">招聘单位：{{item.companyName}}</view>
-          <view class="body-container-right-each">工作区域：{{item.workArea}}</view>
-          <view class="body-container-right-each">面试时间：{{item.interviewTime}}</view>
-          <view class="body-container-right-each">薪资：{{item.wage}}</view>
-        </view>
-      </view>
-    </block>
-    <view class="body-noData" wx:if="{{jobData[currentIndex].data.length==0}}">
-      <view>该类别暂时没有兼职</view>
-    </view>
-  </view>
+	<scroll-view class="up" scroll-x="true">
+		<view class="container_newAdd">  <!--这一行是后面新加上去的，所以下面的class命名方式不连贯-->
+			<block wx:for="{{type}}">
+				<view class="up-each" wx:if="{{item.flag==1}}" data-id="{{index}}" bindtap="changeType">
+					<view class="up-each-name">{{item.name}}</view>
+					<view class="up-each-line"></view>
+				</view>
+				<view class="up-each-noClick" wx:else data-id="{{index}}" bindtap="changeType">
+					<view class="up-each-noClick-name">{{item.name}}</view>
+					<view class="up-each-noClick-line"></view>
+				</view>
+			</block>
+		</view>
+	</scroll-view>
+	<view class="body">
+		<block wx:for="{{jobData[currentIndex].data}}" wx:key="_id">
+			<view class="body-container" bindtap="goJobDetail" data-item="{{item}}">
+				<van-icon name="passed" />
+				<view class="body-container-right">
+					<view class="body-container-right-each">招聘单位：{{item.companyName}}</view>
+					<view class="body-container-right-each">工作区域：{{item.workArea}}</view>
+					<view class="body-container-right-each">面试时间：{{item.interviewTime}}</view>
+					<view class="body-container-right-each">薪资：{{item.wage}}</view>
+				</view>
+			</view>
+		</block>
+		<view class="body-noData" wx:if="{{jobData[currentIndex].data.length==0}}">
+			<view>该类别暂时没有兼职</view>
+		</view>
+	</view>
 </view>

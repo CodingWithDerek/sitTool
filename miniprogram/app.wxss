@@ -6,23 +6,23 @@
 }
 .up {
   width: auto;
-  height: 90rpx;
-  padding: 20rpx;
+  padding: 20rpx 20rpx 0 20rpx;
   background-color: #f2f2f2;
   font-size: 30rpx;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   white-space: nowrap;
-  padding-bottom: 0;
 }
-
+.container_newAdd{
+  height: 90rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .up-each {
-  margin-right: 30rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
   color: #33b5e5;
+  margin-right: 30rpx;
 }
 
 .up-each-line {
@@ -34,11 +34,11 @@
 }
 
 .up-each-noClick {
-  margin-right: 30rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
   color: black;
+  margin-right: 30rpx;
 }
 
 .up-each-noClick-line {

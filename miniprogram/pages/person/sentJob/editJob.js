@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    show_flag:1,
     currentItem: "",
     type: [
       "餐饮", "家教", "助教", "传单", "促销", "校园代理", "其他"
@@ -135,8 +136,9 @@ Page({
   onShow: function() {
     console.log("onShow已经执行过了")
     var currentItem = this.data.currentItem
-    var tempAddress = this.data.tempAddress
-    if (currentItem == "" && tempAddress.length == 0) {
+    var show_flag = this.data.show_flag
+    if (currentItem == "" && show_flag == 1) {
+      console.log("测试onShow执行顺序")
       var that = this
       this.setData({
         showpopup_openMainSwitch: false,
@@ -169,6 +171,9 @@ Page({
             })
           }
           //console.log(that.data)
+          that.setData({
+            show_flag:2
+          })
         }
       })
     }
@@ -625,8 +630,14 @@ Page({
     })
   },
   goSetting: function() {
+    var that = this
     wx.openSetting({
-      success: function(res) {},
+      success: function(res) {
+        console.log("goSetting的res",res)
+        that.setData({
+          show_flag:1
+        })
+      },
       fail: function(err) {
         console.log(err)
       }

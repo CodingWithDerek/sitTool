@@ -1,51 +1,53 @@
 <!--pages/index/team.wxml-->
 <view class="all">
-  <scroll-view class="up" scroll-x="true" enable-flex="true">
-    <block wx:for="{{type}}">
-      <view class="up-each" wx:if="{{item.flag==1}}" data-id="{{index}}" bindtap="changeType">
-        <view class="up-each-name">{{item.name}}</view>
-        <view class="up-each-line"></view>
-      </view>
-      <view class="up-each-noClick" wx:else data-id="{{index}}" bindtap="changeType">
-        <view class="up-each-noClick-name">{{item.name}}</view>
-        <view class="up-each-noClick-line"></view>
-      </view>
-    </block>
-  </scroll-view>
-  <view class="body">
-    <block wx:for="{{teamData[currentIndex].data}}" wx:key="_id">
-      <view class="body-container" bindtap="goTeamDetail" data-item="{{item}}">
-        <view class="body-container-row">
-          <van-icon name="flag-o" />
-          <text>队伍名称：{{item.teamName}}</text>
-        </view>
-        <view class="body-container-row">
-          <van-icon name="orders-o" />
-          <text>项目类别：{{item.type}}</text>
-        </view>
-        <view class="body-container-people">
-          <view class="body-container-people-left">
-            <van-icon name="friends-o" />
-            <text>项目人员</text>
-          </view>
-          <view class="body-container-people-right">
-            <block wx:for="{{item.characterArr}}">
-              <view class="body-container-people-right-content">
-                <view>{{item.character}}</view>
-                <view class="body-container-people-right-content-c2">所需<text>{{item.num}}</text></view>
-                <view class="body-container-people-right-content-c3">还差<text>{{item.needNum}}</text></view>
-              </view>
-            </block>
-          </view>
-        </view>
-        <view class="body-container-row">
-          <van-icon name="underway-o" />
-          <text>发布时间：{{item.time}}</text>
-        </view>
-      </view>
-    </block>
-    <view class="body-noData" wx:if="{{teamData[currentIndex].data.length==0}}">
-      <view>该类别暂时没有项目组队</view>
-    </view>
-  </view>
+	<scroll-view class="up" scroll-x="true">
+		<view class="container_newAdd">  <!--这一行是后面新加上去的，所以下面的class命名方式不连贯-->
+			<block wx:for="{{type}}">
+				<view class="up-each" wx:if="{{item.flag==1}}" data-id="{{index}}" bindtap="changeType">
+					<view class="up-each-name">{{item.name}}</view>
+					<view class="up-each-line"></view>
+				</view>
+				<view class="up-each-noClick" wx:else data-id="{{index}}" bindtap="changeType">
+					<view class="up-each-noClick-name">{{item.name}}</view>
+					<view class="up-each-noClick-line"></view>
+				</view>
+			</block>
+		</view>
+	</scroll-view>
+	<view class="body">
+		<block wx:for="{{teamData[currentIndex].data}}" wx:key="_id">
+			<view class="body-container" bindtap="goTeamDetail" data-item="{{item}}">
+				<view class="body-container-row">
+					<van-icon name="flag-o" />
+					<text>队伍名称：{{item.teamName}}</text>
+				</view>
+				<view class="body-container-row">
+					<van-icon name="orders-o" />
+					<text>项目类别：{{item.type}}</text>
+				</view>
+				<view class="body-container-people">
+					<view class="body-container-people-left">
+						<van-icon name="friends-o" />
+						<text>项目人员</text>
+					</view>
+					<view class="body-container-people-right">
+						<block wx:for="{{item.characterArr}}">
+							<view class="body-container-people-right-content">
+								<view>{{item.character}}</view>
+								<view class="body-container-people-right-content-c2">所需<text>{{item.num}}</text></view>
+								<view class="body-container-people-right-content-c3">还差<text>{{item.needNum}}</text></view>
+							</view>
+						</block>
+					</view>
+				</view>
+				<view class="body-container-row">
+					<van-icon name="underway-o" />
+					<text>发布时间：{{item.time}}</text>
+				</view>
+			</view>
+		</block>
+		<view class="body-noData" wx:if="{{teamData[currentIndex].data.length==0}}">
+			<view>该类别暂时没有项目组队</view>
+		</view>
+	</view>
 </view>
