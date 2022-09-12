@@ -30,7 +30,7 @@
 		<block wx:for="{{goodMenArr}}" wx:key="_id">
 			<view class="careful-container" bindtap="goShowDetail" data-item="{{item}}">
 				<view class="careful-container-up">
-					<image src="{{item.imgArr[0]}}" mode="aspectFill"></image>
+					<image src="{{item.imgArr[0]}}" mode="aspectFill" lazy-load="{{lazy_status}}"></image>
 				</view>
 				<view class="careful-container-down">
 					<view class="careful-container-down-row1">{{item.detail}}</view>

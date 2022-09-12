@@ -39,6 +39,9 @@
   align-items: center;
   border-radius: 20rpx;
 }
+.body1-container-left{
+  margin: 10rpx;
+}
 .body1-container-left-row1,.body1-container-left-row2,.body1-container-left-row3{
   display: flex;
   align-items: center;
@@ -56,6 +59,7 @@
   justify-content: space-between;
   align-items: center;
   height: 70rpx;
+  white-space: nowrap;
 }
 .c1{
   margin-right: 20rpx;

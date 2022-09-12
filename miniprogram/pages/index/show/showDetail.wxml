@@ -16,20 +16,20 @@
       <van-icon name="orders-o" class="icon" />
       <text>{{currentItem.type}}</text>
     </view>
-    <view wx:if="{{canStar}}" class="firstRow-each">
-      <van-icon name="star-o" class="icon" bindtap="star"/>
+    <view wx:if="{{canStar}}" class="firstRow-each" bindtap="star">
+      <van-icon name="star-o" class="icon" />
       <text>收藏</text>
     </view>
-    <view wx:else class="firstRow-each">
-      <van-icon name="star" class="icon clickedIcon" bindtap="cancelStar"/>
+    <view wx:else class="firstRow-each" bindtap="cancelStar">
+      <van-icon name="star" class="icon clickedIcon" />
       <text>已收藏</text>
     </view>
-    <view wx:if="{{canLike}}" class="firstRow-each">
-      <van-icon name="like-o" class="icon" bindtap="like"/>
+    <view wx:if="{{canLike}}" class="firstRow-each" bindtap="like">
+      <van-icon name="like-o" class="icon" />
       <text>点赞</text>
     </view>
-    <view wx:else class="firstRow-each">
-      <van-icon name="like" class="icon clickedIcon" bindtap="cancelLike"/>
+    <view wx:else class="firstRow-each" bindtap="cancelLike">
+      <van-icon name="like" class="icon clickedIcon" />
       <text>已点赞</text>
     </view>
   </view>

@@ -38,7 +38,8 @@ Page({
     interval:7000,
     autoplay:true,
     circular:true,
-    advertisementsArr:[]
+    advertisementsArr:[],
+    lazy_status:true
   },
   onShow:function(){
     var that = this
