@@ -4,15 +4,15 @@
 
 ## 部署介绍文档
 
-https://github.com/CodingWithDerek/sitTool
+https://developers.weixin.qq.com/community/develop/article/doc/00060827be05805eec8eb792c56813
 
 ## 视频介绍详细版
 
-
+https://www.bilibili.com/video/BV1u24y1R7mZ
 
 ## 视频介绍精简版
 
-
+https://www.bilibili.com/video/BV1JG411J72g
 
 ## 数据库集合介绍（你需要创建这些集合并设置相关的数据权限）
 
