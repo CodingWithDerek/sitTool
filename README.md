@@ -4,7 +4,9 @@
 
 ## 部署介绍文档
 
-https://developers.weixin.qq.com/community/develop/article/doc/00060827be05805eec8eb792c56813
+链接：https://pan.baidu.com/s/1j0A2UuSE27Vx_E0ejTZT9A 
+
+提取码：5xpu
 
 ## 视频介绍详细版
 
